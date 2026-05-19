@@ -1,0 +1,2058 @@
+<!DOCTYPE html><script type="application/json" id="cowork-artifact-meta">
+{
+  "name": "Hev Powertrain Trends",
+  "schemaVersion": 1,
+  "description": "하이브리드 전기차 파워트레인 최적제어 동향 라이브 대시보드. 매주 화·목요일 오전 9시에 예약 작업으로 자동 갱신. 핵심 동향 5개, 주요 논문/기사 상세 요약, 본인 연구와의 연관성, 후속 액션, 출처 링크를 포함.",
+  "mcpTools": [],
+  "mcpServerNames": []
+}
+</script>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="googlebot" content="noindex,nofollow">
+<title>xEV 파워트레인 동향</title>
+<style>
+  :root {
+    color-scheme: light;
+    --panel-w: 290px;
+
+    /* === Refined neutral palette === */
+    --bg:           #f6f5f1;
+    --surface:      #ffffff;
+    --surface-alt:  #faf9f5;
+    --border:       #e6e3dc;
+    --divider:      #ece9e1;
+    --text:         #1d1d1b;
+    --text-soft:    #5a5a55;
+    --text-muted:   #8e8b83;
+
+    --accent:       #2c3e50;
+    --accent-soft:  #f0f1f3;
+
+    /* === Top-level category accents === */
+    --cat-oem:      #8a6a55;  /* warm taupe */
+    --cat-market:   #2c3e50;  /* slate */
+    --cat-papers:   #4f6b5e;  /* sage */
+
+    /* === Legacy subtype accents (cat-tag use) === */
+    --cat-hardware: #4f6b5e;
+    --cat-ems:      #2c3e50;
+    --cat-rl:       #5b4f63;
+
+    /* === Tier accents === */
+    --tier-recent:    #4f6b5e;
+    --tier-highlight: #5b4f63;
+    --tier-new:       #8a6a55;
+    --tier-pin:       #6e5a3f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 28px 64px;
+    padding-right: calc(var(--panel-w) + 44px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    transition: padding-right 0.2s ease;
+  }
+  body.panel-collapsed { padding-right: 56px; }
+  header {
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+  }
+  h1 { margin: 0 0 6px; font-size: 24px; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+  .subtitle { color: var(--text-soft); font-size: 13px; }
+  .meta-bar {
+    display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px;
+    font-size: 12px; color: var(--text-muted);
+  }
+  .meta-bar span strong { color: var(--text); font-weight: 600; }
+  .meta-bar .new-count strong       { color: var(--tier-new); }
+  .meta-bar .recent-count strong    { color: var(--tier-recent); }
+  .meta-bar .highlight-count strong { color: var(--tier-highlight); }
+  .meta-bar .pinned-count strong    { color: var(--tier-pin); }
+  section {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 24px; margin-bottom: 20px;
+    box-shadow: 0 1px 2px rgba(20, 20, 18, 0.025);
+  }
+  h2 {
+    margin: 0 0 14px; font-size: 16px; font-weight: 600; color: var(--text);
+    display: flex; align-items: center; gap: 10px; letter-spacing: 0.01em;
+  }
+  h2 .badge {
+    background: transparent; color: var(--text-soft);
+    border: 1px solid var(--border);
+    font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  h2 .badge.relevance { color: var(--accent); border-color: #d6dde4; }
+  h2 .badge.action    { color: var(--tier-recent); border-color: #d4dcd6; }
+  h2 .badge.new       { color: var(--tier-new); border-color: #e0d5cb; }
+
+  .relevance-card {
+    background: var(--surface-alt); border-left: 2px solid var(--accent);
+    padding: 12px 16px; border-radius: 0 4px 4px 0; font-size: 14px;
+  }
+  .action-list { padding-left: 22px; margin: 0; }
+  .action-list li { margin-bottom: 8px; }
+
+  .section-subhead {
+    font-size: 10px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin: 12px 0 8px; padding-bottom: 3px;
+    border-bottom: 1px dashed var(--divider);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .section-subhead.recent    { color: var(--tier-recent); border-bottom-color: #d8dfd9; }
+  .section-subhead.highlight { color: var(--tier-highlight); border-bottom-color: #ddd6e0; }
+
+  /* ============ Category Section Containers — differentiated bg/title ============ */
+  .cat-section {
+    border-radius: 8px;
+    padding: 16px 18px 14px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    border-left-width: 4px;
+  }
+  .cat-section:last-child { margin-bottom: 0; }
+  .cat-section-oem {
+    background: #f6efe1;
+    border-color: #e6d8bd;
+    border-left-color: var(--cat-oem);
+  }
+  .cat-section-market {
+    background: #e9edf3;
+    border-color: #d4dae3;
+    border-left-color: var(--cat-market);
+  }
+  .cat-section-papers {
+    background: #e8efea;
+    border-color: #cfdbd1;
+    border-left-color: var(--cat-papers);
+  }
+  .cat-section-title {
+    margin: 0 0 12px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+  .cat-section-oem    .cat-section-title { color: #5a3f2a; }
+  .cat-section-market .cat-section-title { color: #1f2e40; }
+  .cat-section-papers .cat-section-title { color: #2f4338; }
+  .cat-section-title .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .cat-section-oem    .cat-section-title .num { background: var(--cat-oem); }
+  .cat-section-market .cat-section-title .num { background: var(--cat-market); }
+  .cat-section-papers .cat-section-title .num { background: var(--cat-papers); }
+  .cat-section-title .meta {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.50);
+    margin-left: auto;
+    letter-spacing: 0.03em;
+  }
+  .cat-section-empty {
+    font-size: 13px;
+    color: rgba(0,0,0,0.55);
+    font-style: italic;
+    padding: 16px 12px;
+    text-align: center;
+    background: rgba(255,255,255,0.55);
+    border: 1px dashed rgba(0,0,0,0.10);
+    border-radius: 6px;
+    line-height: 1.55;
+  }
+  .cat-section-empty .small {
+    display: block;
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: rgba(0,0,0,0.45);
+    font-style: normal;
+  }
+  /* On tinted bg, give cards a clearer white background */
+  .cat-section .item-card {
+    background: #ffffff;
+    border-color: rgba(0,0,0,0.08);
+  }
+  .cat-section .item-card .source-link,
+  .cat-section .item-card .relevance-note {
+    background: #faf9f6;
+  }
+  .cat-section .item-card .highlight-reason {
+    background: #faf9f6;
+  }
+  .cat-section .section-subhead { color: rgba(0,0,0,0.55); border-bottom-color: rgba(0,0,0,0.12); }
+  .cat-section .section-subhead.recent    { color: var(--tier-recent); border-bottom-color: rgba(79,107,94,0.30); }
+  .cat-section .section-subhead.highlight { color: var(--tier-highlight); border-bottom-color: rgba(91,79,99,0.30); }
+
+  .item-card {
+    border-left: 2px solid var(--accent);
+    padding: 12px 14px 14px;
+    margin-bottom: 12px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    border-radius: 0 6px 6px 0;
+    position: relative;
+    transition: background 0.15s, box-shadow 0.15s, border-color 0.15s;
+  }
+  .item-card.cat-oem      { border-left-color: var(--cat-oem); }
+  .item-card.cat-market   { border-left-color: var(--cat-market); }
+  .item-card.cat-papers   { border-left-color: var(--cat-papers); }
+  /* legacy compat */
+  .item-card.cat-hardware { border-left-color: var(--cat-hardware); }
+  .item-card.cat-ems      { border-left-color: var(--cat-ems); }
+  .item-card.cat-rl       { border-left-color: var(--cat-rl); }
+
+  .item-card.recent       { border-left-width: 3px; }
+  .item-card.highlight    { border-left-width: 3px; }
+  .item-card.pinned-glow  { animation: pinPulse 0.7s ease; }
+  @keyframes pinPulse {
+    0%   { background-color: #f1efe8; }
+    100% { background-color: #ffffff; }
+  }
+  .item-card .meta-row {
+    display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+    margin-bottom: 6px;
+  }
+  .item-card .title-row {
+    display: flex; align-items: flex-start; gap: 8px;
+    margin: 4px 0 4px;
+  }
+  .item-card .title {
+    flex: 1;
+    font-weight: 600; color: var(--text); font-size: 14px;
+  }
+  .pin-btn {
+    flex-shrink: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 13px; line-height: 1;
+    transition: all 0.15s;
+    padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .pin-btn:hover { background: var(--surface-alt); border-color: var(--tier-pin); color: var(--tier-pin); }
+  .pin-btn.pinned { background: var(--surface-alt); border-color: var(--tier-pin); color: var(--tier-pin); }
+  .pin-btn.pinned:hover { background: #eee9dc; }
+  .item-card .source-link {
+    display: block; margin: 0 0 8px;
+    padding: 5px 8px; background: var(--surface-alt);
+    border: 1px solid var(--border); border-radius: 4px;
+    font-size: 12px; word-break: break-all;
+  }
+  .item-card .source-link a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .item-card .source-link a:hover { text-decoration: underline; }
+  .item-card .summary { font-size: 13.5px; color: var(--text); margin-bottom: 6px; }
+  .item-card .relevance-note {
+    font-size: 12px; color: var(--text-soft);
+    background: var(--surface-alt); padding: 5px 8px; border-radius: 4px; margin-top: 6px;
+    border-left: 2px solid var(--border);
+  }
+  .item-card .highlight-reason {
+    font-size: 12px; color: var(--tier-highlight);
+    background: var(--surface-alt); padding: 5px 8px; border-radius: 4px; margin-top: 4px;
+    border-left: 2px solid var(--tier-highlight);
+  }
+
+  /* === cat-tag (small subtype label inside card) === */
+  .cat-tag {
+    display: inline-block; font-size: 10px;
+    padding: 2px 7px; border-radius: 4px; color: #fff;
+    font-weight: 600; letter-spacing: 0.04em;
+  }
+  .cat-tag.cat-oem      { background: var(--cat-oem); }
+  .cat-tag.cat-market   { background: var(--cat-market); }
+  .cat-tag.cat-papers   { background: var(--cat-papers); }
+  .cat-tag.cat-hardware { background: var(--cat-hardware); }
+  .cat-tag.cat-ems      { background: var(--cat-ems); }
+  .cat-tag.cat-rl       { background: var(--cat-rl); }
+  .cat-tag.cat-bkl      { background: var(--tier-pin); }
+  .cat-tag.cat-iea      { background: #2c3e50; }
+  .cat-tag.cat-doe      { background: #4a5a64; }
+  .cat-tag.cat-epa      { background: #4f6b5e; }
+  .cat-tag.cat-eia      { background: #5b6a7a; }
+  .cat-tag.cat-policy   { background: #5b4f63; }
+  .cat-tag.cat-mpc      { background: var(--cat-ems); }
+  .cat-tag.cat-review   { background: #5b4f63; }
+
+  .source-tag {
+    display: inline-block; font-size: 10px;
+    padding: 2px 7px; border-radius: 4px;
+    background: var(--surface-alt); color: var(--text-soft); border: 1px solid var(--border);
+    font-weight: 500;
+  }
+  .source-tag.peer-reviewed { color: var(--cat-hardware); }
+  .source-tag.preprint      { color: var(--cat-rl); }
+  .source-tag.press         { color: var(--cat-oem); }
+  .source-tag.oem           { color: var(--cat-oem); }
+  .source-tag.report        { color: var(--cat-market); }
+  .source-tag.policy        { color: var(--cat-rl); }
+  .source-tag.local-file    { color: var(--tier-pin); }
+
+  .relevance-badge {
+    display: inline-block; font-size: 11px;
+    padding: 2px 7px; border-radius: 4px;
+    background: var(--surface-alt); color: var(--text-soft);
+    border: 1px solid var(--border); font-weight: 600;
+  }
+  .new-badge, .recent-badge, .highlight-badge {
+    display: inline-block; font-size: 10px; padding: 2px 7px;
+    border-radius: 4px; font-weight: 600; letter-spacing: 0.06em;
+    background: transparent;
+  }
+  .new-badge       { color: var(--tier-new);       border: 1px solid #e0d5cb; }
+  .recent-badge    { color: var(--tier-recent);    border: 1px solid #d4dcd6; }
+  .highlight-badge { color: var(--tier-highlight); border: 1px solid #d8d2dd; }
+  .date-tag        { display: inline-block; font-size: 11px; color: var(--text-muted); margin-left: auto; }
+
+  .filter-bar {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px;
+    padding-bottom: 12px; border-bottom: 1px dashed var(--divider); align-items: center;
+  }
+  .filter-bar .label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-right: 4px; }
+  .filter-btn {
+    background: var(--surface); border: 1px solid var(--border); color: var(--text-soft);
+    padding: 5px 12px; border-radius: 14px; font-size: 12px;
+    cursor: pointer; font-family: inherit; transition: all 0.15s;
+  }
+  .filter-btn:hover { background: var(--surface-alt); border-color: #d8d4ca; }
+  .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .filter-btn.cat-oem               { color: var(--cat-oem); }
+  .filter-btn.cat-oem.active        { background: var(--cat-oem); color: #fff; border-color: var(--cat-oem); }
+  .filter-btn.cat-market            { color: var(--cat-market); }
+  .filter-btn.cat-market.active     { background: var(--cat-market); color: #fff; border-color: var(--cat-market); }
+  .filter-btn.cat-papers            { color: var(--cat-papers); }
+  .filter-btn.cat-papers.active     { background: var(--cat-papers); color: #fff; border-color: var(--cat-papers); }
+  .filter-btn.tier-recent           { color: var(--tier-recent); }
+  .filter-btn.tier-recent.active    { background: var(--tier-recent); color: #fff; border-color: var(--tier-recent); }
+  .filter-btn.tier-highlight        { color: var(--tier-highlight); }
+  .filter-btn.tier-highlight.active { background: var(--tier-highlight); color: #fff; border-color: var(--tier-highlight); }
+  .filter-btn.tier-new              { color: var(--tier-new); }
+  .filter-btn.tier-new.active       { background: var(--tier-new); color: #fff; border-color: var(--tier-new); }
+  .filter-btn.tier-pinned           { color: var(--tier-pin); }
+  .filter-btn.tier-pinned.active    { background: var(--tier-pin); color: #fff; border-color: var(--tier-pin); }
+
+  .empty-state {
+    color: var(--text-muted); font-style: italic; text-align: center;
+    padding: 18px; background: var(--surface-alt); border-radius: 6px; font-size: 13px;
+    border: 1px dashed var(--border);
+  }
+  .source-list { padding-left: 22px; line-height: 1.8; font-size: 13.5px; margin: 0; }
+  .source-list a { color: var(--accent); text-decoration: none; }
+  .source-list a:hover { text-decoration: underline; }
+  footer {
+    margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border);
+    font-size: 11px; color: var(--text-muted); text-align: center;
+  }
+  footer code { background: var(--surface-alt); padding: 1px 5px; border-radius: 3px; color: var(--text-soft); }
+
+  /* ============ 우측 주요 항목 패널 ============ */
+  #pin-panel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: var(--panel-w);
+    max-height: calc(100vh - 40px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(20, 20, 18, 0.06);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, width 0.25s ease;
+  }
+  #pin-panel.collapsed {
+    width: 44px;
+    overflow: hidden;
+  }
+  #pin-panel.collapsed .pin-panel-body,
+  #pin-panel.collapsed .pin-panel-title-text,
+  #pin-panel.collapsed .pin-panel-clear { display: none; }
+  .pin-panel-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 14px;
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--border);
+    border-radius: 10px 10px 0 0;
+  }
+  #pin-panel.collapsed .pin-panel-header {
+    border-bottom: none; border-radius: 10px;
+    padding: 12px 8px; justify-content: center;
+  }
+  .pin-panel-icon { font-size: 14px; color: var(--tier-pin); flex-shrink: 0; opacity: 0.85; }
+  .pin-panel-title-text {
+    font-size: 12px; font-weight: 600; color: var(--text);
+    flex: 1; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .pin-panel-title-text .count {
+    background: var(--tier-pin); color: #fff;
+    font-size: 10px; padding: 1px 6px; border-radius: 8px;
+    margin-left: 6px; font-weight: 700; letter-spacing: 0;
+  }
+  .pin-panel-clear {
+    background: transparent; border: none; color: var(--text-muted);
+    cursor: pointer; font-size: 11px; padding: 2px 6px; border-radius: 4px;
+  }
+  .pin-panel-clear:hover { background: rgba(110, 90, 63, 0.10); color: var(--tier-pin); }
+  .pin-panel-toggle {
+    background: transparent; border: none; color: var(--text-soft);
+    cursor: pointer; font-size: 14px; padding: 0;
+    width: 22px; height: 22px; border-radius: 4px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .pin-panel-toggle:hover { background: rgba(110, 90, 63, 0.10); color: var(--tier-pin); }
+  .pin-panel-body { flex: 1; overflow-y: auto; padding: 10px 12px 14px; }
+  .pin-panel-empty {
+    color: var(--text-muted); font-style: italic; font-size: 12px;
+    text-align: center; padding: 20px 8px; line-height: 1.5;
+  }
+  .pinned-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--tier-pin);
+    border-radius: 0 6px 6px 0;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    font-size: 12.5px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.12s, border-color 0.12s;
+  }
+  .pinned-item:hover { background: var(--surface-alt); }
+  .pinned-item .pin-title {
+    font-weight: 600; color: var(--text);
+    padding-right: 22px; margin-bottom: 4px;
+    line-height: 1.35; font-size: 12.5px;
+  }
+  .pinned-item .pin-meta {
+    display: flex; gap: 4px; flex-wrap: wrap; align-items: center; font-size: 10px;
+  }
+  .pinned-item .pin-cat {
+    padding: 1px 5px; border-radius: 3px; color: #fff;
+    font-weight: 600; letter-spacing: 0.04em;
+  }
+  .pinned-item .pin-cat.cat-oem      { background: var(--cat-oem); }
+  .pinned-item .pin-cat.cat-market   { background: var(--cat-market); }
+  .pinned-item .pin-cat.cat-papers   { background: var(--cat-papers); }
+  .pinned-item .pin-cat.cat-hardware { background: var(--cat-hardware); }
+  .pinned-item .pin-cat.cat-ems      { background: var(--cat-ems); }
+  .pinned-item .pin-cat.cat-rl       { background: var(--cat-rl); }
+  .pinned-item .pin-date { color: var(--text-muted); }
+  .pinned-item .pin-rel  { color: var(--text-soft); font-weight: 600; }
+  .pinned-item .pin-saved {
+    display: block; color: var(--accent); font-size: 10px;
+    margin-top: 4px; text-decoration: none;
+  }
+  .pinned-item .pin-saved:hover { text-decoration: underline; }
+  .pinned-remove {
+    position: absolute; top: 6px; right: 6px;
+    background: transparent; border: none;
+    color: var(--text-muted); cursor: pointer;
+    width: 20px; height: 20px; border-radius: 50%;
+    font-size: 11px; line-height: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .pinned-remove:hover { background: #f1ece3; color: var(--tier-pin); }
+
+  /* === Archive section (지난 회차) === */
+  .archive-section { margin-top: 2rem; padding: 1rem 1.25rem; border-top: 1px solid var(--border); background: var(--surface); border-radius: 10px; }
+  .archive-section h2 { font-size: 15px; margin: 0 0 .6rem; font-weight: 600; }
+  .archive-section ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .archive-section li a { display: inline-block; padding: .3rem .7rem; border: 1px solid var(--border); border-radius: .4rem; font-size: 12.5px; text-decoration: none; color: var(--text-soft); background: var(--surface-alt); }
+  .archive-section li a:hover { color: var(--text); border-color: var(--accent); }
+  .archive-section li.empty { font-size: 12.5px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<!-- ============ 우측 주요 항목 패널 ============ -->
+<aside id="pin-panel" aria-label="주요 항목 저장 패널">
+  <div class="pin-panel-header">
+    <span class="pin-panel-icon">📌</span>
+    <span class="pin-panel-title-text">주요 항목 <span class="count" data-slot="pinned-count-pill">0</span></span>
+    <button class="pin-panel-clear" data-action="clear-all" title="모두 삭제">모두 삭제</button>
+    <button class="pin-panel-toggle" data-action="toggle" title="패널 접기/펴기">‹</button>
+  </div>
+  <div class="pin-panel-body" data-slot="pin-list">
+    <div class="pin-panel-empty">
+      카드의 📌 버튼을 눌러<br>주요 항목을 저장하세요.
+    </div>
+  </div>
+</aside>
+
+<header>
+  <h1>xEV 파워트레인 동향 — 통합 보고서</h1>
+  <div class="subtitle">①OEM · ②시장·규제 · ③논문 — 매주 월 04:00 자동 갱신</div>
+  <div class="meta-bar">
+    <span>최근 업데이트: <strong data-slot="updated-date">2026-05-19</strong></span>
+    <span>업데이트 주기: <strong>매주 월 04:00</strong></span>
+    <span class="recent-count">RECENT(1개월): <strong data-slot="recent-count">14</strong></span>
+    <span class="highlight-count">HIGHLIGHT(분기): <strong data-slot="highlight-count">14</strong></span>
+    <span class="new-count">신규: <strong data-slot="new-count">12</strong></span>
+    <span class="pinned-count">📌 저장: <strong data-slot="pinned-count">0</strong></span>
+  </div>
+</header>
+
+<section>
+  <h2><span class="badge relevance">RELEVANCE</span>본인 연구 관련성 요약 (이번 회차 핵심)</h2>
+  <div class="relevance-card">
+    <strong>이번 회차 핵심 — IEA Global EV Outlook 2026 공식 발간 + Hyundai 첫 EREV(Santa Fe) 양산 준비 + Nature Comm EV 티핑포인트 + 4월 글로벌 EV 시장 데이터(1.6M)</strong>
+    <ul style="margin: 8px 0 0; padding-left: 20px;">
+      <li><strong>플래그십 신 에디션: IEA Global EV Outlook 2026 공식 발간 (2026-05)</strong> — 자동차 SW·AI 트렌드 특별 챕터, EV affordability·제조·무역 분석 추가. 2025 글로벌 EV 판매 21M(+20%), 중국 EV 점유율 50% 돌파, 인도 +75%(2.3M), 동남아 2배, 중남미 +70%. IEA Global Energy Review 2026 EV 챕터도 별도 발간 — 본인 시뮬레이션 시나리오의 외부 reference 갱신 1순위.</li>
+      <li><strong>OEM 핵심: Hyundai 첫 EREV = Santa Fe 확정, 2026년 말 미국 양산</strong> — Genesis EREV는 듀얼 모터 4WD + 엔진(발전 전용) 구성으로 첫 시스템 디테일 공개. Kia Investor Day(2026-04-09)에서 Telluride EREV(2029) + 미국 픽업 EREV/HEV 공식화. 한국 OEM의 EREV 본격 진입 — 본인 EREV EMS 적용성 1차 plant model 후보 확장.</li>
+      <li><strong>학술: Nature Communications "EV 양성 티핑포인트" (2026-05, Exeter Univ 보도)</strong> — 32개국 2016-2023 데이터로 EV·HEV 글로벌 fleet이 1.5년마다 2배, 유럽·중국 가격 평형 2025-2028, 미·캐·한 2026-2030. Top-tier 저널에 EV adoption dynamics가 등장 — 본인 연구 introduction의 시장 동인 외부 근거로 활용 가능.</li>
+      <li><strong>시장: 글로벌 EV 4월 1.6M, 5.6M YTD (Electrek 2026-05-12)</strong> — 4월 YoY +6%, MoM -9%. 유럽 +27% (400K+), 중국 -17% YTD(but 4M 수출), 북미 -25% YTD. 중국 EV 수출 YTD 1.4M(전년 동기 2배). EU에서 판매되는 EV의 22%가 중국산.</li>
+      <li><strong>연구 방법론: arXiv 2601.18294 — RL이 MPC를 완전 대체하는 분산 RL+MPC 프레임 (2026-01)</strong> — 학습 컨트롤러가 속도·기어 제약 모두 처리, 그러나 엔진 제약 만족 보장 한계. 본인 MPC+RL 결합 구조의 직접 비교군 후보.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2><span class="badge action">ACTION</span>후속 액션 제안 (우선순위)</h2>
+  <ol class="action-list">
+    <li><strong>우선 정독</strong> — IEA Global EV Outlook 2026 SW/AI 챕터(본인 분야 직결), Nature Comm EV 티핑포인트 논문, arXiv 2601.18294(RL+분산 MPC), 그리고 직전 회차 1순위인 Energies DRL EMS 종합 리뷰.</li>
+    <li><strong>한국 EREV plant model 등록</strong> — Hyundai Santa Fe EREV(2026 말 양산) + Genesis EREV(듀얼 모터 4WD, 엔진 발전 전용) + Kia Telluride EREV(2029) 사양 윤곽을 EMS 시뮬레이터에 1차 plant 후보로 등록. Hyundai 외 모터 2개 + ICE 발전기 + 배터리 직병렬 위상은 본인 baseline의 직접 적용 케이스.</li>
+    <li><strong>시장 시나리오 v2 캘리브레이션</strong> — IEA Outlook 2026의 21M 글로벌 + 중국 50% 점유율 + 인도 +75% + 동남아 2배 데이터를 시뮬레이션 sweep 범위에 반영. 4월 시점 유럽 +27% / 북미 -25% YTD 비대칭은 EMS 보상 가중치 지역별 튜닝 직접 근거.</li>
+    <li><strong>벤치마크 후보 확장</strong> — arXiv 2601.18294(RL이 MPC 대체, 제약 한계 명시)는 본인 MPC+RL 결합 구조의 약점·강점 분석에 직접 활용. 직전 회차 SAC 통일 벤치마크와 함께 baseline 매트릭스 확장.</li>
+    <li><strong>BKL 폴더</strong> — 로컬 경로(<code>C:\Users\namwook\Documents\Claude\temp\BKL 모빌리티 정책 및 산업동향</code>)로 이전 완료. 다음 회차(월 04:00)부터 84개 PDF 본문 자동 분석 가동.</li>
+  </ol>
+</section>
+
+<section>
+  <h2><span class="badge new">NEW</span>이번 회차 신규 동향</h2>
+  <div data-slot="new-items">
+
+    <div class="item-card cat-market recent highlight" data-item-id="iea-global-energy-review-2026-ev" data-category="market" data-new="true" data-recent="true" data-highlight="true" data-source-type="report" data-date="2026-05">
+      <div class="meta-row">
+        <span class="cat-tag cat-iea">IEA</span>
+        <span class="source-tag report">Report</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="highlight-badge">HIGHLIGHT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2026-05</span>
+      </div>
+      <div class="title-row">
+        <div class="title">IEA Global Energy Review 2026 — EV 기술 챕터 신규 발간</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://www.iea.org/reports/global-energy-review-2026/technology-electric-vehicles" target="_blank">iea.org — Global Energy Review 2026: Technology Electric Vehicles →</a>
+      </div>
+      <div class="summary">IEA Global Energy Review 2026의 EV 기술 챕터. 2025년 글로벌 EV 판매 21M(+20% YoY), 신차 4대 중 1대가 EV. 중국 EV 점유율 50% 첫 돌파, 인도 +75%(2.3M), 동남아 2배, 중남미 +70%(350K). Global EV Outlook 2026 본편과 함께 동일 시기 발간된 신 리포트.</div>
+      <div class="highlight-reason">★ 분기 핵심 — IEA 신 에디션의 EV 전용 챕터. 본인 시뮬레이션 시나리오 외부 reference 갱신 1순위.</div>
+      <div class="relevance-note">★4 — EMS 시뮬레이션 sweep 범위 외부 근거 갱신. 지역별 점유율·증가율 시나리오 직접 활용.</div>
+    </div>
+
+    <div class="item-card cat-market recent highlight" data-item-id="nature-tipping-point-ev-2026" data-category="market" data-new="true" data-recent="true" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-05">
+      <div class="meta-row">
+        <span class="cat-tag cat-market">시장</span>
+        <span class="source-tag peer-reviewed">Peer-reviewed</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="highlight-badge">HIGHLIGHT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2026-05</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Nature Communications — EV 양성 티핑포인트 캐스케이드 증거 (Exeter Univ)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://www.nature.com/articles/s41467-025-66945-9" target="_blank">nature.com — Nat. Comm. — Cascading positive tipping point towards EVs →</a>
+      </div>
+      <div class="summary">32개국 2016-2023 EV·HEV 판매 데이터 분석. 글로벌 EV 플릿이 약 1.5년마다 2배(중국 1년, EU 1.3년, 미국 1.7년). 가격 평형 시점 — 유럽·중국 2025-2028, 미·캐·한 2026-2030, 그 외 2030-2035. 유럽·중국에서 내연차 회복력 약화·내연 차종 다양성 감소 등 임계점 지표 확인.</div>
+      <div class="highlight-reason">★ 분기 핵심 — Top-tier 저널(Nature Comm)에 EV adoption dynamics 게재 + 다수 매체 동시 보도(TechXplore, Yahoo, MSN 등).</div>
+      <div class="relevance-note">★3 — 본인 연구 introduction의 시장 동인 외부 근거. EMS 알고리즘 자체 영향은 간접적이나 인용 가치 높음.</div>
+    </div>
+
+    <div class="item-card cat-oem recent highlight" data-item-id="hyundai-santa-fe-erev-prep-2026" data-category="oem" data-new="true" data-recent="true" data-highlight="true" data-source-type="press" data-date="2026-05">
+      <div class="meta-row">
+        <span class="cat-tag cat-oem">신차</span>
+        <span class="source-tag press">Press</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="highlight-badge">HIGHLIGHT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2026-05</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Hyundai 첫 EREV 차종 = Santa Fe 확정 — 미국 생산 준비 시작 (Korean Car Blog)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://thekoreancarblog.com/hyundai-begins-production-preparation-for-first-extended-range-ev-the-santa-fe-erev/" target="_blank">thekoreancarblog.com — Hyundai begins production preparation for first EREV: Santa Fe →</a>
+      </div>
+      <div class="summary">Hyundai의 첫 EREV 양산 차종이 Santa Fe로 공식 확정. 2026년 말 미국 양산 개시. Hyundai/Genesis EREV SUV 통합 생산 목표 연 8만 대(미국). 직전 회차 "560마일 EREV"의 양산 차종 확정 단계.</div>
+      <div class="highlight-reason">★ 분기 핵심 — Hyundai 첫 EREV 양산 차종 확정 발표. 본인 EMS plant model 등록 직접 후보.</div>
+      <div class="relevance-note">★4 — 한국 OEM EREV 양산 첫 사례. 사양 구체화 시 EREV EMS plant model 1차 등록 후보.</div>
+    </div>
+
+    <div class="item-card cat-oem recent highlight" data-item-id="genesis-erev-system-details-2026" data-category="oem" data-new="true" data-recent="true" data-highlight="true" data-source-type="press" data-date="2026-05">
+      <div class="meta-row">
+        <span class="cat-tag cat-oem">신차</span>
+        <span class="source-tag press">Press</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="highlight-badge">HIGHLIGHT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★5/5</span>
+        <span class="date-tag">📅 2026-05</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Genesis EREV 시스템 첫 디테일 공개 — 듀얼 모터 4WD + 엔진 충전 전용</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://thekoreancarblog.com/first-details-of-genesis-erev-system-revealed/" target="_blank">thekoreancarblog.com — First details of Genesis EREV system revealed →</a>
+      </div>
+      <div class="summary">Jae Hoon Chang(현대차 사장/CEO) 발표 — Genesis EREV는 듀얼 모터 4WD 구성, 엔진은 배터리 충전 전용으로만 사용(시리즈 EREV 위상). 전기 구동 100%, ICE는 발전기. 본격적인 시리즈 하이브리드 EMS 적용 사례.</div>
+      <div class="highlight-reason">★ 분기 핵심 — Hyundai/Genesis EREV 시스템 위상 공식 확정. 시리즈 EREV의 정석 구조.</div>
+      <div class="relevance-note">★5 — 본인 EREV EMS 연구의 직접 대상 위상. SOC/엔진 발전 출력 분배가 핵심 제어 변수. plant model 등록 1순위.</div>
+    </div>
+
+    <div class="item-card cat-market recent" data-item-id="electrek-europe-april-ev-sales-2026-05-12" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05-12">
+      <div class="meta-row">
+        <span class="cat-tag cat-market">시장</span>
+        <span class="source-tag press">Press</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2026-05-12</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Electrek: 유럽이 4월 글로벌 EV 판매 견인, 중국 EV 수출 급증</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://electrek.co/2026/05/12/europe-drove-global-ev-sales-in-april-as-china-exports-surged/" target="_blank">electrek.co — Europe drove global EV sales in April as China exports surged →</a>
+      </div>
+      <div class="summary">2026년 4월 글로벌 EV 판매 1.6M(YoY +6%, MoM -9%), YTD 5.6M. 유럽 4월 400K+ (+27% YoY). 중국 EV YTD -17%이나 4월 단월 수출 400K+, YTD 수출 1.4M(전년 동기 2배). 북미 -25% YTD. EU에서 판매되는 EV 중 22%가 중국산(2025년 19%에서 상승).</div>
+      <div class="relevance-note">★3 — 시장 분기 환경 직전 회차 갱신. 지역별 EMS 캘리브레이션 비대칭 입력값 확정.</div>
+    </div>
+
+    <div class="item-card cat-market recent" data-item-id="techxplore-tipping-point-2026-05" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05">
+      <div class="meta-row">
+        <span class="cat-tag cat-market">시장</span>
+        <span class="source-tag press">Press</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★2/5</span>
+        <span class="date-tag">📅 2026-05</span>
+      </div>
+      <div class="title-row">
+        <div class="title">TechXplore: 유럽·중국 EV 티핑포인트 도달, 내연 회귀 사실상 불가</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://techxplore.com/news/2026-05-electric-vehicles-europe-china.html" target="_blank">techxplore.com — 'Tipping point' to EVs reached in Europe and China →</a>
+      </div>
+      <div class="summary">Nature Comm 논문의 일반 매체 보도. 유럽·중국에서 EV 점유율 가속 + 내연차 차종 다양성 감소 + 내연차 회복력 약화로 임계점 도달. 미국은 정책 후퇴로 뒤처질 위험.</div>
+      <div class="relevance-note">★2 — Nature Comm 논문 보조 자료. EMS 연구 자체 직접 영향은 낮음.</div>
+    </div>
+
+    <div class="item-card cat-oem highlight" data-item-id="kia-investor-day-2026-04-09" data-category="oem" data-new="true" data-recent="false" data-highlight="true" data-source-type="oem" data-date="2026-04-09">
+      <div class="meta-row">
+        <span class="cat-tag cat-oem">OEM</span>
+        <span class="source-tag oem">OEM 공식</span>
+        <span class="highlight-badge">HIGHLIGHT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2026-04-09</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Kia Investor Day 2026 — Telluride EREV(2029) + 미국 픽업 EREV/HEV 진입 공식화</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://www.hyundaimotorgroup.com/en/news/CONT0000000000208362" target="_blank">hyundaimotorgroup.com — 2026 Kia CEO Investor Day (2026-04-09) →</a>
+      </div>
+      <div class="summary">Kia CEO Ho Sung Song 발표 — Kia Telluride 3열 SUV EREV 버전 2029 출시 확정. 미국 픽업트럭 첫 진입 시 EREV·전통 HEV 양 옵션. Kia의 풀 라인업 전기화 가속 + 신규 사업 역량 강화.</div>
+      <div class="highlight-reason">★ 분기 핵심 — 한국 OEM EREV 라인업 확대 공식 발표. Telluride EREV는 본인 plant model 시뮬레이션 2차 후보.</div>
+      <div class="relevance-note">★4 — 한국 OEM EREV 라인업 확대. Hyundai Santa Fe EREV와 함께 본인 plant 후보군 양축 형성.</div>
+    </div>
+
+    <div class="item-card cat-papers" data-item-id="arxiv-rl-distributed-mpc-2601-2026-01" data-category="papers" data-new="true" data-recent="false" data-highlight="false" data-source-type="preprint" data-date="2026-01">
+      <div class="meta-row">
+        <span class="cat-tag cat-rl">RL/ML</span>
+        <span class="source-tag preprint">Preprint</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2026-01</span>
+      </div>
+      <div class="title-row">
+        <div class="title">RL이 분산 MPC를 완전 대체하는 연료효율 컨트롤러 (arXiv 2601.18294)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://arxiv.org/abs/2601.18294" target="_blank">arxiv.org — 2601.18294 (RL with Distributed MPC for Fuel-Efficient Control) →</a>
+      </div>
+      <div class="summary">학습 기반 컨트롤러가 분산 MPC를 완전 대체해 속도·기어 양 변수를 동시 제어. 다만 학습 컨트롤러는 엔진 제약 만족을 보장하지 못함을 명시. RL 단독 대체 vs MPC+RL 결합 구조의 근본 한계 비교 사례.</div>
+      <div class="relevance-note">★4 — 본인 MPC+RL 결합 구조의 비교군. RL 단독의 제약 처리 한계를 명시 — 결합 구조의 필요성 직접 근거.</div>
+    </div>
+
+    <div class="item-card cat-oem" data-item-id="solid-state-breakthrough-electrek-2026-04" data-category="oem" data-new="true" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026-04-15">
+      <div class="meta-row">
+        <span class="cat-tag cat-hardware">Hardware</span>
+        <span class="source-tag press">Press</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★2/5</span>
+        <span class="date-tag">📅 2026-04-15</span>
+      </div>
+      <div class="title-row">
+        <div class="title">솔리드스테이트 EV 배터리 양산 예상보다 빨리 도래 — GBT 5분 충전·621마일</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://electrek.co/2026/04/15/solid-state-ev-batteries-coming-sooner-than-expected/" target="_blank">electrek.co — Solid-state EV batteries coming sooner than expected →</a>
+      </div>
+      <div class="summary">Greater Bay Technology(GBT) — 2026 내 GWh급 솔리드스테이트 배터리 양산 + 차량 적용 목표. GAC 그룹 지원. Donut Lab 5분 충전 배터리 발표. 모토사이클은 Verge가 1Q2026부터 상용 적용. 글로벌 솔리드스테이트 상용화 본격화 신호.</div>
+      <div class="relevance-note">★2 — 배터리 모델 단순화·SoC 운용 범위 변화 가능성. EMS plant model 갱신 잠재 인자.</div>
+    </div>
+
+    <div class="item-card cat-market" data-item-id="solid-state-china-standard-2026-02" data-category="market" data-new="true" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026-02-11">
+      <div class="meta-row">
+        <span class="cat-tag cat-policy">정책</span>
+        <span class="source-tag policy">Policy</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2026-02-11</span>
+      </div>
+      <div class="title-row">
+        <div class="title">중국, 세계 최초 솔리드스테이트 EV 배터리 표준 — 2026-07 시행 예정</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://electrek.co/2026/02/11/solid-state-ev-battery-standard-china-2026/" target="_blank">electrek.co — Solid-state EV battery standard to be released in China in 2026 →</a>
+      </div>
+      <div class="summary">중국이 세계 최초의 솔리드스테이트 EV 배터리 표준을 2026-07에 공식 발효 예정. 차량 적용·인증 가이드라인 통합. 기존 중국 EV 의무 에너지 표준(2026-01)에 이은 두 번째 EV 하드웨어 핵심 규정.</div>
+      <div class="relevance-note">★3 — 배터리 셀 종류·SoC 운용 정책이 시뮬레이션 입력. 다음 회차 시행 직전 동향 추적 필요.</div>
+    </div>
+
+    <div class="item-card cat-oem" data-item-id="mit-tech-review-ev-batteries-2026-02" data-category="oem" data-new="true" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026-02-02">
+      <div class="meta-row">
+        <span class="cat-tag cat-hardware">Hardware</span>
+        <span class="source-tag press">Press</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★2/5</span>
+        <span class="date-tag">📅 2026-02-02</span>
+      </div>
+      <div class="title-row">
+        <div class="title">MIT Tech Review: 2026 EV 배터리 차세대 기술 전망</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://www.technologyreview.com/2026/02/02/1132042/whats-next-for-ev-batteries-in-2026/" target="_blank">technologyreview.com — What's next for EV batteries in 2026 →</a>
+      </div>
+      <div class="summary">2026 EV 배터리 기술 트렌드 종합 정리 — 솔리드스테이트 상용화 가속, LFP·소듐이온 다변화, 800-1200V 아키텍처, 10-80% 단자릿수 분 충전 목표. 한·일·EU·미 공급망 후반기 양산 추진.</div>
+      <div class="relevance-note">★2 — 배터리 화학·아키텍처 분기 시 EMS plant model 일반화 방향성 참고.</div>
+    </div>
+
+    <div class="item-card cat-market" data-item-id="icct-vision-2050-2025" data-category="market" data-new="true" data-recent="false" data-highlight="false" data-source-type="report" data-date="2026">
+      <div class="meta-row">
+        <span class="cat-tag cat-market">시장</span>
+        <span class="source-tag report">Report</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★2/5</span>
+        <span class="date-tag">📅 2026</span>
+      </div>
+      <div class="title-row">
+        <div class="title">ICCT Vision 2050 — 글로벌 ZEV 전환 업데이트 (2025 데이터)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://theicct.org/publication/vision-2050-update-on-the-global-zev-transition-in-2025/" target="_blank">theicct.org — Vision 2050: Update on the global ZEV transition in 2025 →</a>
+      </div>
+      <div class="summary">ICCT(국제청정교통연구회)의 ZEV(zero-emission vehicle) 전환 시나리오 갱신. Baseline 2025 vs Momentum 시나리오 비교. 미국 정책 후퇴로 GHG 격차 폐쇄율이 baseline 60%에서 momentum 14%로 급락.</div>
+      <div class="relevance-note">★2 — EMS 다목적 손실함수의 미국 시나리오 격차 정량 자료.</div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2><span class="badge">DETAILS</span>카테고리별 상세 (필터 가능)</h2>
+
+  <div class="filter-bar">
+    <span class="label">카테고리</span>
+    <button class="filter-btn active" data-filter-cat="all">전체</button>
+    <button class="filter-btn cat-oem"    data-filter-cat="oem">① OEM</button>
+    <button class="filter-btn cat-market" data-filter-cat="market">② 시장·규제</button>
+    <button class="filter-btn cat-papers" data-filter-cat="papers">③ 논문</button>
+    <span class="label" style="margin-left: 12px;">티어</span>
+    <button class="filter-btn active" data-filter-tier="all">전체</button>
+    <button class="filter-btn tier-recent" data-filter-tier="recent">RECENT 1개월</button>
+    <button class="filter-btn tier-highlight" data-filter-tier="highlight">분기 핵심</button>
+    <button class="filter-btn tier-new" data-filter-tier="new">신규만</button>
+    <button class="filter-btn tier-pinned" data-filter-tier="pinned">📌 저장</button>
+  </div>
+
+  <div data-slot="details-root">
+
+    <!-- ============ ① OEM 동향 ============ -->
+    <div class="cat-section cat-section-oem" data-cat="oem">
+      <h3 class="cat-section-title">
+        <span class="num">①</span>
+        OEM 동향
+        <span class="meta">신차·신기술·파워트레인 하드웨어</span>
+      </h3>
+      <div data-slot="oem-items">
+        <div class="section-subhead recent" data-section="oem-recent">⚡ RECENT — 최근 1개월 이내</div>
+
+        <div class="item-card cat-oem recent highlight" data-item-id="hyundai-santa-fe-erev-prep-2026" data-category="oem" data-new="true" data-recent="true" data-highlight="true" data-source-type="press" data-date="2026-05">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">신차</span>
+            <span class="source-tag press">Press</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★4/5</span>
+            <span class="date-tag">📅 2026-05</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Hyundai 첫 EREV 차종 = Santa Fe 확정 — 미국 생산 준비 시작</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://thekoreancarblog.com/hyundai-begins-production-preparation-for-first-extended-range-ev-the-santa-fe-erev/" target="_blank">thekoreancarblog.com — Hyundai begins production preparation for Santa Fe EREV →</a>
+          </div>
+          <div class="summary">Hyundai의 첫 EREV 양산 차종이 Santa Fe로 공식 확정. 2026년 말 미국 양산 개시. Hyundai/Genesis EREV SUV 통합 생산 목표 연 8만 대(미국).</div>
+          <div class="highlight-reason">★ 분기 핵심 — Hyundai 첫 EREV 양산 차종 확정. 본인 EMS plant model 등록 직접 후보.</div>
+          <div class="relevance-note">★4 — 한국 OEM EREV 양산 첫 사례. 사양 구체화 시 EREV EMS plant model 1차 등록 후보.</div>
+        </div>
+
+        <div class="item-card cat-oem recent highlight" data-item-id="genesis-erev-system-details-2026" data-category="oem" data-new="true" data-recent="true" data-highlight="true" data-source-type="press" data-date="2026-05">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">신차</span>
+            <span class="source-tag press">Press</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★5/5</span>
+            <span class="date-tag">📅 2026-05</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Genesis EREV 시스템 첫 디테일 공개 — 듀얼 모터 4WD + 엔진 충전 전용</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://thekoreancarblog.com/first-details-of-genesis-erev-system-revealed/" target="_blank">thekoreancarblog.com — First details of Genesis EREV system revealed →</a>
+          </div>
+          <div class="summary">Jae Hoon Chang(현대차 사장/CEO) 발표 — Genesis EREV는 듀얼 모터 4WD 구성, 엔진은 배터리 충전 전용(시리즈 EREV 위상). 전기 구동 100%, ICE는 발전기. 시리즈 하이브리드 EMS 정석 사례.</div>
+          <div class="highlight-reason">★ 분기 핵심 — Genesis EREV 시스템 위상 공식 확정. 시리즈 EREV의 정석 구조.</div>
+          <div class="relevance-note">★5 — 본인 EREV EMS 연구의 직접 대상 위상. SOC/엔진 발전 출력 분배가 핵심 제어 변수. plant model 등록 1순위.</div>
+        </div>
+
+        <div class="item-card cat-oem recent" data-item-id="honda-next-hybrid-roadmap-2026-05" data-category="oem" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05-14">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">OEM</span>
+            <span class="source-tag press">Press</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-05-14</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Honda 차세대 하이브리드 로드맵 — Mibe CEO 발표 (mid-size 2.0L I4, large V6 dual-motor AWD)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.torquenews.com/3929/honda-announce-new-plan-next-week" target="_blank">torquenews.com — Honda CEO new plan announcement →</a>
+          </div>
+          <div class="summary">Honda Mibe CEO가 EV 후퇴·하이브리드 강화 전략 공식화. small/medium/large 3개 사이즈 신규 하이브리드 파워트레인 개발. 신 하이브리드 시스템 연비 30% 향상 목표, 2018 대비 50% 이상·2023 대비 30% 이상 비용 감축 목표. 하이브리드 판매 2030년까지 800K → 2M 확대 목표.</div>
+          <div class="relevance-note">★3 — 사이즈별 하이브리드 시스템 다중화 + 30% 연비 개선 목표는 EMS plant model 일반화 기준점.</div>
+        </div>
+
+        <div class="item-card cat-oem recent highlight" data-item-id="hyundai-kia-2motor-hybrid-2026" data-category="oem" data-new="false" data-recent="true" data-highlight="true" data-source-type="press" data-date="2026-05">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">OEM</span>
+            <span class="source-tag press">Press</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="relevance-badge">★4/5</span>
+            <span class="date-tag">📅 2026-05</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Hyundai/Kia 차세대 2-Motor 통합 변속기 하이브리드 — Palisade·Telluride Hybrid 데뷔</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.autoguide.com/auto/category/hybrids/who-makes-the-best-hybrid-vehicles-in-2026-44631031" target="_blank">autoguide.com — Best hybrid makers 2026 (Hyundai/Kia 2-motor system) →</a>
+          </div>
+          <div class="summary">기존 1-motor 시스템 대비 부가 하드웨어 제거, 2개 모터를 변속기에 통합. Hyundai Palisade Hybrid·Kia Telluride Hybrid에 우선 적용. 시스템 단순화로 SoC/모터 토크 분배 영역 재설계 신호.</div>
+          <div class="highlight-reason">★ 분기 핵심 — 한국 OEM 차세대 하이브리드의 핵심 변경점. 다수 매체 동시 보도.</div>
+          <div class="relevance-note">★4 — 본인 EMS plant model 일반화·모드 전환 로직 적용 직접 후보.</div>
+        </div>
+
+        <div class="item-card cat-oem recent" data-item-id="usnews-2026-best-hybrid-ev" data-category="oem" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-04-22">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">OEM</span>
+            <span class="source-tag press">Press</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="relevance-badge">★1/5</span>
+            <span class="date-tag">📅 2026-04-22</span>
+          </div>
+          <div class="title-row">
+            <div class="title">U.S. News 2026 Best Hybrid & Electric Cars — Hyundai/Toyota 강세</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.usnews.com/info/blogs/press-room/articles/2026-04-22/u-s-news-announces-the-2026-best-hybrid-and-electric-cars" target="_blank">usnews.com — 2026 Best Hybrid and Electric Cars →</a>
+          </div>
+          <div class="summary">Hyundai Tucson Hybrid·Ioniq 5 3년 연속 수상, Ioniq 9 Midsize EV SUV 부문 1위. Kia Sportage PHEV·Niro 부문 수상. 시장 인식 차원에서 Hyundai/Kia 라인업의 안정적 평가 지속.</div>
+          <div class="relevance-note">★1 — 시장 인식 자료. EMS 알고리즘 자체 영향은 거의 없음. 참고용.</div>
+        </div>
+
+        <div class="item-card cat-oem recent" data-item-id="horse-powertrain-c15-2026-04" data-category="oem" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-04-21">
+          <div class="meta-row">
+            <span class="cat-tag cat-hardware">Hardware</span>
+            <span class="source-tag press">Press</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026-04-21</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Horse Powertrain X-Range C15 — All-in-One 모듈러 하이브리드 시스템</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.electrive.com/2026/04/21/horse-powertrain-unveils-hybrid-system-for-bev-platforms/" target="_blank">electrive.com — Horse Powertrain unveils hybrid system for BEV platforms →</a>
+          </div>
+          <div class="summary">4기통 엔진·변속기·파워 일렉트로닉스·듀얼 전기 모터를 단일 유닛에 통합. BEV 아키텍처를 HEV/PHEV/REEV에 재사용 가능. Amorphous 모터 98.2% 효율.</div>
+          <div class="relevance-note">★2 — 제어 알고리즘 일반화 관점에서 plant model 추상화 사례로 참고.</div>
+        </div>
+
+        <div class="section-subhead highlight" data-section="oem-highlight">★ HIGHLIGHT — 분기 핵심 (널리 회자된 동향)</div>
+
+        <div class="item-card cat-oem highlight" data-item-id="kia-investor-day-2026-04-09" data-category="oem" data-new="true" data-recent="false" data-highlight="true" data-source-type="oem" data-date="2026-04-09">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">OEM</span>
+            <span class="source-tag oem">OEM 공식</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★4/5</span>
+            <span class="date-tag">📅 2026-04-09</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Kia Investor Day 2026 — Telluride EREV(2029) + 미국 픽업 EREV/HEV 진입 공식화</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.hyundaimotorgroup.com/en/news/CONT0000000000208362" target="_blank">hyundaimotorgroup.com — 2026 Kia CEO Investor Day (2026-04-09) →</a>
+          </div>
+          <div class="summary">Kia CEO Ho Sung Song 발표 — Kia Telluride 3열 SUV EREV 2029 출시. 미국 픽업트럭 첫 진입 시 EREV·전통 HEV 양 옵션. 풀 라인업 전기화 가속.</div>
+          <div class="highlight-reason">★ 분기 핵심 — 한국 OEM EREV 라인업 확대 공식 발표. Telluride EREV는 본인 plant model 2차 후보.</div>
+          <div class="relevance-note">★4 — 한국 OEM EREV 라인업 확대. Hyundai Santa Fe EREV와 함께 plant 후보군 양축.</div>
+        </div>
+
+        <div class="item-card cat-oem highlight" data-item-id="toyota-5gen-hybrid-2026" data-category="oem" data-new="false" data-recent="false" data-highlight="true" data-source-type="press" data-date="2026-Q1">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">OEM</span>
+            <span class="source-tag press">Press</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026 Q1</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Toyota 5세대 하이브리드 시스템 — RAV4·Prius 전면 적용</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.tustintoyota.com/2026-toyota-hybrid-technology-explained-tustin/" target="_blank">tustintoyota.com — 2026 Toyota Hybrid Technology Explained →</a>
+          </div>
+          <div class="summary">2.5L 엔진 + 듀얼 모터로 출력·효율 동시 향상. 6세대 RAV4 하이브리드 전용(236 hp), PHEV 320 hp. Prius 57 mpg combined.</div>
+          <div class="highlight-reason">★ 분기 핵심 — Toyota 5세대 시스템 전면 적용은 업계 다수 매체에서 동시 보도된 산업 이벤트.</div>
+          <div class="relevance-note">★2 — 시스템 출력 사양 추세 파악용. 직접 제어 알고리즘 영향은 적음.</div>
+        </div>
+
+        <div class="item-card cat-oem highlight" data-item-id="honda-4gen-2motor-2026" data-category="oem" data-new="false" data-recent="false" data-highlight="true" data-source-type="oem" data-date="2026-Q1">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">OEM</span>
+            <span class="source-tag oem">OEM 공식</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026 Q1</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Honda 4세대 2-Motor 하이브리드 시스템 + IPU 개선</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://hondanews.com/en-US/honda-automobiles/releases/release-1503019bd8a757ea08267d7944378955-honda-two-motor-hybrid-electric-system" target="_blank">hondanews.com — Honda Two-Motor Hybrid Electric System (4th-Gen) →</a>
+          </div>
+          <div class="summary">신형 IPU가 1.06 kWh 배터리를 24% 더 작은 패키지에 12% 더 가볍게 탑재. 배터리 화학·제어 개선으로 SoC 운용 폭 확대. Civic('25+), Prelude('26+) 적용.</div>
+          <div class="highlight-reason">★ 분기 핵심 — Honda 4세대 전면 개편 공식 발표. SoC 운용 폭 확대는 EMS 설계 제약 변경 신호.</div>
+          <div class="relevance-note">★2 — SoC 운용 폭 변경이 EMS 설계 제약 조건에 영향.</div>
+        </div>
+
+        <div class="section-subhead" data-section="oem-older">전체 OEM 동향</div>
+
+        <div class="item-card cat-oem" data-item-id="hyundai-erev-560mi-2026" data-category="oem" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">OEM</span>
+            <span class="source-tag press">Press</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026 (양산 임박)</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Hyundai EREV 560마일 — 대형 SUV 2026 말 미국 양산 시작</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://insideevs.com/news/772645/hyundai-erev-2027-release/" target="_blank">insideevs.com — Hyundai EREV 2027 release (560-mile combined range) →</a>
+          </div>
+          <div class="summary">Hyundai/Genesis 대형 SUV용 EREV 플랫폼. 결합 항속 560마일 티저, 2026 말 미국 양산 개시·2027 판매. 발전기 ICE + 배터리 + 모터의 직병렬 위상 EMS 적용 후보. (신규 정보: Santa Fe가 첫 양산 차종으로 확정 — 위 카드 참조.)</div>
+          <div class="relevance-note">★3 — EREV 위상 EMS 적용성. Santa Fe 확정으로 plant model 후보 구체화.</div>
+        </div>
+
+        <div class="item-card cat-oem" data-item-id="ford-f150-erev-2026" data-category="oem" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">OEM</span>
+            <span class="source-tag press">Press</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Ford F-150 EREV — 차세대 Lightning에 700마일+ 항속 EREV 적용 예고</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://insideevs.com/features/786506/every-erev-extended-range-ev-america-2026/" target="_blank">insideevs.com — Every EREV coming to America 2026 →</a>
+          </div>
+          <div class="summary">차세대 F-150 Lightning을 EREV 파워트레인으로 전환, 견인 시에도 700마일+ 항속 목표. 트럭 세그먼트 EREV 표준 사양 신호.</div>
+          <div class="relevance-note">★2 — EREV 적용 차종 확대 트렌드.</div>
+        </div>
+
+        <div class="item-card cat-oem" data-item-id="solid-state-breakthrough-electrek-2026-04" data-category="oem" data-new="true" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026-04-15">
+          <div class="meta-row">
+            <span class="cat-tag cat-hardware">Hardware</span>
+            <span class="source-tag press">Press</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026-04-15</span>
+          </div>
+          <div class="title-row">
+            <div class="title">솔리드스테이트 EV 배터리 양산 예상보다 빨리 도래 — GBT 5분 충전·621마일</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://electrek.co/2026/04/15/solid-state-ev-batteries-coming-sooner-than-expected/" target="_blank">electrek.co — Solid-state EV batteries coming sooner than expected →</a>
+          </div>
+          <div class="summary">Greater Bay Technology(GBT) — 2026 내 GWh급 솔리드스테이트 배터리 양산 + 차량 적용 목표. GAC 그룹 지원. Donut Lab 5분 충전 배터리 발표. 모토사이클은 Verge가 1Q2026부터 상용 적용.</div>
+          <div class="relevance-note">★2 — 배터리 모델 단순화·SoC 운용 범위 변화 가능성. EMS plant model 갱신 잠재 인자.</div>
+        </div>
+
+        <div class="item-card cat-oem" data-item-id="mit-tech-review-ev-batteries-2026-02" data-category="oem" data-new="true" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026-02-02">
+          <div class="meta-row">
+            <span class="cat-tag cat-hardware">Hardware</span>
+            <span class="source-tag press">Press</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026-02-02</span>
+          </div>
+          <div class="title-row">
+            <div class="title">MIT Tech Review: 2026 EV 배터리 차세대 기술 전망</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.technologyreview.com/2026/02/02/1132042/whats-next-for-ev-batteries-in-2026/" target="_blank">technologyreview.com — What's next for EV batteries in 2026 →</a>
+          </div>
+          <div class="summary">2026 EV 배터리 기술 트렌드 종합 — 솔리드스테이트 상용화 가속, LFP·소듐이온 다변화, 800-1200V 아키텍처, 10-80% 단자릿수 분 충전. 한·일·EU·미 공급망 후반기 양산 추진.</div>
+          <div class="relevance-note">★2 — 배터리 화학·아키텍처 분기 시 EMS plant model 일반화 방향성 참고.</div>
+        </div>
+
+        <div class="item-card cat-oem" data-item-id="toyota-6-models-2026" data-category="oem" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026">
+          <div class="meta-row">
+            <span class="cat-tag cat-oem">OEM</span>
+            <span class="source-tag press">Press</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Toyota 2026년 6개 신차 라인업 — RAV4 PHEV(625mi)·C-HR BEV·Crown 풀 하이브리드</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.motor1.com/news/793992/new-toyota-models-2026/" target="_blank">motor1.com — Toyota 2026 6 new models →</a>
+          </div>
+          <div class="summary">2026 RAV4 PHEV/HEV 625mi 항속, C-HR 듀얼모터 BEV, Crown 전 라인 풀 하이브리드. Toyota 전기화 라인업 가속.</div>
+          <div class="relevance-note">★2 — RAV4 PHEV의 625mi 항속은 SoC/연료 배분 최적화 한계의 산업 기준점.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ② 시장 및 규제 동향 ============ -->
+    <div class="cat-section cat-section-market" data-cat="market">
+      <h3 class="cat-section-title">
+        <span class="num">②</span>
+        시장 및 규제 동향
+        <span class="meta">IEA · EIA · EPA · ORNL · BP · ExxonMobil · BKL 폴더</span>
+      </h3>
+      <div data-slot="market-items">
+        <div class="section-subhead recent" data-section="market-recent">⚡ RECENT — 최근 1개월 이내</div>
+
+        <div class="item-card cat-market recent highlight" data-item-id="iea-global-energy-review-2026-ev" data-category="market" data-new="true" data-recent="true" data-highlight="true" data-source-type="report" data-date="2026-05">
+          <div class="meta-row">
+            <span class="cat-tag cat-iea">IEA</span>
+            <span class="source-tag report">Report</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★4/5</span>
+            <span class="date-tag">📅 2026-05</span>
+          </div>
+          <div class="title-row">
+            <div class="title">IEA Global Energy Review 2026 — EV 기술 챕터 신규 발간</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.iea.org/reports/global-energy-review-2026/technology-electric-vehicles" target="_blank">iea.org — Global Energy Review 2026: Technology Electric Vehicles →</a>
+          </div>
+          <div class="summary">IEA Global Energy Review 2026의 EV 기술 챕터. 2025년 글로벌 EV 판매 21M(+20% YoY), 신차 4대 중 1대가 EV. 중국 EV 점유율 50% 첫 돌파, 인도 +75%(2.3M), 동남아 2배, 중남미 +70%(350K).</div>
+          <div class="highlight-reason">★ 분기 핵심 — IEA 신 에디션의 EV 전용 챕터. 본인 시뮬레이션 시나리오 외부 reference 갱신 1순위.</div>
+          <div class="relevance-note">★4 — EMS 시뮬레이션 sweep 범위 외부 근거. 지역별 점유율·증가율 시나리오 직접 활용.</div>
+        </div>
+
+        <div class="item-card cat-market recent highlight" data-item-id="nature-tipping-point-ev-2026" data-category="market" data-new="true" data-recent="true" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-05">
+          <div class="meta-row">
+            <span class="cat-tag cat-market">시장</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-05</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Nature Communications — EV 양성 티핑포인트 캐스케이드 증거 (Exeter Univ)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.nature.com/articles/s41467-025-66945-9" target="_blank">nature.com — Cascading positive tipping point towards EVs →</a>
+          </div>
+          <div class="summary">32개국 2016-2023 EV·HEV 판매 데이터 분석. 글로벌 EV 플릿이 약 1.5년마다 2배(중국 1년, EU 1.3년, 미국 1.7년). 가격 평형 시점 — 유럽·중국 2025-2028, 미·캐·한 2026-2030, 그 외 2030-2035.</div>
+          <div class="highlight-reason">★ 분기 핵심 — Top-tier 저널(Nature Comm) 등재 + 다수 매체 동시 보도.</div>
+          <div class="relevance-note">★3 — introduction 시장 동인 외부 근거.</div>
+        </div>
+
+        <div class="item-card cat-market recent" data-item-id="electrek-europe-april-ev-sales-2026-05-12" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05-12">
+          <div class="meta-row">
+            <span class="cat-tag cat-market">시장</span>
+            <span class="source-tag press">Press</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-05-12</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Electrek: 유럽이 4월 글로벌 EV 판매 견인, 중국 EV 수출 급증</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://electrek.co/2026/05/12/europe-drove-global-ev-sales-in-april-as-china-exports-surged/" target="_blank">electrek.co — Europe drove global EV sales in April as China exports surged →</a>
+          </div>
+          <div class="summary">2026년 4월 글로벌 EV 판매 1.6M(YoY +6%, MoM -9%), YTD 5.6M. 유럽 4월 400K+ (+27% YoY). 중국 EV YTD -17%이나 4월 단월 수출 400K+, YTD 수출 1.4M(전년 동기 2배). 북미 -25% YTD. EU에서 판매 EV 22%가 중국산.</div>
+          <div class="relevance-note">★3 — 지역별 EMS 캘리브레이션 비대칭 입력값 확정.</div>
+        </div>
+
+        <div class="item-card cat-market recent" data-item-id="techxplore-tipping-point-2026-05" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05">
+          <div class="meta-row">
+            <span class="cat-tag cat-market">시장</span>
+            <span class="source-tag press">Press</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026-05</span>
+          </div>
+          <div class="title-row">
+            <div class="title">TechXplore: 유럽·중국 EV 티핑포인트 도달, 내연 회귀 사실상 불가</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://techxplore.com/news/2026-05-electric-vehicles-europe-china.html" target="_blank">techxplore.com — 'Tipping point' to EVs reached in Europe and China →</a>
+          </div>
+          <div class="summary">Nature Comm 논문의 일반 매체 보도. 유럽·중국 EV 점유율 가속 + 내연차 다양성 감소 + 회복력 약화로 임계점 도달. 미국은 정책 후퇴로 뒤처질 위험.</div>
+          <div class="relevance-note">★2 — Nature Comm 논문 보조 자료.</div>
+        </div>
+
+        <div class="item-card cat-market recent" data-item-id="bkl-2026-05-2" data-category="market" data-new="false" data-recent="true" data-highlight="false" data-source-type="local-file" data-date="2026-05-15" data-bkl-file="BKL_2026_5월2차_자동차,모빌리티_정책 및 산업동향.pdf">
+          <div class="meta-row">
+            <span class="cat-tag cat-bkl">BKL</span>
+            <span class="source-tag local-file">Local File</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-05-15</span>
+          </div>
+          <div class="title-row">
+            <div class="title">BKL 2026년 5월 2차 — 자동차·모빌리티 정책 및 산업동향</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="file:///C:/Users/namwook/Documents/Claude/temp/BKL%20%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5/BKL_2026_5%EC%9B%942%EC%B0%A8_%EC%9E%90%EB%8F%99%EC%B0%A8,%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0_%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5.pdf" target="_blank">BKL_2026_5월2차_자동차,모빌리티 — 로컬 파일 →</a>
+          </div>
+          <div class="summary">BKL(법무법인) 발간 2026년 5월 후반기 모빌리티 정책·산업동향 격주 리포트. 본문 PDF 분석은 다음 회차(월 04:00) 자동 실행에서 정상 수행 예정 — 로컬 폴더 이전 완료.</div>
+          <div class="relevance-note">★3 — 국내 정책·OEM 동향 통합 자료. 메타데이터 기반 카드.</div>
+        </div>
+
+        <div class="item-card cat-market recent" data-item-id="bkl-2026-05-1" data-category="market" data-new="false" data-recent="true" data-highlight="false" data-source-type="local-file" data-date="2026-05-01" data-bkl-file="BKL_2026_5월1차_자동차,모빌리티_정책 및 산업동향.pdf">
+          <div class="meta-row">
+            <span class="cat-tag cat-bkl">BKL</span>
+            <span class="source-tag local-file">Local File</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-05-01</span>
+          </div>
+          <div class="title-row">
+            <div class="title">BKL 2026년 5월 1차 — 자동차·모빌리티 정책 및 산업동향</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="file:///C:/Users/namwook/Documents/Claude/temp/BKL%20%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5/BKL_2026_5%EC%9B%941%EC%B0%A8_%EC%9E%90%EB%8F%99%EC%B0%A8,%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0_%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5.pdf" target="_blank">BKL_2026_5월1차_자동차,모빌리티 — 로컬 파일 →</a>
+          </div>
+          <div class="summary">BKL 2026년 5월 상반기 모빌리티 정책·산업동향 격주 리포트. 본문 분석은 다음 회차(월 04:00) 자동 실행에서 정상 수행 예정.</div>
+          <div class="relevance-note">★3 — 국내 정책·OEM 동향 통합 자료.</div>
+        </div>
+
+        <div class="item-card cat-market recent" data-item-id="bkl-2026-04-2" data-category="market" data-new="false" data-recent="true" data-highlight="false" data-source-type="local-file" data-date="2026-04-22" data-bkl-file="BKL_2026_4월2차_자동차,모빌리티_정책 및 산업동향.pdf">
+          <div class="meta-row">
+            <span class="cat-tag cat-bkl">BKL</span>
+            <span class="source-tag local-file">Local File</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-04-22</span>
+          </div>
+          <div class="title-row">
+            <div class="title">BKL 2026년 4월 2차 — 자동차·모빌리티 정책 및 산업동향</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="file:///C:/Users/namwook/Documents/Claude/temp/BKL%20%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5/BKL_2026_4%EC%9B%942%EC%B0%A8_%EC%9E%90%EB%8F%99%EC%B0%A8,%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0_%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5.pdf" target="_blank">BKL_2026_4월2차_자동차,모빌리티 — 로컬 파일 →</a>
+          </div>
+          <div class="summary">BKL 2026년 4월 하반기 모빌리티 정책·산업동향 격주 리포트. 분기 마감 시점 국내 EV 보조금·세제 변화, OEM 1분기 실적 동향.</div>
+          <div class="relevance-note">★3 — 4월 분기 마감 정책 동향. 본문 분석은 다음 회차 자동 분석 시 정밀 인용 가능.</div>
+        </div>
+
+        <div class="cat-section-empty" style="display:none;">
+          BKL 폴더가 비어 있습니다 (C:\Users\namwook\Documents\Claude\temp\BKL 모빌리티 정책 및 산업동향). 파일 추가 시 다음 회차에 자동 분석.
+        </div>
+
+        <div class="section-subhead highlight" data-section="market-highlight">★ HIGHLIGHT — 분기 핵심</div>
+
+        <div class="item-card cat-market highlight" data-item-id="eia-aeo-2026-04" data-category="market" data-new="false" data-recent="false" data-highlight="true" data-source-type="report" data-date="2026-04-08">
+          <div class="meta-row">
+            <span class="cat-tag cat-eia">EIA</span>
+            <span class="source-tag report">Report</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-04-08</span>
+          </div>
+          <div class="title-row">
+            <div class="title">EIA Annual Energy Outlook 2026 — 미국 LDV BEV 2050년 18~46% (배출 규제 분기)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.eia.gov/outlooks/aeo/pdf/AEO_Narrative.pdf" target="_blank">eia.gov — Annual Energy Outlook 2026 (2026-04-08) →</a>
+          </div>
+          <div class="summary">교통부문 에너지 소비 27 quads(2025) → 21~25 quads(2050) 감소 예상. tailpipe 표준 적용 시 BEV 점유율 2032년 50%·2050년 40~46%, 미적용 시 18%. 시장 시나리오 분기 명시.</div>
+          <div class="highlight-reason">★ 분기 핵심 — EIA 핵심 연간 플래그십. 배출 규제 적용 여부 분기 시나리오를 본인 시뮬레이션에 직접 활용.</div>
+          <div class="relevance-note">★3 — EMS 차량 사용 시나리오의 BEV 점유율 sweep 범위(18~46%) 외부 근거.</div>
+        </div>
+
+        <div class="item-card cat-market highlight" data-item-id="epa-automotive-trends-2025" data-category="market" data-new="false" data-recent="false" data-highlight="true" data-source-type="report" data-date="2026-02">
+          <div class="meta-row">
+            <span class="cat-tag cat-epa">EPA</span>
+            <span class="source-tag report">Report</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-02</span>
+          </div>
+          <div class="title-row">
+            <div class="title">EPA Automotive Trends Report 2025 (2026-02 발간) — 평균 신차 연비 27.2 mpg 사상 최고</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.epa.gov/system/files/documents/2026-02/420r26001.pdf" target="_blank">epa.gov — EPA Automotive Trends Report (2026-02 PDF) →</a>
+          </div>
+          <div class="summary">MY2024 평균 신차 연비 27.2 mpg 사상 최고치(2004 대비 41% 향상). MY2023 차량은 1975 대비 50% 이하 CO2/mile. BEV+PHEV가 2024 평균 연비에 1.7 mpg 기여. 2026-02 rulemaking 후 compliance 평가 섹션 삭제.</div>
+          <div class="highlight-reason">★ 분기 핵심 — EPA 핵심 연간 리포트. BEV/PHEV 평균 연비 기여 정량화는 EMS 보상 가중치 캘리브레이션 근거.</div>
+          <div class="relevance-note">★3 — BEV/PHEV 기여도 정량 자료. EMS 다목적 최적화 가중치 설정 외부 근거.</div>
+        </div>
+
+        <div class="item-card cat-market highlight" data-item-id="iea-global-ev-outlook-2026" data-category="market" data-new="false" data-recent="false" data-highlight="true" data-source-type="report" data-date="2026">
+          <div class="meta-row">
+            <span class="cat-tag cat-iea">IEA</span>
+            <span class="source-tag report">Report</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026 발간</span>
+          </div>
+          <div class="title-row">
+            <div class="title">IEA Global EV Outlook 2026 — 공식 신 에디션</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.iea.org/events/global-ev-outlook-2026" target="_blank">iea.org — Global EV Outlook 2026 →</a>
+          </div>
+          <div class="summary">2026 신 에디션. 자동차 SW·AI 트렌드 특별 챕터 + EV affordability·제조·무역 분석. 2025 글로벌 EV 판매 21M(+20%), 신차 4대 중 1대가 EV. (2026-05 공식 발간 확인 — Global Energy Review 2026 EV 챕터와 동시 발표.)</div>
+          <div class="highlight-reason">★ 분기 핵심 — IEA 핵심 연간 리포트 신 에디션. SW/AI 챕터는 본인 분야와 직결.</div>
+          <div class="relevance-note">★3 — 시장 규모·정책 환경 기준선. SW/AI 특별 챕터는 EMS 알고리즘 시장 적용성 판단에 직접 도움.</div>
+        </div>
+
+        <div class="section-subhead" data-section="market-older">전체 시장·규제 동향</div>
+
+        <div class="item-card cat-market" data-item-id="pwc-q1-2026-ev-review" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="report" data-date="2026-04">
+          <div class="meta-row">
+            <span class="cat-tag cat-market">시장</span>
+            <span class="source-tag report">Report</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-04</span>
+          </div>
+          <div class="title-row">
+            <div class="title">PwC Strategy& EV Sales Review Q1 2026 — 글로벌 4M대 (YoY -3%), 유럽 +27%</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.strategyand.pwc.com/de/en/industries/automotive/electric-vehicle-sales-review-q1-2026.html" target="_blank">strategyand.pwc.com — EV Sales Review Q1-2026 →</a>
+          </div>
+          <div class="summary">Q1 글로벌 EV 판매 4.0M대(YoY -3%). 유럽 1.2M(+27%, 3월 단월 50만+), 중국 1.9M(-21%), 북미 0.32M(-27%). BEV 유럽 점유율 19% 사상 최고.</div>
+          <div class="relevance-note">★3 — EMS 적용 차량의 시장 기준선. 지역별 분기 시나리오 셋업에 활용.</div>
+        </div>
+
+        <div class="item-card cat-market" data-item-id="epa-ghg-rule-eliminated-2026-02" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026-02">
+          <div class="meta-row">
+            <span class="cat-tag cat-policy">정책</span>
+            <span class="source-tag policy">Policy</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-02</span>
+          </div>
+          <div class="title-row">
+            <div class="title">미국 EPA, 경·중·대형 차량 GHG 표준 공식 폐기 (2026-02)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.epa.gov/automotive-trends" target="_blank">epa.gov — Automotive Trends (compliance 섹션 삭제) →</a>
+          </div>
+          <div class="summary">2026-02 rulemaking으로 light/medium/heavy-duty GHG 표준 모두 폐기. Automotive Trends Report에서 compliance 평가 섹션 삭제. 미국 EMS 목적함수에서 CO2 가중치 사실상 무의미화.</div>
+          <div class="relevance-note">★3 — EMS 다목적 손실함수 미국 시나리오 가중치 재정의 직접 근거.</div>
+        </div>
+
+        <div class="item-card cat-market" data-item-id="global-ev-sales-q1-2026" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026-04-14">
+          <div class="meta-row">
+            <span class="cat-tag cat-market">시장</span>
+            <span class="source-tag press">Press</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026-04-14</span>
+          </div>
+          <div class="title-row">
+            <div class="title">글로벌 EV Q1 2026 4M대 돌파, 성장 불균등 — Europe 주도 (Electrek)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://electrek.co/2026/04/14/global-ev-sales-hit-4m-in-q1-2026-but-growth-is-uneven/" target="_blank">electrek.co — Global EV sales 4M Q1 2026 (2026-04-14) →</a>
+          </div>
+          <div class="summary">유럽이 회복 견인, 중국·북미는 정체. 미국 세액공제(2025-09-30) 만료·관세 영향 본격화.</div>
+          <div class="relevance-note">★2 — 시장 분기 환경 보조 자료.</div>
+        </div>
+
+        <div class="item-card cat-market" data-item-id="icct-vision-2050-2025" data-category="market" data-new="true" data-recent="false" data-highlight="false" data-source-type="report" data-date="2026">
+          <div class="meta-row">
+            <span class="cat-tag cat-market">시장</span>
+            <span class="source-tag report">Report</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026</span>
+          </div>
+          <div class="title-row">
+            <div class="title">ICCT Vision 2050 — 글로벌 ZEV 전환 업데이트 (2025 데이터)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://theicct.org/publication/vision-2050-update-on-the-global-zev-transition-in-2025/" target="_blank">theicct.org — Vision 2050: Update on the global ZEV transition in 2025 →</a>
+          </div>
+          <div class="summary">ICCT의 ZEV 전환 시나리오 갱신. Baseline 2025 vs Momentum 시나리오 비교. 미국 정책 후퇴로 GHG 격차 폐쇄율이 baseline 60%에서 momentum 14%로 급락.</div>
+          <div class="relevance-note">★2 — EMS 다목적 손실함수 미국 시나리오 격차 정량 자료.</div>
+        </div>
+
+        <div class="item-card cat-market" data-item-id="solid-state-china-standard-2026-02" data-category="market" data-new="true" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026-02-11">
+          <div class="meta-row">
+            <span class="cat-tag cat-policy">정책</span>
+            <span class="source-tag policy">Policy</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-02-11</span>
+          </div>
+          <div class="title-row">
+            <div class="title">중국, 세계 최초 솔리드스테이트 EV 배터리 표준 — 2026-07 시행 예정</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://electrek.co/2026/02/11/solid-state-ev-battery-standard-china-2026/" target="_blank">electrek.co — Solid-state EV battery standard to be released in China in 2026 →</a>
+          </div>
+          <div class="summary">중국이 세계 최초의 솔리드스테이트 EV 배터리 표준을 2026-07에 공식 발효 예정. 차량 적용·인증 가이드라인 통합.</div>
+          <div class="relevance-note">★3 — 배터리 셀 종류·SoC 운용 정책이 시뮬레이션 입력. 시행 직전 동향 추적 필요.</div>
+        </div>
+
+        <div class="item-card cat-market" data-item-id="china-ev-energy-standard-2026" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026-01-01">
+          <div class="meta-row">
+            <span class="cat-tag cat-policy">정책</span>
+            <span class="source-tag policy">Policy</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-01-01 시행</span>
+          </div>
+          <div class="title-row">
+            <div class="title">중국 의무 EV 에너지소비 표준 시행 — 세계 최초 (2026-01-01)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://carnewschina.com/2025/12/26/china-to-enforce-worlds-first-mandatory-ev-energy-standard-in-2026-capping-two-tonne-models-at-15-1-kwh-per-100-km/" target="_blank">carnewschina.com — China mandatory EV energy standard 2026 →</a>
+          </div>
+          <div class="summary">중국이 세계 최초로 EV 에너지 소비 의무 표준 시행. 2톤급 15.1 kWh/100km 캡. NEV 구매세 면제 자격에도 연동. GB 38031-2025 배터리 화재 안전 표준은 2026-07 시행.</div>
+          <div class="relevance-note">★3 — EMS 다목적 최적화 외부 제약(전력 소비 cap). 시뮬레이션 시나리오에 직접 반영.</div>
+        </div>
+
+        <div class="item-card cat-market" data-item-id="eu-automotive-package-2025-12" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2025-12">
+          <div class="meta-row">
+            <span class="cat-tag cat-policy">정책</span>
+            <span class="source-tag policy">Policy</span>
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2025-12</span>
+          </div>
+          <div class="title-row">
+            <div class="title">EU Automotive Package 발표 — 2035 90% 감축 + 배터리 부스터 + 그린 플릿</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.globalpolicywatch.com/2026/01/the-eu-automotive-package-increased-compliance-flexibility-but-growing-made-in-the-eu-conditionality/" target="_blank">globalpolicywatch.com — EU Automotive Package overview →</a>
+          </div>
+          <div class="summary">2025-12 EU 집행위 발표. 2030 LCV 감축 40%로 완화, 2035 전체 90% 감축 유지. 2025-2027 CO2 목표 3년 평균 유연화.</div>
+          <div class="relevance-note">★2 — 유럽 시장 EMS 캘리브레이션 기준.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ ③ 논문 동향 ============ -->
+    <div class="cat-section cat-section-papers" data-cat="papers">
+      <h3 class="cat-section-title">
+        <span class="num">③</span>
+        논문 동향
+        <span class="meta">EMS · MPC · RL/ML · 제어·신기술</span>
+      </h3>
+      <div data-slot="papers-items">
+        <div class="section-subhead recent" data-section="papers-recent">⚡ RECENT — 최근 1개월 이내</div>
+
+        <div class="item-card cat-papers recent highlight" data-item-id="energies-drl-ems-review-2216-2026-05" data-category="papers" data-new="false" data-recent="true" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-05-03">
+          <div class="meta-row">
+            <span class="cat-tag cat-review">리뷰</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="recent-badge">RECENT</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="relevance-badge">★5/5</span>
+            <span class="date-tag">📅 2026-05-03</span>
+          </div>
+          <div class="title-row">
+            <div class="title">DRL 기반 하이브리드 파워시스템 EMS 종합 리뷰 — 알고리즘·응용·검증·과제·전망 풀체인 (Energies 2026)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.mdpi.com/1996-1073/19/9/2216" target="_blank">mdpi.com — Energies 19(9), 2216 (2026-05-03) →</a>
+          </div>
+          <div class="summary">하이브리드 파워시스템 DRL EMS의 algorithm–application–verification–challenges–prospects 풀체인 분석. 1Q2026까지 국내외 결과 체계화. DRL이 실시간 EMS 엔지니어링 구현 핵심 controller로 자리잡음을 정리.</div>
+          <div class="highlight-reason">★ 분기 핵심 — 2026 Q2 게재 신규 종합 리뷰. introduction 인용 1순위 갱신.</div>
+          <div class="relevance-note">★5 — 본인 연구 introduction 갱신용 1순위. Energies 1월 MPC 리뷰와 함께 양축 활용.</div>
+        </div>
+
+        <div class="section-subhead highlight" data-section="papers-highlight">★ HIGHLIGHT — 분기 핵심</div>
+
+        <div class="item-card cat-papers highlight" data-item-id="energies-mpc-ev-review-2026" data-category="papers" data-new="false" data-recent="false" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-01">
+          <div class="meta-row">
+            <span class="cat-tag cat-mpc">MPC</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="relevance-badge">★5/5</span>
+            <span class="date-tag">📅 2026-01</span>
+          </div>
+          <div class="title-row">
+            <div class="title">EV MPC 에너지관리 종합 리뷰 — 이론·응용·전망·과제 (Energies 2026)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.mdpi.com/1996-1073/19/3/740" target="_blank">mdpi.com — Energies 19(3), 740 (2026-01) →</a>
+          </div>
+          <div class="summary">MPC가 EV 에너지관리의 핵심 전략으로 자리잡은 배경(롤링 최적화, 명시적 제약 처리)과 한계(모델 불확실성, 계산 복잡도, 실시간성)를 정리. 미래 방향으로 모델 단순화 + 빠른 솔버 + intelligent learning 결합을 제시.</div>
+          <div class="highlight-reason">★ 분기 핵심 — 2026 Q1 게재 종합 리뷰. introduction 인용 1순위 후보(MPC 축).</div>
+          <div class="relevance-note">★5 — 본인 연구 introduction 직접 인용 후보.</div>
+        </div>
+
+        <div class="item-card cat-papers highlight" data-item-id="benchmarking-drl-reev-2025" data-category="papers" data-new="false" data-recent="false" data-highlight="true" data-source-type="peer-reviewed" data-date="2025">
+          <div class="meta-row">
+            <span class="cat-tag cat-rl">RL/ML</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="relevance-badge">★5/5</span>
+            <span class="date-tag">📅 2025</span>
+          </div>
+          <div class="title-row">
+            <div class="title">REEV SOC-적응형 EMS — DDPG/TD3/SAC/PPO 통일 벤치마크 (J. Energy Storage)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.sciencedirect.com/science/article/abs/pii/S2352152X25032657" target="_blank">sciencedirect.com — Benchmarking DRL for SOC-adaptive EMS in REEV →</a>
+          </div>
+          <div class="summary">DDPG·TD3·SAC·PPO 4개 SOTA DRL을 단일 시뮬레이션 프레임에서 비교. 동적 SOC 페널티 채널 다목적 보상. DRL EMS 연비를 DP 대비 7.6% 이내, SAC가 DP 대비 +6.8%, 옴 손실 −18.6%, 암페어-시간 throughput −10.4%로 최우수.</div>
+          <div class="highlight-reason">★ 분기 핵심 — DRL EMS 통일 벤치마크 첫 정립. 본인 baseline 비교군 SOTA 확정.</div>
+          <div class="relevance-note">★5 — 본인 연구 baseline 비교군 갱신. SAC 도입 + 다목적 보상 설계 직접 참조.</div>
+        </div>
+
+        <div class="item-card cat-papers highlight" data-item-id="hmpc-dual-mode-wevj-2026" data-category="papers" data-new="false" data-recent="false" data-highlight="true" data-source-type="peer-reviewed" data-date="2026">
+          <div class="meta-row">
+            <span class="cat-tag cat-ems">EMS</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="highlight-badge">HIGHLIGHT</span>
+            <span class="relevance-badge">★4/5</span>
+            <span class="date-tag">📅 2026 (월 미상)</span>
+          </div>
+          <div class="title-row">
+            <div class="title">HMPC 기반 듀얼 모드 파워-스플릿 HEV 온라인 최적 에너지 관리</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.mdpi.com/2032-6653/17/3/140" target="_blank">mdpi.com — World Electric Vehicle Journal, 17(3), 140 (DOI: 10.3390/wevj17030140) →</a>
+          </div>
+          <div class="summary">유한 시간 영역 전역 온라인 최적화를 위한 HMPC가 듀얼 모드 파워-스플릿 HEV에 적용. rule-based 및 기존 최적화 대비 연비·실시간성 모두 개선.</div>
+          <div class="highlight-reason">★ 분기 핵심 — 2026 게재의 신규 MPC 적용 사례. 본인 baseline 비교군 후보.</div>
+          <div class="relevance-note">★4 — MPC 프레임 안에 모드 전환 로직을 통합한 사례.</div>
+        </div>
+
+        <div class="section-subhead" data-section="papers-older">전체 논문·프리프린트</div>
+
+        <div class="item-card cat-papers" data-item-id="arxiv-rl-distributed-mpc-2601-2026-01" data-category="papers" data-new="true" data-recent="false" data-highlight="false" data-source-type="preprint" data-date="2026-01">
+          <div class="meta-row">
+            <span class="cat-tag cat-rl">RL/ML</span>
+            <span class="source-tag preprint">Preprint</span>
+            <span class="new-badge">NEW</span>
+            <span class="relevance-badge">★4/5</span>
+            <span class="date-tag">📅 2026-01</span>
+          </div>
+          <div class="title-row">
+            <div class="title">RL이 분산 MPC를 완전 대체하는 연료효율 컨트롤러 (arXiv 2601.18294)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://arxiv.org/abs/2601.18294" target="_blank">arxiv.org — 2601.18294 (RL with Distributed MPC for Fuel-Efficient Control) →</a>
+          </div>
+          <div class="summary">학습 기반 컨트롤러가 분산 MPC를 완전 대체해 속도·기어 양 변수를 동시 제어. 다만 학습 컨트롤러는 엔진 제약 만족을 보장하지 못함을 명시. RL 단독 대체 vs MPC+RL 결합 구조의 근본 한계 비교 사례.</div>
+          <div class="relevance-note">★4 — 본인 MPC+RL 결합 구조의 비교군. RL 단독의 제약 처리 한계 명시 — 결합 구조의 필요성 직접 근거.</div>
+        </div>
+
+        <div class="item-card cat-papers" data-item-id="frontiers-rl-ems-review-2025" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="peer-reviewed" data-date="2025">
+          <div class="meta-row">
+            <span class="cat-tag cat-review">리뷰</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="relevance-badge">★4/5</span>
+            <span class="date-tag">📅 2025</span>
+          </div>
+          <div class="title-row">
+            <div class="title">EV EMS의 RL — 방법·과제·미래 혁신 종합 open-access 리뷰 (Frontiers in Future Transportation)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.frontiersin.org/journals/future-transportation/articles/10.3389/ffutr.2025.1555250/full" target="_blank">frontiersin.org — Front. Future Transp. 2025 (DOI: 10.3389/ffutr.2025.1555250) →</a>
+          </div>
+          <div class="summary">EV/HEV EMS의 RL 방법론 풀스펙트럼 정리(value-based, policy-gradient, actor-critic, model-based). transfer learning·sim-to-real·디지털 트윈 통합 방향 제시.</div>
+          <div class="relevance-note">★4 — 본인 introduction 문헌리뷰 보조 인용.</div>
+        </div>
+
+        <div class="item-card cat-papers" data-item-id="erev-hierarchical-td3-msmpc-2025" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="peer-reviewed" data-date="2025">
+          <div class="meta-row">
+            <span class="cat-tag cat-rl">RL/ML</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="relevance-badge">★4/5</span>
+            <span class="date-tag">📅 2025</span>
+          </div>
+          <div class="title-row">
+            <div class="title">EREV 계층형 EMS — TD3 + 다중스케일 MPC range extender 동적 협조 제어 (J. Power Sources)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.sciencedirect.com/science/article/abs/pii/S0378775324013016" target="_blank">sciencedirect.com — Hierarchical EMS for EREV (TD3+MSMPC) →</a>
+          </div>
+          <div class="summary">상위 TD3로 range extender·배터리 파워 분배, 하위 MSMPC로 range extender 협조 제어. 계층형 RL+MPC 결합의 정석 EREV 구현.</div>
+          <div class="relevance-note">★4 — 본인 MPC+RL 결합 구조의 EREV 사례.</div>
+        </div>
+
+        <div class="item-card cat-papers" data-item-id="frontiers-td3-rl-hev-2026" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="peer-reviewed" data-date="2026">
+          <div class="meta-row">
+            <span class="cat-tag cat-rl">RL/ML</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="relevance-badge">★5/5</span>
+            <span class="date-tag">📅 2026</span>
+          </div>
+          <div class="title-row">
+            <div class="title">신에너지 HEV TD3 기반 강화학습 EMS — 연비·배터리수명·강건성 3축 (Frontiers 2026)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.frontiersin.org/journals/mechanical-engineering/articles/10.3389/fmech.2026.1769645/full" target="_blank">frontiersin.org — Front. Mech. Eng. 2026 (DOI: 10.3389/fmech.2026.1769645) →</a>
+          </div>
+          <div class="summary">개선 TD3 기반 RL EMS. 연비·배터리 수명·강건성을 동시에 다루는 다목적 보상 함수 설계.</div>
+          <div class="relevance-note">★5 — 본인 연구 직접 비교군. 보상 함수 가중치 설계 사례.</div>
+        </div>
+
+        <div class="item-card cat-papers" data-item-id="arxiv-distributed-mpc-2026-02" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="preprint" data-date="2026-02">
+          <div class="meta-row">
+            <span class="cat-tag cat-mpc">MPC</span>
+            <span class="source-tag preprint">Preprint</span>
+            <span class="relevance-badge">★4/5</span>
+            <span class="date-tag">📅 2026-02</span>
+          </div>
+          <div class="title-row">
+            <div class="title">분산형 MPC 기반 하이브리드 파워트레인 예측 에너지관리 (arXiv 2026-02)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://arxiv.org/html/2602.06277" target="_blank">arxiv.org — 2602.06277 (Predictive Energy Management for Hybrid Powertrains) →</a>
+          </div>
+          <div class="summary">분산 MPC 전략으로 파워 스플릿을 조정해 효율을 최대화하면서 배터리 열화에 따른 고장 리스크를 완화.</div>
+          <div class="relevance-note">★4 — 분산 구조 + 배터리 열화 모델 결합 사례.</div>
+        </div>
+
+        <div class="item-card cat-papers" data-item-id="lstm-mpc-ddqn-2025" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="peer-reviewed" data-date="2025">
+          <div class="meta-row">
+            <span class="cat-tag cat-rl">RL/ML</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="relevance-badge">★5/5</span>
+            <span class="date-tag">📅 2025</span>
+          </div>
+          <div class="title-row">
+            <div class="title">LSTM-MPC 속도 예측 기반 Double DQN HEV 에너지 관리</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12074296/" target="_blank">pmc.ncbi.nlm.nih.gov — PMC12074296 →</a>
+          </div>
+          <div class="summary">LSTM으로 미래 차속을 예측하고, 예측 horizon에서 비선형 제약 최적화를 푸는 MPC 프레임에 Double DQN을 결합.</div>
+          <div class="relevance-note">★5 — MPC+RL 결합의 정석 구조. 본인 연구 방법론 비교군으로 최우선 검토.</div>
+        </div>
+
+        <div class="item-card cat-papers" data-item-id="rl-review-energy-reports-2025" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="peer-reviewed" data-date="2025">
+          <div class="meta-row">
+            <span class="cat-tag cat-review">리뷰</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="relevance-badge">★5/5</span>
+            <span class="date-tag">📅 2025</span>
+          </div>
+          <div class="title-row">
+            <div class="title">RL 기반 HEV EMS 종합 리뷰 — 방법·도전과제·연구 격차</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.sciencedirect.com/science/article/pii/S2666546825000461" target="_blank">sciencedirect.com — Energy Reports, 2025 →</a>
+          </div>
+          <div class="summary">RL 기반 HEV EMS의 알고리즘 혁신(DDPG/TD3/SAC/PPO), 파워트레인 혁신(직병렬·파워스플릿·REEV), 환경 혁신(transfer learning, sim-to-real) 3축 분류 체계.</div>
+          <div class="relevance-note">★5 — 본인 introduction 문헌리뷰 핵심 인용 후보.</div>
+        </div>
+
+        <div class="item-card cat-papers" data-item-id="experience-pool-drl-2025" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="peer-reviewed" data-date="2025">
+          <div class="meta-row">
+            <span class="cat-tag cat-rl">RL/ML</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            <span class="relevance-badge">★5/5</span>
+            <span class="date-tag">📅 2025</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Experience-Pool-Optimized DRL 기반 HEV 에너지 관리</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.mdpi.com/2076-3417/15/17/9302" target="_blank">mdpi.com — Applied Sciences 15(17), 9302 →</a>
+          </div>
+          <div class="summary">DRL EMS에 PER + HER 결합으로 연속 행동공간 보상 희소성·느린 수렴 완화.</div>
+          <div class="relevance-note">★5 — RL+다목적 보상 구조에 직접 응용 가능한 PER/HER 결합.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="empty-state" data-slot="no-match" style="display:none;">필터 조건에 해당하는 항목이 없습니다.</div>
+</section>
+
+
+<section class="archive-section">
+  <h2>📚 지난 회차 (최근 6개월)</h2>
+  <ul data-slot="archive-list">
+    <li class="empty">아직 지난 회차가 없습니다. 다음 월요일(5/25) 첫 자동 푸시부터 이 영역에 누적됩니다.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="badge">SOURCES</span>주요 정보 링크 (전체)</h2>
+  <ul class="source-list" data-slot="sources">
+    <li><a href="https://www.iea.org/reports/global-energy-review-2026/technology-electric-vehicles" target="_blank">IEA Global Energy Review 2026 — EV 챕터 (2026-05) — RECENT · HIGHLIGHT · NEW</a></li>
+    <li><a href="https://www.nature.com/articles/s41467-025-66945-9" target="_blank">Nature Comm. — EV 양성 티핑포인트 (2026-05) — RECENT · HIGHLIGHT · NEW</a></li>
+    <li><a href="https://thekoreancarblog.com/hyundai-begins-production-preparation-for-first-extended-range-ev-the-santa-fe-erev/" target="_blank">Hyundai Santa Fe EREV 양산 준비 (2026-05) — RECENT · HIGHLIGHT · NEW</a></li>
+    <li><a href="https://thekoreancarblog.com/first-details-of-genesis-erev-system-revealed/" target="_blank">Genesis EREV 시스템 첫 디테일 (2026-05) — RECENT · HIGHLIGHT · NEW</a></li>
+    <li><a href="https://electrek.co/2026/05/12/europe-drove-global-ev-sales-in-april-as-china-exports-surged/" target="_blank">Electrek — 4월 글로벌 EV 1.6M, 중국 수출 급증 (2026-05-12) — RECENT · NEW</a></li>
+    <li><a href="https://techxplore.com/news/2026-05-electric-vehicles-europe-china.html" target="_blank">TechXplore — 유럽·중국 EV 티핑포인트 (2026-05) — RECENT · NEW</a></li>
+    <li><a href="https://www.hyundaimotorgroup.com/en/news/CONT0000000000208362" target="_blank">Kia Investor Day 2026 (2026-04-09) — HIGHLIGHT · NEW</a></li>
+    <li><a href="https://arxiv.org/abs/2601.18294" target="_blank">arXiv 2601.18294 — RL+분산 MPC (2026-01) — NEW</a></li>
+    <li><a href="https://electrek.co/2026/04/15/solid-state-ev-batteries-coming-sooner-than-expected/" target="_blank">솔리드스테이트 EV 배터리 양산 가속 (Electrek 2026-04-15) — NEW</a></li>
+    <li><a href="https://electrek.co/2026/02/11/solid-state-ev-battery-standard-china-2026/" target="_blank">중국 솔리드스테이트 배터리 표준 (Electrek 2026-02-11) — NEW</a></li>
+    <li><a href="https://www.technologyreview.com/2026/02/02/1132042/whats-next-for-ev-batteries-in-2026/" target="_blank">MIT Tech Review — 2026 EV 배터리 전망 — NEW</a></li>
+    <li><a href="https://theicct.org/publication/vision-2050-update-on-the-global-zev-transition-in-2025/" target="_blank">ICCT Vision 2050 — ZEV 전환 업데이트 — NEW</a></li>
+    <li><a href="https://www.mdpi.com/1996-1073/19/9/2216" target="_blank">Energies 19(9), 2216 (2026-05-03) — DRL EMS 종합 리뷰 — RECENT · HIGHLIGHT</a></li>
+    <li><a href="https://www.autoguide.com/auto/category/hybrids/who-makes-the-best-hybrid-vehicles-in-2026-44631031" target="_blank">Hyundai/Kia 차세대 2-Motor 통합 변속기 — RECENT · HIGHLIGHT</a></li>
+    <li><a href="https://www.eia.gov/outlooks/aeo/pdf/AEO_Narrative.pdf" target="_blank">EIA Annual Energy Outlook 2026 (2026-04-08) — HIGHLIGHT</a></li>
+    <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S2352152X25032657" target="_blank">Benchmarking DRL for SOC-adaptive EMS in REEV — HIGHLIGHT</a></li>
+    <li><a href="https://www.frontiersin.org/journals/future-transportation/articles/10.3389/ffutr.2025.1555250/full" target="_blank">Frontiers in Future Transp. — RL EV EMS 종합 리뷰 (2025)</a></li>
+    <li><a href="https://www.strategyand.pwc.com/de/en/industries/automotive/electric-vehicle-sales-review-q1-2026.html" target="_blank">PwC Strategy& EV Sales Review Q1 2026</a></li>
+    <li><a href="https://insideevs.com/news/772645/hyundai-erev-2027-release/" target="_blank">Hyundai EREV 560-mile release teaser</a></li>
+    <li><a href="https://electrek.co/2026/04/14/global-ev-sales-hit-4m-in-q1-2026-but-growth-is-uneven/" target="_blank">Electrek — Global EV sales 4M Q1 2026 (2026-04-14)</a></li>
+    <li><a href="https://www.epa.gov/automotive-trends" target="_blank">EPA Automotive Trends — GHG 표준 폐기 (2026-02)</a></li>
+    <li><a href="https://www.sciencedirect.com/science/article/abs/pii/S0378775324013016" target="_blank">EREV 계층형 EMS — TD3 + MSMPC (J. Power Sources)</a></li>
+    <li><a href="https://insideevs.com/features/786506/every-erev-extended-range-ev-america-2026/" target="_blank">Ford F-150 EREV / Every EREV coming 2026</a></li>
+    <li><a href="https://www.torquenews.com/3929/honda-announce-new-plan-next-week" target="_blank">Honda 차세대 하이브리드 로드맵 (torquenews 2026-05-14) — RECENT</a></li>
+    <li><a href="https://www.usnews.com/info/blogs/press-room/articles/2026-04-22/u-s-news-announces-the-2026-best-hybrid-and-electric-cars" target="_blank">U.S. News 2026 Best Hybrid & EV (2026-04-22) — RECENT</a></li>
+    <li><a href="https://www.electrive.com/2026/04/21/horse-powertrain-unveils-hybrid-system-for-bev-platforms/" target="_blank">Horse Powertrain X-Range C15 (electrive 2026-04-21) — RECENT</a></li>
+    <li><a href="https://www.tustintoyota.com/2026-toyota-hybrid-technology-explained-tustin/" target="_blank">Toyota 5th-Gen Hybrid Technology 2026 — HIGHLIGHT</a></li>
+    <li><a href="https://hondanews.com/en-US/honda-automobiles/releases/release-1503019bd8a757ea08267d7944378955-honda-two-motor-hybrid-electric-system" target="_blank">Honda 4th-Gen Two-Motor Hybrid System — HIGHLIGHT</a></li>
+    <li><a href="https://www.epa.gov/system/files/documents/2026-02/420r26001.pdf" target="_blank">EPA Automotive Trends Report 2025 (2026-02) — HIGHLIGHT</a></li>
+    <li><a href="https://www.iea.org/events/global-ev-outlook-2026" target="_blank">IEA Global EV Outlook 2026 — HIGHLIGHT</a></li>
+    <li><a href="https://www.mdpi.com/1996-1073/19/3/740" target="_blank">Energies 2026-01 — EV MPC EMS 종합 리뷰 — HIGHLIGHT</a></li>
+    <li><a href="https://www.mdpi.com/2032-6653/17/3/140" target="_blank">Hybrid MPC for Dual-Mode Power-Split HEVs (MDPI 2026) — HIGHLIGHT</a></li>
+    <li><a href="https://www.motor1.com/news/793992/new-toyota-models-2026/" target="_blank">Toyota 2026 6 new models (motor1)</a></li>
+    <li><a href="https://carnewschina.com/2025/12/26/china-to-enforce-worlds-first-mandatory-ev-energy-standard-in-2026-capping-two-tonne-models-at-15-1-kwh-per-100-km/" target="_blank">중국 의무 EV 에너지소비 표준 2026-01 시행</a></li>
+    <li><a href="https://www.globalpolicywatch.com/2026/01/the-eu-automotive-package-increased-compliance-flexibility-but-growing-made-in-the-eu-conditionality/" target="_blank">EU Automotive Package 2025-12</a></li>
+    <li><a href="https://www.frontiersin.org/journals/mechanical-engineering/articles/10.3389/fmech.2026.1769645/full" target="_blank">Frontiers in Mechanical Engineering 2026 — TD3 RL EMS</a></li>
+    <li><a href="https://arxiv.org/html/2602.06277" target="_blank">arXiv 2602.06277 — Distributed MPC for Hybrid Powertrains (2026-02)</a></li>
+    <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12074296/" target="_blank">LSTM-MPC + Double DQN for HEV</a></li>
+    <li><a href="https://www.sciencedirect.com/science/article/pii/S2666546825000461" target="_blank">RL-based HEV EMS — Comprehensive Review (ScienceDirect 2025)</a></li>
+    <li><a href="https://www.mdpi.com/2076-3417/15/17/9302" target="_blank">Experience-Pool-Optimized DRL for HEV EMS</a></li>
+    <li><a href="file:///C:/Users/namwook/Documents/Claude/temp/BKL%20%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5/BKL_2026_5%EC%9B%942%EC%B0%A8_%EC%9E%90%EB%8F%99%EC%B0%A8,%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0_%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5.pdf" target="_blank">BKL 2026년 5월 2차 (로컬) — RECENT</a></li>
+    <li><a href="file:///C:/Users/namwook/Documents/Claude/temp/BKL%20%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5/BKL_2026_5%EC%9B%941%EC%B0%A8_%EC%9E%90%EB%8F%99%EC%B0%A8,%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0_%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5.pdf" target="_blank">BKL 2026년 5월 1차 (로컬) — RECENT</a></li>
+    <li><a href="file:///C:/Users/namwook/Documents/Claude/temp/BKL%20%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5/BKL_2026_4%EC%9B%942%EC%B0%A8_%EC%9E%90%EB%8F%99%EC%B0%A8,%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0_%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5.pdf" target="_blank">BKL 2026년 4월 2차 (로컬) — RECENT</a></li>
+  </ul>
+</section>
+
+<footer>
+  Cowork 예약 작업이 매주 월요일 04:00에 이 보고서를 자동 갱신합니다.<br>
+  GitHub Pages: <code>https://nwkim21.github.io/xEV-Technology-Trends-Update-by-MDL/</code> (Unlisted — 검색 비노출)<br>
+  📌 저장 항목은 브라우저 localStorage에 영구 보관됩니다 (브라우저별로 별도).
+</footer>
+
+<script>
+(function() {
+  /* =================== State =================== */
+  var state = { category: 'all', tier: 'all' };
+  var LS_KEY = 'hev-pwt-pinned-items';
+  var LS_PANEL_KEY = 'hev-pwt-panel-collapsed';
+
+  /* =================== Pinned items (localStorage) =================== */
+  function readPinned() {
+    try {
+      var raw = localStorage.getItem(LS_KEY);
+      if (!raw) return [];
+      var parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) { return []; }
+  }
+  function writePinned(arr) {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(arr)); } catch (e) {}
+  }
+  function isPinned(id) {
+    return readPinned().some(function(p) { return p.id === id; });
+  }
+  function pinFromCard(card) {
+    var id = card.dataset.itemId;
+    if (!id || isPinned(id)) return;
+    var titleEl = card.querySelector('.title');
+    var linkEl  = card.querySelector('.source-link a');
+    var record = {
+      id: id,
+      title: titleEl ? titleEl.textContent.trim() : id,
+      category: card.dataset.category,
+      date: card.dataset.date || '',
+      url: linkEl ? linkEl.getAttribute('href') : '',
+      relevance: (function() {
+        var rb = card.querySelector('.relevance-badge');
+        return rb ? rb.textContent.trim() : '';
+      })(),
+      savedAt: new Date().toISOString().slice(0, 10)
+    };
+    var arr = readPinned();
+    arr.unshift(record);
+    writePinned(arr);
+    card.classList.add('pinned-glow');
+    setTimeout(function() { card.classList.remove('pinned-glow'); }, 700);
+  }
+  function unpinById(id) {
+    var arr = readPinned().filter(function(p) { return p.id !== id; });
+    writePinned(arr);
+  }
+  function clearAllPinned() {
+    if (!confirm('저장한 주요 항목을 모두 삭제할까요?')) return;
+    writePinned([]);
+  }
+
+  /* =================== Render: pin panel =================== */
+  function renderPinPanel() {
+    var panel = document.querySelector('[data-slot="pin-list"]');
+    if (!panel) return;
+    var items = readPinned();
+    var count = items.length;
+
+    var pillSlot = document.querySelector('[data-slot="pinned-count-pill"]');
+    if (pillSlot) pillSlot.textContent = count;
+    var headerSlot = document.querySelector('[data-slot="pinned-count"]');
+    if (headerSlot) headerSlot.textContent = count;
+
+    if (count === 0) {
+      panel.innerHTML = '<div class="pin-panel-empty">카드의 📌 버튼을 눌러<br>주요 항목을 저장하세요.</div>';
+      return;
+    }
+
+    // Map both new (oem/market/papers) and legacy (hardware/ems/rl) category values
+    var catLabel = {
+      oem: 'OEM', market: '시장·규제', papers: '논문',
+      hardware: 'Hardware', ems: 'EMS', rl: 'RL/ML'
+    };
+    var html = '';
+    items.forEach(function(p) {
+      var cat = p.category || 'papers';
+      html += '<div class="pinned-item" data-go-to="' + escapeAttr(p.id) + '">';
+      html +=   '<button class="pinned-remove" data-action="unpin" data-id="' + escapeAttr(p.id) + '" title="삭제">✕</button>';
+      html +=   '<div class="pin-title">' + escapeHtml(p.title) + '</div>';
+      html +=   '<div class="pin-meta">';
+      html +=     '<span class="pin-cat cat-' + cat + '">' + (catLabel[cat] || cat) + '</span>';
+      if (p.relevance) html += '<span class="pin-rel">' + escapeHtml(p.relevance) + '</span>';
+      if (p.date) html += '<span class="pin-date">📅 ' + escapeHtml(p.date) + '</span>';
+      html +=   '</div>';
+      if (p.url) html += '<a class="pin-saved" href="' + escapeAttr(p.url) + '" target="_blank" onclick="event.stopPropagation();">원문 →</a>';
+      html += '</div>';
+    });
+    panel.innerHTML = html;
+  }
+
+  /* =================== Sync pin button states =================== */
+  function syncPinButtons() {
+    document.querySelectorAll('.item-card').forEach(function(card) {
+      var btn = card.querySelector('.pin-btn');
+      if (!btn) return;
+      if (isPinned(card.dataset.itemId)) {
+        btn.classList.add('pinned');
+        btn.textContent = '★';
+        btn.title = '저장됨 (클릭하여 해제)';
+      } else {
+        btn.classList.remove('pinned');
+        btn.textContent = '📌';
+        btn.title = '주요 항목으로 저장';
+      }
+    });
+  }
+
+  /* =================== Filter =================== */
+  function applyFilter() {
+    var cards = document.querySelectorAll('[data-slot="details-root"] .item-card');
+    var visible = 0;
+    var visibleByCat = { oem: 0, market: 0, papers: 0 };
+    var pinnedIds = readPinned().map(function(p) { return p.id; });
+
+    cards.forEach(function(card) {
+      var cat = card.dataset.category;
+      var catOk = state.category === 'all' || cat === state.category;
+      var tierOk = state.tier === 'all'
+        || (state.tier === 'recent'    && card.dataset.recent === 'true')
+        || (state.tier === 'highlight' && card.dataset.highlight === 'true')
+        || (state.tier === 'new'       && card.dataset.new === 'true')
+        || (state.tier === 'pinned'    && pinnedIds.indexOf(card.dataset.itemId) !== -1);
+      if (catOk && tierOk) {
+        card.style.display = '';
+        visible++;
+        if (visibleByCat[cat] !== undefined) visibleByCat[cat]++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Show/hide category section containers based on category filter
+    document.querySelectorAll('.cat-section').forEach(function(sec) {
+      var cat = sec.dataset.cat;
+      var catMatchesFilter = (state.category === 'all' || state.category === cat);
+      // For market section with empty state, keep visible when category=all or category=market and no tier filter
+      var hasCards = (visibleByCat[cat] || 0) > 0;
+      var emptyEl = sec.querySelector('.cat-section-empty');
+      if (!catMatchesFilter) {
+        sec.style.display = 'none';
+      } else if (hasCards || (emptyEl && state.tier === 'all')) {
+        sec.style.display = '';
+      } else {
+        sec.style.display = 'none';
+      }
+    });
+
+    // Show/hide subheads inside each category section
+    document.querySelectorAll('.section-subhead').forEach(function(sh) {
+      var key = sh.dataset.section || '';
+      var parts = key.split('-');
+      var cat = parts[0];
+      var tier = parts[1];
+      var sectionCards = document.querySelectorAll('[data-slot="' + cat + '-items"] .item-card');
+      var matchingVisible = 0;
+      sectionCards.forEach(function(c) {
+        if (c.style.display === 'none') return;
+        if (tier === 'recent') {
+          if (c.dataset.recent === 'true') matchingVisible++;
+        } else if (tier === 'highlight') {
+          if (c.dataset.highlight === 'true' && c.dataset.recent !== 'true') matchingVisible++;
+        } else {
+          // older/general subhead
+          if (c.dataset.recent !== 'true' && c.dataset.highlight !== 'true') matchingVisible++;
+        }
+      });
+      sh.style.display = matchingVisible > 0 ? '' : 'none';
+    });
+
+    var noMatch = document.querySelector('[data-slot="no-match"]');
+    if (noMatch) noMatch.style.display = visible === 0 ? '' : 'none';
+  }
+
+  /* =================== Helpers =================== */
+  function escapeHtml(s) { return String(s).replace(/[&<>"']/g, function(c) {
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+  }); }
+  function escapeAttr(s) { return escapeHtml(s); }
+
+  function scrollToCard(id) {
+    var card = document.querySelector('.item-card[data-item-id="' + CSS.escape(id) + '"]');
+    if (!card) return;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    card.classList.add('pinned-glow');
+    setTimeout(function() { card.classList.remove('pinned-glow'); }, 700);
+  }
+
+  /* =================== Wire up =================== */
+  document.querySelectorAll('[data-filter-cat]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      state.category = btn.dataset.filterCat;
+      document.querySelectorAll('[data-filter-cat]').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      applyFilter();
+    });
+  });
+
+  document.querySelectorAll('[data-filter-tier]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      state.tier = btn.dataset.filterTier;
+      document.querySelectorAll('[data-filter-tier]').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      applyFilter();
+    });
+  });
+
+  // Delegate clicks for pin buttons on cards
+  document.addEventListener('click', function(e) {
+    var pinBtn = e.target.closest('.pin-btn');
+    if (pinBtn) {
+      var card = pinBtn.closest('.item-card');
+      if (!card) return;
+      var id = card.dataset.itemId;
+      if (isPinned(id)) {
+        unpinById(id);
+      } else {
+        pinFromCard(card);
+      }
+      syncPinButtons();
+      renderPinPanel();
+      if (state.tier === 'pinned') applyFilter();
+      return;
+    }
+
+    var unpinBtn = e.target.closest('[data-action="unpin"]');
+    if (unpinBtn) {
+      e.stopPropagation();
+      unpinById(unpinBtn.dataset.id);
+      syncPinButtons();
+      renderPinPanel();
+      if (state.tier === 'pinned') applyFilter();
+      return;
+    }
+
+    var clearBtn = e.target.closest('[data-action="clear-all"]');
+    if (clearBtn) {
+      clearAllPinned();
+      syncPinButtons();
+      renderPinPanel();
+      if (state.tier === 'pinned') applyFilter();
+      return;
+    }
+
+    var toggleBtn = e.target.closest('[data-action="toggle"]');
+    if (toggleBtn) {
+      var panel = document.getElementById('pin-panel');
+      panel.classList.toggle('collapsed');
+      document.body.classList.toggle('panel-collapsed', panel.classList.contains('collapsed'));
+      toggleBtn.textContent = panel.classList.contains('collapsed') ? '›' : '‹';
+      try { localStorage.setItem(LS_PANEL_KEY, panel.classList.contains('collapsed') ? '1' : '0'); } catch (e2) {}
+      return;
+    }
+
+    var goto = e.target.closest('[data-go-to]');
+    if (goto && !e.target.closest('[data-action]') && !e.target.closest('.pin-saved')) {
+      scrollToCard(goto.dataset.goTo);
+    }
+  });
+
+  /* =================== Init =================== */
+  var cards = document.querySelectorAll('[data-slot="details-root"] .item-card');
+  var recentCount = 0, highlightCount = 0, newCount = 0;
+  cards.forEach(function(c) {
+    if (c.dataset.recent === 'true') recentCount++;
+    if (c.dataset.highlight === 'true') highlightCount++;
+    if (c.dataset.new === 'true') newCount++;
+  });
+  var rSlot = document.querySelector('[data-slot="recent-count"]');     if (rSlot) rSlot.textContent = recentCount;
+  var hSlot = document.querySelector('[data-slot="highlight-count"]');  if (hSlot) hSlot.textContent = highlightCount;
+  var nSlot = document.querySelector('[data-slot="new-count"]');        if (nSlot) nSlot.textContent = newCount;
+
+  // Restore panel collapsed state
+  try {
+    if (localStorage.getItem(LS_PANEL_KEY) === '1') {
+      document.getElementById('pin-panel').classList.add('collapsed');
+      document.body.classList.add('panel-collapsed');
+      var tBtn = document.querySelector('[data-action="toggle"]');
+      if (tBtn) tBtn.textContent = '›';
+    }
+  } catch (e) {}
+
+  syncPinButtons();
+  renderPinPanel();
+  // Initialize subhead visibility based on current data
+  applyFilter();
+})();
+</script>
+
+</body>
+</html>
