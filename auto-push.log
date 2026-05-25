@@ -2,3 +2,19 @@
 2026-05-25 16:21:36    A  .nojekyll
 2026-05-25 16:21:36    A  archive/index_2026-05-19.html
 2026-05-25 16:21:36    M  index.html
+2026-05-25 16:21:36    Author identity unknown
+2026-05-25 16:21:36    System.Management.Automation.RemoteException
+2026-05-25 16:21:36    *** Please tell me who you are.
+2026-05-25 16:21:36    System.Management.Automation.RemoteException
+2026-05-25 16:21:36    Run
+2026-05-25 16:21:36    System.Management.Automation.RemoteException
+2026-05-25 16:21:36      git config --global user.email "you@example.com"
+2026-05-25 16:21:36      git config --global user.name "Your Name"
+2026-05-25 16:21:36    System.Management.Automation.RemoteException
+2026-05-25 16:21:36    to set your account's default identity.
+2026-05-25 16:21:36    Omit --global to set the identity only in this repository.
+2026-05-25 16:21:36    System.Management.Automation.RemoteException
+2026-05-25 16:21:36    fatal: unable to auto-detect email address (got 'namwook@nwkim-office.(none)')
+2026-05-25 16:21:36  ERROR: git commit ?ㅽ뙣
+2026-05-25 16:37:43  蹂寃?媛먯?:
+2026-05-25 16:37:43     M auto-push.log
