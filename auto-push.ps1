@@ -1,5 +1,10 @@
-# auto-push.ps1 — Cowork 예약 작업이 갱신한 index.html을 GitHub Pages로 자동 푸시
+﻿# auto-push.ps1 — Cowork 예약 작업이 갱신한 index.html을 GitHub Pages로 자동 푸시
 # 호출: Windows 작업 스케줄러 (매주 월 04:30)
+
+# --- 콘솔/로그 UTF-8 강제 (한글 깨짐 방지) ---
+chcp 65001 > $null
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding = [System.Text.Encoding]::UTF8
 
 $ErrorActionPreference = "Continue"
 $repoPath = "C:\Users\namwook\git\xEV-Technology-Trends-Update-by-MDL"

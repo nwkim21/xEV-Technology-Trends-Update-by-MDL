@@ -50,3 +50,16 @@
 2026-06-02 15:41:11     M auto-push.log
 2026-06-02 15:41:11     M index.html
 2026-06-02 15:41:11    ?? archive/index_2026-06-01.html
+2026-06-02 15:41:11    [main 3964926] Auto-update 2026-06-02 15:41
+2026-06-02 15:41:11     3 files changed, 3242 insertions(+), 98 deletions(-)
+2026-06-02 15:41:11     create mode 100644 archive/index_2026-06-01.html
+2026-06-02 15:41:11  push ?쒕룄 以?..
+2026-06-02 15:41:13    To https://github.com/nwkim21/xEV-Technology-Trends-Update-by-MDL.git
+2026-06-02 15:41:13       b05972f..3964926  main -> main
+2026-06-02 15:41:13  ?몄떆 ?깃났
+2026-06-02 15:41:13  ??https://nwkim21.github.io/xEV-Technology-Trends-Update-by-MDL/
+2026-06-05 23:39:32  변경 감지:
+2026-06-05 23:39:32     M auto-push.log
+2026-06-05 23:39:32     M auto-push.ps1
+2026-06-05 23:39:32     M index.html
+2026-06-05 23:39:32    ?? archive/index_2026-06-02.html
