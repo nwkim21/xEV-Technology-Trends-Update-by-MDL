@@ -63,3 +63,15 @@
 2026-06-05 23:39:32     M auto-push.ps1
 2026-06-05 23:39:32     M index.html
 2026-06-05 23:39:32    ?? archive/index_2026-06-02.html
+2026-06-05 23:39:33    [main 39560e4] Auto-update 2026-06-05 23:39
+2026-06-05 23:39:33     4 files changed, 3316 insertions(+), 93 deletions(-)
+2026-06-05 23:39:33     create mode 100644 archive/index_2026-06-02.html
+2026-06-05 23:39:33  push 시도 중...
+2026-06-05 23:39:36    To https://github.com/nwkim21/xEV-Technology-Trends-Update-by-MDL.git
+2026-06-05 23:39:36       3964926..39560e4  main -> main
+2026-06-05 23:39:36  푸시 성공
+2026-06-05 23:39:36  → https://nwkim21.github.io/xEV-Technology-Trends-Update-by-MDL/
+2026-06-08 04:00:00  변경 감지:
+2026-06-08 04:00:01     M auto-push.log
+2026-06-08 04:00:01     M index.html
+2026-06-08 04:00:01    ?? archive/index_2026-06-04.html
