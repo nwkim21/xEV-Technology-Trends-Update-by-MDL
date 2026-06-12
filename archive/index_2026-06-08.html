@@ -510,11 +510,11 @@
   <h1>xEV 파워트레인 동향 — 통합 보고서</h1>
   <div class="subtitle">①OEM · ②시장·규제 · ③논문 — 매주 월 04:00 자동 갱신</div>
   <div class="meta-bar">
-    <span>최근 업데이트: <strong data-slot="updated-date">2026-06-11</strong></span>
+    <span>최근 업데이트: <strong data-slot="updated-date">2026-06-08</strong></span>
     <span>업데이트 주기: <strong>매주 월 04:00</strong></span>
-    <span class="recent-count">RECENT(1개월): <strong data-slot="recent-count">51</strong></span>
+    <span class="recent-count">RECENT(1개월): <strong data-slot="recent-count">49</strong></span>
     <span class="highlight-count">HIGHLIGHT(분기): <strong data-slot="highlight-count">29</strong></span>
-    <span class="new-count">신규: <strong data-slot="new-count">3</strong></span>
+    <span class="new-count">신규: <strong data-slot="new-count">12</strong></span>
     <span class="pinned-count">📌 저장: <strong data-slot="pinned-count">0</strong></span>
   </div>
 </header>
@@ -522,12 +522,12 @@
 <section>
   <h2><span class="badge relevance">RELEVANCE</span>본인 연구 관련성 요약 (이번 회차 핵심)</h2>
   <div class="relevance-card">
-    <strong>이번 회차 핵심 — 현대 TMED-II 듀얼모터(P1+P2) 하이브리드 라인업 확대 + 토요타 5세대 HEV 실연비 우위 데이터 + IEA GEVO 2026 1분기 글로벌 EV 판매 –8%(지역 편차 심화). 신규 동료심사 논문·BKL 신규 파일은 이번 주 없음(직전 회차 6/08 대비 3일 경과).</strong>
+    <strong>이번 회차 핵심 — 중국 EREV 기술규정 상향(연 100만대 시장) + 5월 MPC-EMS 논문 클러스터(DP+MPC·속도예측 융합·리뷰) + IEA GEVO 장기전망 챕터 + 미 30C 충전 세액공제 6/30 종료</strong>
     <ul style="margin: 8px 0 0; padding-left: 20px;">
-      <li><strong>현대 TMED-II 듀얼모터 (2026-06)</strong> — 엔진축 P1 모터(스타트·저속) + 변속기 내 P2 모터(회생·고속) 신구조를 2026 HEV 전 라인업으로 확대 → 모터 협조제어·모드 전환 EMS 설계 직접 벤치마크.</li>
-      <li><strong>양산 HEV 실연비 격차 (2026-06)</strong> — Grand Highlander 33.2mpg vs Palisade 30.3mpg(약 10% 차) → 토요타 5세대 HEV vs 현대 HEV 효율·캘리브레이션 비교.</li>
-      <li><strong>IEA GEVO 2026 1분기 (2026-06)</strong> — 글로벌 EV 판매 전년比 –8%이나 유럽 +30%·아태(중국 제외) +80%·미국 부진 → 시장 시나리오 지역 편차 가정 갱신.</li>
-      <li><strong>신규 논문·BKL 없음</strong> — 직전 회차(6/08) 이후 3일 경과로 신규 동료심사 논문·BKL 6월2차 파일 미발생. 기존 5월 MPC-EMS 논문 클러스터(DP+MPC·속도예측 융합·리뷰) 유지.</li>
+      <li><strong>중국 EREV 규정 개정 (2026-06-07)</strong> — EREV 연 판매 100만대 돌파 속 기술 요구사항 상향. 1월 발효 EV 에너지소비 의무기준에 이은 후속 — 중국향 EREV plant model·EMS 제약조건에 직접 영향.</li>
+      <li><strong>5월 MPC-EMS 논문 클러스터</strong> — DP 기반 MPC(듀얼모터 PHEV, Energies)·Stacked-CNN-BiLSTM-Attention 속도예측 융합 MPC(Vehicles)·MPC 기법 리뷰(Energies) — 본인 MPC+RL 최적제어 연구와 직접 접점.</li>
+      <li><strong>IEA GEVO 2026 Outlook 챕터 (2026-05-21)</strong> — 현행 정책만으로 2035년 EV 보유 최대 약 5.1억대(6배) 전망, 2026년 판매 약 2,300만대·신차의 ~30%.</li>
+      <li><strong>미국 연방 인센티브 공백 확정</strong> — 차량 공제(9/30 종료)에 이어 충전 인프라 30C 공제도 6/30 만료 — 미국 시장 시나리오 가정 갱신 필요. Nissan 차세대 e-Power(X-Trail)는 직렬형 EMS 벤치마크 추가.</li>
     </ul>
   </div>
 </section>
@@ -535,78 +535,265 @@
 <section>
   <h2><span class="badge action">ACTION</span>후속 액션 제안 (우선순위)</h2>
   <ol class="action-list">
-    <li><strong>현대 TMED-II 토폴로지 정밀 검토</strong> — P1/P2 모터 정격·모드전환 로직을 본인 EMS 동작점 설계와 대조, 관련연구 인용군에 추가.</li>
-    <li><strong>실연비 격차 원인 분석</strong> — 토요타 5세대 HEV의 33.2mpg 우위를 가능케 한 동력분기·엔진 운전점 전략을 벤치마크.</li>
-    <li><strong>시장 시나리오 v5 갱신</strong> — IEA GEVO 1분기 –8%·지역 편차를 반영하고 미 30C 충전 공제 6/30 종료 가정 유지.</li>
-    <li><strong>5월 MPC-EMS 논문 클러스터 재정독</strong> — DP+MPC 듀얼모터 PHEV·속도예측 융합 MPC·MPC 리뷰 인용군 정리(신규 논문 부재로 기존 항목 심화).</li>
-    <li><strong>BKL 폴더 세션 연결</strong> — temp 폴더를 세션에 연결하면 6월2차 파일 발행 시 차기 회차 자동 분석 재개.</li>
+    <li><strong>우선 정독 — Energies DP+MPC 듀얼모터 PHEV (2026-05-21)</strong> — DP 전역해를 MPC 프레임에 결합하는 구조를 본인 예측구간 설계와 비교, 관련연구 인용군에 추가.</li>
+    <li><strong>중국 EREV 신규정 원문 추적</strong> — 개정된 레인지익스텐더 기술 요구사항(순수전기항속·에너지소비 기준)의 발효 시점·수치 확인 후 EREV plant model 제약조건에 반영.</li>
+    <li><strong>MPC-EMS 리뷰(Energies 19(9):2207) 훑어보기</strong> — 전력배분·회생제동·협조제어 적용 지도를 최신화하고 본인 연구 포지셔닝 점검.</li>
+    <li><strong>시장 시나리오 갱신</strong> — IEA GEVO Outlook 챕터(2035년 최대 5.1억대)와 미 30C 공제 6/30 종료를 시장 시나리오 v5 가정에 반영.</li>
+    <li><strong>BKL 폴더 접근 복구</strong> — temp 폴더가 세션 연결 외부라 6월1차 이후 본문 분석 보류 지속. 폴더를 세션에 연결하면 차기 회차에 자동 분석 재개.</li>
   </ol>
 </section>
 
 <section>
   <h2><span class="badge new">NEW</span>이번 회차 신규 동향</h2>
   <div data-slot="new-items">
+
     <div class="item-card cat-oem recent"
-         data-item-id="hyundai-tmed-ii-dual-motor-hybrid-2026" data-category="oem" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-06">
+         data-item-id="nissan-xtrail-next-gen-epower-2026" data-category="oem" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05">
       <div class="meta-row">
-        <span class="cat-tag cat-hardware">Hardware</span>
+        <span class="cat-tag cat-oem">신차</span>
         <span class="source-tag press">Press</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2026-05</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Nissan 차세대 X-Trail — 신형 e-Power 직렬 하이브리드 (정숙성·효율 개선)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://www.carsguide.com.au/car-news/2027-nissan-x-trail-everything-we-know-about-the-new-2026-toyota-rav4-hybrid-and-hyundai" target="_blank">carsguide.com.au — 2027 Nissan X-Trail: new-generation e-Power →</a>
+      </div>
+      <div class="summary">차세대 X-Trail에 신세대 e-Power 직렬 하이브리드를 탑재 — 현행 대비 더 조용하고 부드러우며 연비가 개선됐다고 예고. RAV4 HEV·투싼 HEV 대항 볼륨 모델.</div>
+      <div class="relevance-note">★4 — e-Power 직렬 구성의 세대 개선 — 직렬형 엔진 운전점·EMS 제어 벤치마크.</div>
+    </div>
+
+    <div class="item-card cat-oem"
+         data-item-id="hyundai-5-new-models-2026" data-category="oem" data-new="true" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026">
+      <div class="meta-row">
+        <span class="cat-tag cat-oem">OEM</span>
+        <span class="source-tag press">Press</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2026</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Hyundai — 2026년 신모델 5종 라인업 정리</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://www.motor1.com/news/797835/new-hyundai-models-2026/" target="_blank">motor1.com — Hyundai Has 5 New Models Coming In 2026 →</a>
+      </div>
+      <div class="summary">2026년 투입 예정 현대차 신모델 5종 정리 — HEV 중심 라인업(엘란트라·투싼·쏘나타 등 HEV 5종+PHEV 1종) 유지 속 전동화 모델 일정 파악용.</div>
+      <div class="relevance-note">★3 — 현대차 HEV 라인업 전개 — 자사 연구 대상 파워트레인의 모델 일정 레퍼런스.</div>
+    </div>
+
+    <div class="item-card cat-market recent highlight"
+         data-item-id="china-erev-rules-upgrade-2026-06" data-category="market" data-new="true" data-recent="true" data-highlight="true" data-source-type="policy" data-date="2026-06-07">
+      <div class="meta-row">
+        <span class="cat-tag cat-policy">정책</span>
+        <span class="source-tag policy">Policy</span>
         <span class="recent-badge">RECENT</span>
         <span class="new-badge">NEW</span>
         <span class="relevance-badge">★5/5</span>
-        <span class="date-tag">📅 2026-06</span>
+        <span class="date-tag">📅 2026-06-07</span>
       </div>
       <div class="title-row">
-        <div class="title">현대차 TMED-II 하이브리드 — P1+P2 듀얼 모터 신구조 (2026 라인업 확대)</div>
+        <div class="title">중국, 레인지익스텐더(EREV) 기술규정 상향 개정 — 연 판매 100만대 돌파</div>
         <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
       </div>
       <div class="source-link">
-        <a href="https://carbuzz.com/hyundai-hybrid-lineup-for-2026/" target="_blank">carbuzz.com — Hyundai's TMED-II dual-motor hybrid system expands across 2026 lineup →</a>
+        <a href="https://carnewschina.com/2026/06/07/china-upgrades-range-extender-rules-as-erev-market-surpasses-1-million-annual-sales/" target="_blank">carnewschina.com — China upgrades range extender rules as EREV market surpasses 1 million annual sales (2026-06-07) →</a>
       </div>
-      <div class="summary">현대 TMED-II는 엔진 출력축의 컴팩트 P1 모터(스타트/저속 구동)와 변속기 내 대형 P2 모터(회생·고속 구동)를 결합한 신구조. Tucson·Palisade 등 2026 HEV 전 라인업으로 확대 적용된다.</div>
-      <div class="relevance-note">★5 — P1/P2 듀얼모터 토폴로지·모드 전환은 EMS 동작점 설계 및 모터 협조제어 벤치마크에 직접 관련.</div>
-    </div>
-
-    <div class="item-card cat-oem recent"
-         data-item-id="palisade-grandhighlander-hybrid-realworld-mpg-2026" data-category="oem" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-06">
-      <div class="meta-row">
-        <span class="cat-tag cat-hardware">Hardware</span>
-        <span class="source-tag press">Press</span>
-        <span class="recent-badge">RECENT</span>
-        <span class="new-badge">NEW</span>
-        <span class="relevance-badge">★3/5</span>
-        <span class="date-tag">📅 2026-06</span>
-      </div>
-      <div class="title-row">
-        <div class="title">2026 Palisade HEV vs Grand Highlander HEV — 실연비 비교 (30.3 vs 33.2 mpg)</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://www.cars.com/articles/hyundai-palisade-vs-toyota-grand-highlander-which-hybrid-3-row-suv-gets-the-best-mpg-525661/" target="_blank">cars.com — Hyundai Palisade vs. Toyota Grand Highlander: which hybrid gets the best MPG? →</a>
-      </div>
-      <div class="summary">약 200마일 실주행에서 토요타 5세대 HEV(Grand Highlander) 33.2mpg로 현대 HEV(Palisade) 30.3mpg 대비 약 10% 우위. 동급 3열 HEV 실연비 벤치마크 데이터.</div>
-      <div class="relevance-note">★3 — 양산 HEV 실주행 효율 격차 — 파워트레인 효율·EMS 캘리브레이션 비교 참고치.</div>
+      <div class="summary">EREV 연간 판매가 100만대를 넘어선 가운데 중국이 레인지익스텐더 기술 요구사항을 상향 개정. 1월 발효된 세계 최초 EV 에너지소비 의무기준에 이은 신에너지차 규제 정비 흐름.</div>
+      <div class="highlight-reason">★ 분기 핵심 — EREV 연 100만대 시장의 기술규정 개정 — 중국향 EREV 설계·제어 기준 변화</div>
+      <div class="relevance-note">★5 — EREV 항속·에너지소비 요건은 plant model 설계와 EMS 최적화 제약조건에 직결.</div>
     </div>
 
     <div class="item-card cat-market recent"
-         data-item-id="iea-gevo2026-q1-sales-drop-us-2026-06" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="report" data-date="2026-06">
+         data-item-id="iea-gevo2026-outlook-electric-mobility" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="report" data-date="2026-05-21">
       <div class="meta-row">
         <span class="cat-tag cat-iea">IEA</span>
         <span class="source-tag report">Report</span>
         <span class="recent-badge">RECENT</span>
         <span class="new-badge">NEW</span>
         <span class="relevance-badge">★4/5</span>
-        <span class="date-tag">📅 2026-06</span>
+        <span class="date-tag">📅 2026-05-21</span>
       </div>
       <div class="title-row">
-        <div class="title">IEA Global EV Outlook 2026 — Q1 글로벌 EV 판매 8% 감소, 미국 부진·유럽 +30%</div>
+        <div class="title">IEA GEVO 2026 — Outlook for electric mobility 챕터 (2035년 EV 보유 최대 5.1억대)</div>
         <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
       </div>
       <div class="source-link">
-        <a href="https://restofworld.org/2026/iea-global-ev-outlook-us-sales-drop/" target="_blank">restofworld.org — IEA EV Outlook 2026: The U.S. falls behind global boom →</a>
+        <a href="https://www.iea.org/reports/global-ev-outlook-2026/outlook-for-electric-mobility-chap-9-11" target="_blank">iea.org — Global EV Outlook 2026: Outlook for electric mobility (chap. 9 & 11) →</a>
       </div>
-      <div class="summary">2026년 1분기 글로벌 EV 판매가 전년 동기 대비 8% 감소(주요국 정책 변화 영향). 다만 유럽 +30%, 아·태(중국 제외) +80%, 중남미 +75%로 지역 편차가 확대됐고 미국은 보조금 축소로 부진.</div>
-      <div class="relevance-note">★4 — 지역별 xEV 수요 분화는 시장 시나리오·OEM 파워트레인 전략(HEV 회귀) 가정에 직접 영향.</div>
+      <div class="summary">현행 정책만으로도 2035년 글로벌 EV 보유대수가 2025년 대비 6배 이상(최대 약 5.1억대)으로 성장 전망. 2026년 판매는 약 2,300만대, 신차의 약 30% 수준 예상.</div>
+      <div class="relevance-note">★4 — 장기 보급 시나리오 — 시장 시나리오 모델의 장기 전망 수치 갱신 소스.</div>
+    </div>
+
+    <div class="item-card cat-market recent"
+         data-item-id="us-30c-charger-credit-expiry-2026-06" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="policy" data-date="2026-06">
+      <div class="meta-row">
+        <span class="cat-tag cat-policy">정책</span>
+        <span class="source-tag policy">Policy</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2026-06</span>
+      </div>
+      <div class="title-row">
+        <div class="title">미국 — EV 충전 인프라 세액공제(30C) 2026-06-30 종료</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://afdc.energy.gov/laws/ev-tax-credits" target="_blank">afdc.energy.gov — Tax Credits for Electric Vehicles and Charging Infrastructure →</a>
+      </div>
+      <div class="summary">IRA 차량 구매 세액공제는 2025-09-30 조기 종료(OBBBA)됐고, 남아 있던 충전 인프라 30C 공제도 6월 30일 만료. 이후 연방 차원 xEV 인센티브는 사실상 공백 — 주별 인센티브만 잔존.</div>
+      <div class="relevance-note">★3 — 미국 인센티브 전면 공백 — HEV/PHEV 상대 경쟁력과 시장 시나리오 가정 변경.</div>
+    </div>
+
+    <div class="item-card cat-market"
+         data-item-id="eu-china-bev-price-undertaking-2026-01" data-category="market" data-new="true" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026-01-12">
+      <div class="meta-row">
+        <span class="cat-tag cat-policy">정책</span>
+        <span class="source-tag policy">Policy</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2026-01-12</span>
+      </div>
+      <div class="title-row">
+        <div class="title">EU 집행위 — 중국산 BEV 상계관세 '가격약속' 제출 지침 발표</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://policy.trade.ec.europa.eu/news/commission-issues-guidance-document-submission-price-undertaking-offers-battery-electric-vehicles-2026-01-12_en" target="_blank">policy.trade.ec.europa.eu — Guidance on price undertaking offers for BEVs from China (2026-01-12) →</a>
+      </div>
+      <div class="summary">상계관세(17.4~37.6%) 대상 중국산 BEV에 대해 최저수입가격 약속(price undertaking) 제출 절차를 안내하는 지침 발행 — EU·중국 EV 통상 협상의 실무 단계 진입.</div>
+      <div class="relevance-note">★3 — 유럽 시장 중국산 BEV 가격 구조 — 시장 점유율 시나리오의 통상 변수.</div>
+    </div>
+
+    <div class="item-card cat-market"
+         data-item-id="korea-ev-battery-regulation-2026" data-category="market" data-new="true" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026">
+      <div class="meta-row">
+        <span class="cat-tag cat-policy">정책</span>
+        <span class="source-tag policy">Policy</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2026</span>
+      </div>
+      <div class="title-row">
+        <div class="title">한국 — EV 배터리 관리·안전·재사용 통합 규제 입법 추진</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://fiscalnote.com/blog/south-korea-races-to-regulate-ev-batteries" target="_blank">fiscalnote.com — South Korea Races to Regulate EV Batteries and Match EU →</a>
+      </div>
+      <div class="summary">배터리 관리·안전·재사용을 아우르는 통합 규제 프레임워크 법안이 국회에서 추진 — EU 배터리 규정 등 글로벌 기준 충족과 공급망 경쟁력 확보가 목적.</div>
+      <div class="relevance-note">★3 — 국내 배터리 규제 방향 — 배터리 열화·안전 제약 모델링의 규제 배경.</div>
+    </div>
+
+    <div class="item-card cat-papers recent"
+         data-item-id="energies-19-2487-dp-mpc-dualmotor-phev" data-category="papers" data-new="true" data-recent="true" data-highlight="false" data-source-type="peer-reviewed" data-date="2026-05-21">
+      <div class="meta-row">
+        <span class="cat-tag cat-mpc">MPC</span>
+        <span class="source-tag peer-reviewed">Peer-reviewed</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★5/5</span>
+        <span class="date-tag">📅 2026-05-21</span>
+      </div>
+      <div class="title-row">
+        <div class="title">DP 기반 MPC 에너지관리 — 듀얼모터 PHEV의 실시간성·전역최적성 절충 (Energies)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://doi.org/10.3390/en19102487" target="_blank">doi.org — Energies 19(10):2487, Dynamic Programming-Based MPC of Energy Management for a Novel PHEV (2026-05-21) →</a>
+      </div>
+      <div class="summary">듀얼모터 PHEV에서 DP로 구한 전역 최적해를 MPC 프레임에 결합해 실시간성과 전역 최적성의 충돌을 완화하는 에너지관리 전략 제안.</div>
+      <div class="relevance-note">★5 — DP+MPC 결합 구조 — 본인 최적제어(MPC 예측구간 설계) 연구의 직접 비교 대상.</div>
+    </div>
+
+    <div class="item-card cat-papers recent"
+         data-item-id="vehicles-8-105-cnn-bilstm-mpc-ems" data-category="papers" data-new="true" data-recent="true" data-highlight="false" data-source-type="peer-reviewed" data-date="2026-05-08">
+      <div class="meta-row">
+        <span class="cat-tag cat-mpc">MPC</span>
+        <span class="source-tag peer-reviewed">Peer-reviewed</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2026-05-08</span>
+      </div>
+      <div class="title-row">
+        <div class="title">속도예측 융합 MPC EMS — Stacked-CNN-BiLSTM-Attention (Vehicles)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://www.mdpi.com/2624-8921/8/5/105" target="_blank">mdpi.com — Vehicles 8(5):105, MPC Optimization EMS with Fused Temporal Features Speed Prediction (2026-05-08) →</a>
+      </div>
+      <div class="summary">시계열 특징 융합 CNN-BiLSTM-Attention 네트워크로 단기 속도를 예측해 MPC 에너지관리에 결합 — 실주행 불확실성 하 에너지 배분 최적성 개선.</div>
+      <div class="relevance-note">★4 — 학습형 속도예측+MPC — 예측구간 외란 모델링 개선 아이디어로 직접 활용 가능.</div>
+    </div>
+
+    <div class="item-card cat-papers highlight"
+         data-item-id="energies-19-2207-mpc-ev-ems-review" data-category="papers" data-new="true" data-recent="false" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-05-02">
+      <div class="meta-row">
+        <span class="cat-tag cat-review">리뷰</span>
+        <span class="source-tag peer-reviewed">Peer-reviewed</span>
+        <span class="highlight-badge">HIGHLIGHT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2026-05-02</span>
+      </div>
+      <div class="title-row">
+        <div class="title">리뷰 — EV/HEV 에너지관리를 위한 MPC 기법 최신 동향 (Energies)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://doi.org/10.3390/en19092207" target="_blank">doi.org — Energies 19(9):2207, Advances in Model Predictive Control Techniques and Applications (2026-05-02) →</a>
+      </div>
+      <div class="summary">MPC 기반 에너지관리의 원리·모델링 프레임워크·응용(전력배분·회생제동·협조제어)과 향후 과제를 정리한 리뷰.</div>
+      <div class="highlight-reason">★ 분기 핵심 — 최신 MPC-EMS 기법 지도를 갱신하는 분기 핵심 리뷰</div>
+      <div class="relevance-note">★4 — MPC-EMS 기법 전반의 최신 지도 — 관련연구 절 갱신용.</div>
+    </div>
+
+    <div class="item-card cat-papers"
+         data-item-id="arxiv-2512-14344-data-driven-ev-pwt-model" data-category="papers" data-new="true" data-recent="false" data-highlight="false" data-source-type="preprint" data-date="2025-12">
+      <div class="meta-row">
+        <span class="cat-tag cat-papers">모델링</span>
+        <span class="source-tag preprint">Preprint</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2025-12</span>
+      </div>
+      <div class="title-row">
+        <div class="title">데이터 기반 EV 파워트레인 모델링 접근 (arXiv)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://arxiv.org/pdf/2512.14344" target="_blank">arxiv.org — A Data-Driven Approach for Electric Vehicle Powertrain Modeling (2512.14344) →</a>
+      </div>
+      <div class="summary">실차 데이터로 EV 파워트레인 효율·동특성을 식별하는 데이터 기반 모델링 — 시뮬레이션 모델 보정과 디지털트윈 구축에 활용 가능.</div>
+      <div class="relevance-note">★3 — plant model 데이터 보정 — 디지털트윈·전이학습 연구 흐름과 연결.</div>
+    </div>
+
+    <div class="item-card cat-papers"
+         data-item-id="arxiv-2508-04874-sequence-aware-sac" data-category="papers" data-new="true" data-recent="false" data-highlight="false" data-source-type="preprint" data-date="2025-08">
+      <div class="meta-row">
+        <span class="cat-tag cat-rl">RL/ML</span>
+        <span class="source-tag preprint">Preprint</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2025-08</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Sequence-aware SAC — 전동화 파워트레인 엔진 연료소비 최적화 (arXiv)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://arxiv.org/pdf/2508.04874" target="_blank">arxiv.org — Sequence Aware SAC Control for Engine Fuel Consumption Optimization in Electrified Powertrain (2508.04874) →</a>
+      </div>
+      <div class="summary">시계열 상태 표현을 결합한 sequence-aware SAC로 전동화 파워트레인의 엔진 연료소비를 최적화하는 off-policy RL 접근.</div>
+      <div class="relevance-note">★4 — SAC 기반 엔진 운전점 최적화 — 본인 RL-EMS 연구의 알고리즘 비교군.</div>
     </div>
   </div>
 </section>
@@ -683,45 +870,62 @@
     </div>
 
         <div class="item-card cat-oem recent"
-         data-item-id="hyundai-tmed-ii-dual-motor-hybrid-2026" data-category="oem" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-06">
+         data-item-id="lexus-es-2026-hybrid-ev-dual" data-category="oem" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05-27">
       <div class="meta-row">
-        <span class="cat-tag cat-hardware">Hardware</span>
+        <span class="cat-tag cat-oem">신차</span>
         <span class="source-tag press">Press</span>
         <span class="recent-badge">RECENT</span>
-        <span class="new-badge">NEW</span>
-        <span class="relevance-badge">★5/5</span>
-        <span class="date-tag">📅 2026-06</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2026-05-27</span>
       </div>
       <div class="title-row">
-        <div class="title">현대차 TMED-II 하이브리드 — P1+P2 듀얼 모터 신구조 (2026 라인업 확대)</div>
+        <div class="title">Lexus 신형 ES — 하이브리드·EV 듀얼 파워트레인, 6월 미국 인도 개시</div>
         <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
       </div>
       <div class="source-link">
-        <a href="https://carbuzz.com/hyundai-hybrid-lineup-for-2026/" target="_blank">carbuzz.com — Hyundai's TMED-II dual-motor hybrid system expands across 2026 lineup →</a>
+        <a href="https://www.autonews.com/toyota/lexus/an-lexus-es-powertrain-flex-0527/" target="_blank">autonews.com — Lexus 2026 ES sedan will come in hybrid, EV versions in June (2026-05-27) →</a>
       </div>
-      <div class="summary">현대 TMED-II는 엔진 출력축의 컴팩트 P1 모터(스타트/저속 구동)와 변속기 내 대형 P2 모터(회생·고속 구동)를 결합한 신구조. Tucson·Palisade 등 2026 HEV 전 라인업으로 확대 적용된다.</div>
-      <div class="relevance-note">★5 — P1/P2 듀얼모터 토폴로지·모드 전환은 EMS 동작점 설계 및 모터 협조제어 벤치마크에 직접 관련.</div>
+      <div class="summary">8세대 Lexus ES가 46 mpg 하이브리드와 307마일 항속 EV 두 가지 파워트레인으로 6월부터 인도 개시(시작가 $48,895). 동일 차체에 HEV/BEV를 병행하는 Toyota 멀티패스웨이 전략의 대표 사례.</div>
+      <div class="relevance-note">★3 — 동일 플랫폼 HEV/BEV 병행 설계 — 파워트레인 아키텍처·원가 비교 사례.</div>
     </div>
 
-        <div class="item-card cat-oem recent"
-         data-item-id="palisade-grandhighlander-hybrid-realworld-mpg-2026" data-category="oem" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-06">
+        <div class="item-card cat-oem recent" data-item-id="honda-city-ehev-zrv-2026-05-22" data-category="oem" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05-22">
       <div class="meta-row">
-        <span class="cat-tag cat-hardware">Hardware</span>
+        <span class="cat-tag cat-oem">신차</span>
         <span class="source-tag press">Press</span>
         <span class="recent-badge">RECENT</span>
-        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★3/5</span>
-        <span class="date-tag">📅 2026-06</span>
+        <span class="date-tag">📅 2026-05-22</span>
       </div>
       <div class="title-row">
-        <div class="title">2026 Palisade HEV vs Grand Highlander HEV — 실연비 비교 (30.3 vs 33.2 mpg)</div>
+        <div class="title">Honda 신차 동시 출시: City e:HEV 세단 + ZR-V Hybrid SUV (2026-05-22)</div>
         <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
       </div>
       <div class="source-link">
-        <a href="https://www.cars.com/articles/hyundai-palisade-vs-toyota-grand-highlander-which-hybrid-3-row-suv-gets-the-best-mpg-525661/" target="_blank">cars.com — Hyundai Palisade vs. Toyota Grand Highlander: which hybrid gets the best MPG? →</a>
+        <a href="https://www.cartoq.com/car-news/honda-city-facelift-city-ehev-zr-v-launch-may-2026/" target="_blank">cartoq.com — Honda City facelift, City e:HEV, ZR-V launch (2026-05-22) →</a>
       </div>
-      <div class="summary">약 200마일 실주행에서 토요타 5세대 HEV(Grand Highlander) 33.2mpg로 현대 HEV(Palisade) 30.3mpg 대비 약 10% 우위. 동급 3열 HEV 실연비 벤치마크 데이터.</div>
-      <div class="relevance-note">★3 — 양산 HEV 실주행 효율 격차 — 파워트레인 효율·EMS 캘리브레이션 비교 참고치.</div>
+      <div class="summary">Honda가 2026-05-22 3개 모델 동시 출시 — City facelift(L2 ADAS), City e:HEV 세단(1.5L Atkinson + e-CVT, 126 bhp/250 Nm), ZR-V 풀하이브리드 SUV(2.0L Atkinson + e-CVT). City e:HEV는 동급 유일 하이브리드 세단. Honda 2030년 HEV 2.2M 목표 라인업 가속.</div>
+      <div class="relevance-note">★3 — Honda e:HEV 시스템 실차 사양 데이터(1.5L Atkinson + e-CVT 126 bhp). 본인 HEV plant model 일본 OEM 축 갱신 자료.</div>
+    </div>
+
+        <div class="item-card cat-oem recent highlight" data-item-id="stellantis-fastlane-2030-2026-05-21" data-category="oem" data-new="false" data-recent="true" data-highlight="true" data-source-type="oem" data-date="2026-05-21">
+      <div class="meta-row">
+        <span class="cat-tag cat-oem">OEM</span>
+        <span class="source-tag oem">OEM 공식</span>
+                <span class="recent-badge">RECENT</span>
+                <span class="relevance-badge">★5/5</span>
+        <span class="date-tag">📅 2026-05-21</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Stellantis FaSTLAne 2030 — €60B 5년 로드맵, 29 BEV + 15 PHEV/EREV + 24 HEV + 39 ICE/MHEV</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://www.electrive.com/2026/05/21/stellantis-plans-29-new-electric-vehicles-and-a-new-platform-for-all-drive-types/" target="_blank">electrive.com — Stellantis FaSTLAne 2030 (29 BEV + 15 PHEV/EREV + 24 HEV) →</a>
+      </div>
+      <div class="summary">Stellantis가 FaSTLAne 2030 5개년 전략(2026-05-21) 공식 발표. €60B 투자, 60+ 신차, STLA One 공통 아키텍처가 5개 기존 플랫폼 대체. 파워트레인 구성: 29 BEV + 15 PHEV/EREV + 24 HEV + 39 ICE/MHEV. Ram 1500 REV(Ramcharger)가 첫 EREV 양산 차종. Jeep·Ram 전면 EREV/HEV 확장.</div>
+      <div class="highlight-reason">★ 분기 핵심 — 글로벌 OEM 3대 권역(미·유럽·중국) 동시 영향. 본인 EREV/PHEV plant model 후보군 미국 OEM 축 대규모 확장.</div>
+      <div class="relevance-note">★5 — ★5 — STLA One 공통 아키텍처는 다중 파워트레인 plant model 일반화 직접 근거. 24 HEV·15 PHEV/EREV 라인업은 본인 시뮬레이션 시나리오 매트릭스 직접 확장.</div>
     </div>
 
         <div class="item-card cat-oem recent highlight" data-item-id="ford-f150-lightning-erev-700mi-2026-05" data-category="oem" data-new="false" data-recent="true" data-highlight="true" data-source-type="press" data-date="2026-05">
@@ -807,7 +1011,7 @@
         <span class="cat-tag cat-oem">신차</span>
         <span class="source-tag oem">OEM 공식</span>
                 <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
+                <span class="relevance-badge">★4/5</span>
         <span class="date-tag">📅 2026-05</span>
       </div>
       <div class="title-row">
@@ -827,7 +1031,7 @@
         <span class="cat-tag cat-oem">신차</span>
         <span class="source-tag press">Press</span>
                 <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
+                <span class="relevance-badge">★3/5</span>
         <span class="date-tag">📅 2026-05</span>
       </div>
       <div class="title-row">
@@ -846,7 +1050,7 @@
         <span class="cat-tag cat-oem">신차</span>
         <span class="source-tag press">Press</span>
                 <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★5/5</span>
+                <span class="relevance-badge">★5/5</span>
         <span class="date-tag">📅 2026-05</span>
       </div>
       <div class="title-row">
@@ -866,7 +1070,7 @@
         <span class="cat-tag cat-oem">OEM</span>
         <span class="source-tag press">Press</span>
                 <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
+                <span class="relevance-badge">★3/5</span>
         <span class="date-tag">📅 2026-05</span>
       </div>
       <div class="title-row">
@@ -886,7 +1090,8 @@
             <span class="source-tag press">Press</span>
             
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
+            
+            <span class="relevance-badge">★4/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -907,7 +1112,8 @@
             <span class="source-tag press">Press</span>
             
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
+            
+            <span class="relevance-badge">★4/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -928,7 +1134,8 @@
             <span class="source-tag press">Press</span>
             
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
+            
+            <span class="relevance-badge">★3/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -949,7 +1156,8 @@
             <span class="source-tag press">Press</span>
             
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
+            
+            <span class="relevance-badge">★3/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -969,7 +1177,8 @@
             <span class="source-tag press">Press</span>
             
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
+            
+            <span class="relevance-badge">★4/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -990,7 +1199,8 @@
             <span class="source-tag press">Press</span>
             
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★5/5</span>
+            
+            <span class="relevance-badge">★5/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -1010,7 +1220,7 @@
             <span class="cat-tag cat-oem">OEM</span>
             <span class="source-tag press">Press</span>
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
+            <span class="relevance-badge">★4/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -1026,11 +1236,12 @@
         </div>
 
         <div class="item-card cat-oem recent"
-         data-item-id="nissan-xtrail-next-gen-epower-2026" data-category="oem" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05">
+         data-item-id="nissan-xtrail-next-gen-epower-2026" data-category="oem" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05">
       <div class="meta-row">
         <span class="cat-tag cat-oem">신차</span>
         <span class="source-tag press">Press</span>
         <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★4/5</span>
         <span class="date-tag">📅 2026-05</span>
       </div>
@@ -1045,71 +1256,12 @@
       <div class="relevance-note">★4 — e-Power 직렬 구성의 세대 개선 — 직렬형 엔진 운전점·EMS 제어 벤치마크.</div>
     </div>
 
-        <div class="item-card cat-oem recent"
-         data-item-id="lexus-es-2026-hybrid-ev-dual" data-category="oem" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05-27">
-      <div class="meta-row">
-        <span class="cat-tag cat-oem">신차</span>
-        <span class="source-tag press">Press</span>
-        <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
-        <span class="date-tag">📅 2026-05-27</span>
-      </div>
-      <div class="title-row">
-        <div class="title">Lexus 신형 ES — 하이브리드·EV 듀얼 파워트레인, 6월 미국 인도 개시</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://www.autonews.com/toyota/lexus/an-lexus-es-powertrain-flex-0527/" target="_blank">autonews.com — Lexus 2026 ES sedan will come in hybrid, EV versions in June (2026-05-27) →</a>
-      </div>
-      <div class="summary">8세대 Lexus ES가 46 mpg 하이브리드와 307마일 항속 EV 두 가지 파워트레인으로 6월부터 인도 개시(시작가 $48,895). 동일 차체에 HEV/BEV를 병행하는 Toyota 멀티패스웨이 전략의 대표 사례.</div>
-      <div class="relevance-note">★3 — 동일 플랫폼 HEV/BEV 병행 설계 — 파워트레인 아키텍처·원가 비교 사례.</div>
-    </div>
-
-        <div class="item-card cat-oem recent" data-item-id="honda-city-ehev-zrv-2026-05-22" data-category="oem" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05-22">
-      <div class="meta-row">
-        <span class="cat-tag cat-oem">신차</span>
-        <span class="source-tag press">Press</span>
-        <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
-        <span class="date-tag">📅 2026-05-22</span>
-      </div>
-      <div class="title-row">
-        <div class="title">Honda 신차 동시 출시: City e:HEV 세단 + ZR-V Hybrid SUV (2026-05-22)</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://www.cartoq.com/car-news/honda-city-facelift-city-ehev-zr-v-launch-may-2026/" target="_blank">cartoq.com — Honda City facelift, City e:HEV, ZR-V launch (2026-05-22) →</a>
-      </div>
-      <div class="summary">Honda가 2026-05-22 3개 모델 동시 출시 — City facelift(L2 ADAS), City e:HEV 세단(1.5L Atkinson + e-CVT, 126 bhp/250 Nm), ZR-V 풀하이브리드 SUV(2.0L Atkinson + e-CVT). City e:HEV는 동급 유일 하이브리드 세단. Honda 2030년 HEV 2.2M 목표 라인업 가속.</div>
-      <div class="relevance-note">★3 — Honda e:HEV 시스템 실차 사양 데이터(1.5L Atkinson + e-CVT 126 bhp). 본인 HEV plant model 일본 OEM 축 갱신 자료.</div>
-    </div>
-
-        <div class="item-card cat-oem recent highlight" data-item-id="stellantis-fastlane-2030-2026-05-21" data-category="oem" data-new="false" data-recent="true" data-highlight="true" data-source-type="oem" data-date="2026-05-21">
-      <div class="meta-row">
-        <span class="cat-tag cat-oem">OEM</span>
-        <span class="source-tag oem">OEM 공식</span>
-                <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★5/5</span>
-        <span class="date-tag">📅 2026-05-21</span>
-      </div>
-      <div class="title-row">
-        <div class="title">Stellantis FaSTLAne 2030 — €60B 5년 로드맵, 29 BEV + 15 PHEV/EREV + 24 HEV + 39 ICE/MHEV</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://www.electrive.com/2026/05/21/stellantis-plans-29-new-electric-vehicles-and-a-new-platform-for-all-drive-types/" target="_blank">electrive.com — Stellantis FaSTLAne 2030 (29 BEV + 15 PHEV/EREV + 24 HEV) →</a>
-      </div>
-      <div class="summary">Stellantis가 FaSTLAne 2030 5개년 전략(2026-05-21) 공식 발표. €60B 투자, 60+ 신차, STLA One 공통 아키텍처가 5개 기존 플랫폼 대체. 파워트레인 구성: 29 BEV + 15 PHEV/EREV + 24 HEV + 39 ICE/MHEV. Ram 1500 REV(Ramcharger)가 첫 EREV 양산 차종. Jeep·Ram 전면 EREV/HEV 확장.</div>
-      <div class="highlight-reason">★ 분기 핵심 — 글로벌 OEM 3대 권역(미·유럽·중국) 동시 영향. 본인 EREV/PHEV plant model 후보군 미국 OEM 축 대규모 확장.</div>
-      <div class="relevance-note">★5 — ★5 — STLA One 공통 아키텍처는 다중 파워트레인 plant model 일반화 직접 근거. 24 HEV·15 PHEV/EREV 라인업은 본인 시뮬레이션 시나리오 매트릭스 직접 확장.</div>
-    </div>
-
         <div class="item-card cat-oem recent" data-item-id="honda-next-hybrid-roadmap-2026-05" data-category="oem" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05-14">
           <div class="meta-row">
             <span class="cat-tag cat-oem">OEM</span>
             <span class="source-tag press">Press</span>
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
+            <span class="relevance-badge">★3/5</span>
             <span class="date-tag">📅 2026-05-14</span>
           </div>
           <div class="title-row">
@@ -1131,7 +1283,8 @@
             <span class="source-tag oem">OEM 공식</span>
             
             <span class="highlight-badge">HIGHLIGHT</span>
-        <span class="relevance-badge">★4/5</span>
+            
+            <span class="relevance-badge">★4/5</span>
             <span class="date-tag">📅 2026-04-09</span>
           </div>
           <div class="title-row">
@@ -1151,7 +1304,7 @@
             <span class="cat-tag cat-oem">신차</span>
             <span class="source-tag press">Press</span>
             <span class="highlight-badge">HIGHLIGHT</span>
-        <span class="relevance-badge">★4/5</span>
+            <span class="relevance-badge">★4/5</span>
             <span class="date-tag">📅 2026-03-21</span>
           </div>
           <div class="title-row">
@@ -1167,25 +1320,6 @@
         </div>
 
         <div class="section-subhead" data-section="oem-older">전체 OEM 동향</div>
-
-        <div class="item-card cat-oem"
-         data-item-id="nissan-xterra-v6-erev-2026-04" data-category="oem" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026-04">
-      <div class="meta-row">
-        <span class="cat-tag cat-oem">신차</span>
-        <span class="source-tag press">Press</span>
-        <span class="relevance-badge">★3/5</span>
-        <span class="date-tag">📅 2026-04</span>
-      </div>
-      <div class="title-row">
-        <div class="title">Nissan 신형 Xterra — V6 하이브리드·레인지익스텐더 개발 공식화 (EV 항속 ~75마일)</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://www.ev.guide/post/ready-or-not-the-erevs-are-coming" target="_blank">ev.guide — Ready or not, the EREVs are coming (Nissan V6 hybrid range extender) →</a>
-      </div>
-      <div class="summary">Nissan이 4월 신형 Xterra 등 SUV·픽업용 V6 하이브리드 파워트레인 개발을 공식 확인 — 레인지익스텐더 구성 시 순수 전기 항속 약 75마일. e-Power Rogue에 이어 미국 EREV 확산 흐름에 합류.</div>
-      <div class="relevance-note">★3 — V6 발전기 EREV — 미국 대형 SUV·픽업 EREV plant model 비교군 추가.</div>
-    </div>
 
         <div class="item-card cat-oem" data-item-id="usnews-2026-best-hybrid-ev" data-category="oem" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026-04-22">
           <div class="meta-row">
@@ -1224,6 +1358,25 @@
           <div class="summary">4기통 엔진·변속기·파워 일렉트로닉스·듀얼 전기 모터를 단일 유닛에 통합. BEV 아키텍처를 HEV/PHEV/REEV에 재사용 가능. Amorphous 모터 98.2% 효율.</div>
           <div class="relevance-note">★2 — 제어 알고리즘 일반화 관점에서 plant model 추상화 사례로 참고.</div>
         </div>
+
+        <div class="item-card cat-oem"
+         data-item-id="nissan-xterra-v6-erev-2026-04" data-category="oem" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026-04">
+      <div class="meta-row">
+        <span class="cat-tag cat-oem">신차</span>
+        <span class="source-tag press">Press</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2026-04</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Nissan 신형 Xterra — V6 하이브리드·레인지익스텐더 개발 공식화 (EV 항속 ~75마일)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://www.ev.guide/post/ready-or-not-the-erevs-are-coming" target="_blank">ev.guide — Ready or not, the EREVs are coming (Nissan V6 hybrid range extender) →</a>
+      </div>
+      <div class="summary">Nissan이 4월 신형 Xterra 등 SUV·픽업용 V6 하이브리드 파워트레인 개발을 공식 확인 — 레인지익스텐더 구성 시 순수 전기 항속 약 75마일. e-Power Rogue에 이어 미국 EREV 확산 흐름에 합류.</div>
+      <div class="relevance-note">★3 — V6 발전기 EREV — 미국 대형 SUV·픽업 EREV plant model 비교군 추가.</div>
+    </div>
 
         <div class="item-card cat-oem" data-item-id="solid-state-breakthrough-electrek-2026-04" data-category="oem" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026-04-15">
           <div class="meta-row">
@@ -1413,10 +1566,11 @@
         </div>
 
         <div class="item-card cat-oem"
-         data-item-id="hyundai-5-new-models-2026" data-category="oem" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026">
+         data-item-id="hyundai-5-new-models-2026" data-category="oem" data-new="true" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026">
       <div class="meta-row">
         <span class="cat-tag cat-oem">OEM</span>
         <span class="source-tag press">Press</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★3/5</span>
         <span class="date-tag">📅 2026</span>
       </div>
@@ -1444,11 +1598,12 @@
         <div class="section-subhead recent" data-section="market-recent">⚡ RECENT — 최근 1개월 이내</div>
 
         <div class="item-card cat-market recent"
-         data-item-id="us-30c-charger-credit-expiry-2026-06" data-category="market" data-new="false" data-recent="true" data-highlight="false" data-source-type="policy" data-date="2026-06">
+         data-item-id="us-30c-charger-credit-expiry-2026-06" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="policy" data-date="2026-06">
       <div class="meta-row">
         <span class="cat-tag cat-policy">정책</span>
         <span class="source-tag policy">Policy</span>
         <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★3/5</span>
         <span class="date-tag">📅 2026-06</span>
       </div>
@@ -1463,33 +1618,13 @@
       <div class="relevance-note">★3 — 미국 인센티브 전면 공백 — HEV/PHEV 상대 경쟁력과 시장 시나리오 가정 변경.</div>
     </div>
 
-        <div class="item-card cat-market recent"
-         data-item-id="iea-gevo2026-q1-sales-drop-us-2026-06" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="report" data-date="2026-06">
-      <div class="meta-row">
-        <span class="cat-tag cat-iea">IEA</span>
-        <span class="source-tag report">Report</span>
-        <span class="recent-badge">RECENT</span>
-        <span class="new-badge">NEW</span>
-        <span class="relevance-badge">★4/5</span>
-        <span class="date-tag">📅 2026-06</span>
-      </div>
-      <div class="title-row">
-        <div class="title">IEA Global EV Outlook 2026 — Q1 글로벌 EV 판매 8% 감소, 미국 부진·유럽 +30%</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://restofworld.org/2026/iea-global-ev-outlook-us-sales-drop/" target="_blank">restofworld.org — IEA EV Outlook 2026: The U.S. falls behind global boom →</a>
-      </div>
-      <div class="summary">2026년 1분기 글로벌 EV 판매가 전년 동기 대비 8% 감소(주요국 정책 변화 영향). 다만 유럽 +30%, 아·태(중국 제외) +80%, 중남미 +75%로 지역 편차가 확대됐고 미국은 보조금 축소로 부진.</div>
-      <div class="relevance-note">★4 — 지역별 xEV 수요 분화는 시장 시나리오·OEM 파워트레인 전략(HEV 회귀) 가정에 직접 영향.</div>
-    </div>
-
         <div class="item-card cat-market recent highlight"
-         data-item-id="china-erev-rules-upgrade-2026-06" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="policy" data-date="2026-06-07">
+         data-item-id="china-erev-rules-upgrade-2026-06" data-category="market" data-new="true" data-recent="true" data-highlight="true" data-source-type="policy" data-date="2026-06-07">
       <div class="meta-row">
         <span class="cat-tag cat-policy">정책</span>
         <span class="source-tag policy">Policy</span>
         <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★5/5</span>
         <span class="date-tag">📅 2026-06-07</span>
       </div>
@@ -1524,129 +1659,6 @@
       <div class="summary">법무법인 태평양(BKL) 모빌리티 TF의 2026년 6월 1차 정책·산업동향 리포트가 폴더에 신규 입수됨. 이번 자동 회차에서는 PDF가 연결 폴더 외부에 있어 본문 접근에 실패 — 메타데이터만으로 카드 생성. 폴더 재연결 시 다음 회차에 목차·관련성 본문 분석 수행 예정.</div>
       <div class="relevance-note">★3 — 신규 BKL 회차. 본문 분석은 폴더 접근 복구 후 차기 회차 처리(현 회차 메타데이터만).</div>
     </div>
-
-        <div class="item-card cat-market recent highlight" data-item-id="marklines-xev-april-2026" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="report" data-date="2026-05">
-      <div class="meta-row">
-        <span class="cat-tag cat-market">시장</span>
-        <span class="source-tag report">Report</span>
-        <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
-        <span class="date-tag">📅 2026-05</span>
-      </div>
-      <div class="title-row">
-        <div class="title">MarkLines xEV 판매 월간 리포트 (4월) — HEV가 PHEV 추월 추세 지속</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://www.marklines.com/en/report/statistics_evsales_202604" target="_blank">marklines.com — Electrified Vehicle (xEV) Sales Monthly Report (April 2026) →</a>
-      </div>
-      <div class="summary">MarkLines 4월 xEV 리포트 — PHEV는 MoM −6.9%·YoY −13.5% 하락 지속, HEV는 MoM −20.3%이나 YoY +9.1%로 1월 이후 PHEV 추월 추세 유지. 주요 OEM이 실적 발표에서 BEV·PHEV뿐 아니라 HEV 포함 파워트레인 전략 재검토 표명. (3월: 15개국 xEV 199.9만대, 점유율 34.3% — BEV 16.8%/PHEV 7.3%/HEV 10.2%.)</div>
-      <div class="highlight-reason">★ 분기 핵심 — HEV>PHEV 판매 역전 추세 정량 확인. 본인 HEV 연구 시장 모멘텀 외부 근거.</div>
-      <div class="relevance-note">★4 — 파워트레인별(BEV/PHEV/HEV) 판매 비중 추세. EMS 시나리오 가중치 재캘리브레이션 직접 입력.</div>
-    </div>
-
-        <div class="item-card cat-market recent highlight" data-item-id="korea-ev-subsidy-2026" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="policy" data-date="2026-05">
-      <div class="meta-row">
-        <span class="cat-tag cat-policy">정책</span>
-        <span class="source-tag policy">Policy</span>
-                <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
-        <span class="date-tag">📅 2026-05</span>
-      </div>
-      <div class="title-row">
-        <div class="title">한국 2026 EV 보조금 상향 — 최대 680만원 + 내연차 폐차 인센티브 100만원 신설</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://electrek.co/2026/01/02/hyundai-kia-win-big-south-koreas-new-support-for-evs/" target="_blank">electrek.co — Hyundai/Kia win big with South Korea's new EV support (2026) →</a>
-      </div>
-      <div class="summary">한국 기후에너지환경부 2026 EV 보조금 최종안 — 최대 580만원→680만원 상향. 내연차 폐차·매각 시 추가 100만원 신설. 총 EV 예산 7,150억원→9,360억원 증액. 전기·하이브리드·수소차 취·등록세 면제 유지. 자동차 산업에 15조원+ 저금리 대출/보증. US 관세 대응 + EV 산업 가속 패키지.</div>
-      <div class="highlight-reason">★ 분기 핵심 — 한국 정부 EV 산업 지원 대폭 강화 패키지. 본인 연구 국가 정책 환경 외부 변수.</div>
-      <div class="relevance-note">★4 — ★4 — EMS 다목적 손실의 한국 시장 시나리오 가중치 캘리브레이션 근거. 보조금/세제 직접 입력.</div>
-    </div>
-
-        <div class="item-card cat-market recent highlight" data-item-id="eu-euro-7-nov-2026" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="policy" data-date="2026-05">
-          <div class="meta-row">
-            <span class="cat-tag cat-policy">정책</span>
-            <span class="source-tag policy">Policy</span>
-            
-            <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★5/5</span>
-            <span class="date-tag">📅 2026-11-29 시행</span>
-          </div>
-          <div class="title-row">
-            <div class="title">EU Euro 7 — 2026-11-29 신차 시행 확정 (배터리 SoH 의무 + 브레이크 입자 한계)</div>
-            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-          </div>
-          <div class="source-link">
-            <a href="https://eur-lex.europa.eu/EN/legal-content/summary/vehicle-emissions-and-battery-durability-euro-7-technical-requirements-and-certification-rules.html" target="_blank">eur-lex.europa.eu — Euro 7 (Reg. 2024/1257) →</a>
-          </div>
-          <div class="summary">EU Euro 7(Reg. 2024/1257) 2026-11-29 M1/N1 신차 type-approval 단계 시행. EV 배터리 SoH 의무 — 5년/100,000km ≥80%, 8년/160,000km ≥72%. 브레이크 입자 3~7 mg/km 승용 + 타이어 마모 한계 신설. OBD·OBM·anti-tampering·cybersecurity 강화.</div>
-          <div class="highlight-reason">★ 분기 핵심 — EU 규정 단계 시행 확정. EMS 다목적 최적화의 외부 제약(SoH 의무) 직접 강제.</div>
-          <div class="relevance-note">★5 — EMS 손실 함수에 SoH 운용 범위 강제 제약 도입 직접 근거.</div>
-        </div>
-
-        <div class="item-card cat-market recent highlight" data-item-id="iea-global-energy-review-2026-ev" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="report" data-date="2026-05">
-          <div class="meta-row">
-            <span class="cat-tag cat-iea">IEA</span>
-            <span class="source-tag report">Report</span>
-            
-            <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
-            <span class="date-tag">📅 2026-05</span>
-          </div>
-          <div class="title-row">
-            <div class="title">IEA Global Energy Review 2026 — EV 기술 챕터 신규 발간</div>
-            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-          </div>
-          <div class="source-link">
-            <a href="https://www.iea.org/reports/global-energy-review-2026/technology-electric-vehicles" target="_blank">iea.org — Global Energy Review 2026: Technology Electric Vehicles →</a>
-          </div>
-          <div class="summary">IEA Global Energy Review 2026의 EV 기술 챕터. 2025년 글로벌 EV 판매 21M(+20% YoY), 신차 4대 중 1대가 EV. 중국 EV 점유율 50% 첫 돌파, 인도 +75%(2.3M), 동남아 2배, 중남미 +70%(350K).</div>
-          <div class="highlight-reason">★ 분기 핵심 — IEA 신 에디션의 EV 전용 챕터. 본인 시뮬레이션 시나리오 외부 reference 갱신 1순위.</div>
-          <div class="relevance-note">★4 — EMS 시뮬레이션 sweep 범위 외부 근거. 지역별 점유율·증가율 시나리오 직접 활용.</div>
-        </div>
-
-        <div class="item-card cat-market recent highlight" data-item-id="nature-tipping-point-ev-2026" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-05">
-          <div class="meta-row">
-            <span class="cat-tag cat-market">시장</span>
-            <span class="source-tag peer-reviewed">Peer-reviewed</span>
-            
-            <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
-            <span class="date-tag">📅 2026-05</span>
-          </div>
-          <div class="title-row">
-            <div class="title">Nature Communications — EV 양성 티핑포인트 캐스케이드 증거 (Exeter Univ)</div>
-            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-          </div>
-          <div class="source-link">
-            <a href="https://www.nature.com/articles/s41467-025-66945-9" target="_blank">nature.com — Cascading positive tipping point towards EVs →</a>
-          </div>
-          <div class="summary">32개국 2016-2023 EV·HEV 판매 데이터 분석. 글로벌 EV 플릿이 약 1.5년마다 2배(중국 1년, EU 1.3년, 미국 1.7년). 가격 평형 시점 — 유럽·중국 2025-2028, 미·캐·한 2026-2030, 그 외 2030-2035.</div>
-          <div class="highlight-reason">★ 분기 핵심 — Top-tier 저널(Nature Comm) 등재 + 다수 매체 동시 보도.</div>
-          <div class="relevance-note">★3 — introduction 시장 동인 외부 근거.</div>
-        </div>
-
-        <div class="item-card cat-market recent" data-item-id="techxplore-tipping-point-2026-05" data-category="market" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05">
-          <div class="meta-row">
-            <span class="cat-tag cat-market">시장</span>
-            <span class="source-tag press">Press</span>
-            
-            <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★2/5</span>
-            <span class="date-tag">📅 2026-05</span>
-          </div>
-          <div class="title-row">
-            <div class="title">TechXplore: 유럽·중국 EV 티핑포인트 도달, 내연 회귀 사실상 불가</div>
-            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-          </div>
-          <div class="source-link">
-            <a href="https://techxplore.com/news/2026-05-electric-vehicles-europe-china.html" target="_blank">techxplore.com — 'Tipping point' to EVs reached in Europe and China →</a>
-          </div>
-          <div class="summary">Nature Comm 논문의 일반 매체 보도. 유럽·중국 EV 점유율 가속 + 내연차 다양성 감소 + 회복력 약화로 임계점 도달. 미국은 정책 후퇴로 뒤처질 위험.</div>
-          <div class="relevance-note">★2 — Nature Comm 논문 보조 자료.</div>
-        </div>
 
         <div class="item-card cat-market recent"
          data-item-id="pew-quarter-ev-hybrid-2026-05" data-category="market" data-new="false" data-recent="true" data-highlight="false" data-source-type="report" data-date="2026-05-28">
@@ -1713,7 +1725,7 @@
         <span class="cat-tag cat-iea">IEA</span>
         <span class="source-tag report">Report</span>
                 <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
+                <span class="relevance-badge">★4/5</span>
         <span class="date-tag">📅 2026-05-21</span>
       </div>
       <div class="title-row">
@@ -1734,7 +1746,8 @@
             <span class="source-tag report">Report</span>
             
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★5/5</span>
+            
+            <span class="relevance-badge">★5/5</span>
             <span class="date-tag">📅 2026-05-21</span>
           </div>
           <div class="title-row">
@@ -1755,7 +1768,8 @@
             <span class="source-tag report">Report</span>
             
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★5/5</span>
+            
+            <span class="relevance-badge">★5/5</span>
             <span class="date-tag">📅 2026-05-21</span>
           </div>
           <div class="title-row">
@@ -1771,11 +1785,12 @@
         </div>
 
         <div class="item-card cat-market recent"
-         data-item-id="iea-gevo2026-outlook-electric-mobility" data-category="market" data-new="false" data-recent="true" data-highlight="false" data-source-type="report" data-date="2026-05-21">
+         data-item-id="iea-gevo2026-outlook-electric-mobility" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="report" data-date="2026-05-21">
       <div class="meta-row">
         <span class="cat-tag cat-iea">IEA</span>
         <span class="source-tag report">Report</span>
         <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★4/5</span>
         <span class="date-tag">📅 2026-05-21</span>
       </div>
@@ -1836,7 +1851,7 @@
         <span class="cat-tag cat-market">시장</span>
         <span class="source-tag report">Report</span>
                 <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
+                <span class="relevance-badge">★3/5</span>
         <span class="date-tag">📅 2026-05-18</span>
       </div>
       <div class="title-row">
@@ -1850,12 +1865,139 @@
       <div class="relevance-note">★3 — ★3 — 지역별 BEV vs PHEV 비중 데이터. EMS 시나리오 가중치 외부 근거.</div>
     </div>
 
+        <div class="item-card cat-market recent highlight" data-item-id="marklines-xev-april-2026" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="report" data-date="2026-05">
+      <div class="meta-row">
+        <span class="cat-tag cat-market">시장</span>
+        <span class="source-tag report">Report</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2026-05</span>
+      </div>
+      <div class="title-row">
+        <div class="title">MarkLines xEV 판매 월간 리포트 (4월) — HEV가 PHEV 추월 추세 지속</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://www.marklines.com/en/report/statistics_evsales_202604" target="_blank">marklines.com — Electrified Vehicle (xEV) Sales Monthly Report (April 2026) →</a>
+      </div>
+      <div class="summary">MarkLines 4월 xEV 리포트 — PHEV는 MoM −6.9%·YoY −13.5% 하락 지속, HEV는 MoM −20.3%이나 YoY +9.1%로 1월 이후 PHEV 추월 추세 유지. 주요 OEM이 실적 발표에서 BEV·PHEV뿐 아니라 HEV 포함 파워트레인 전략 재검토 표명. (3월: 15개국 xEV 199.9만대, 점유율 34.3% — BEV 16.8%/PHEV 7.3%/HEV 10.2%.)</div>
+      <div class="highlight-reason">★ 분기 핵심 — HEV>PHEV 판매 역전 추세 정량 확인. 본인 HEV 연구 시장 모멘텀 외부 근거.</div>
+      <div class="relevance-note">★4 — 파워트레인별(BEV/PHEV/HEV) 판매 비중 추세. EMS 시나리오 가중치 재캘리브레이션 직접 입력.</div>
+    </div>
+
+        <div class="item-card cat-market recent highlight" data-item-id="korea-ev-subsidy-2026" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="policy" data-date="2026-05">
+      <div class="meta-row">
+        <span class="cat-tag cat-policy">정책</span>
+        <span class="source-tag policy">Policy</span>
+                <span class="recent-badge">RECENT</span>
+                <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2026-05</span>
+      </div>
+      <div class="title-row">
+        <div class="title">한국 2026 EV 보조금 상향 — 최대 680만원 + 내연차 폐차 인센티브 100만원 신설</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://electrek.co/2026/01/02/hyundai-kia-win-big-south-koreas-new-support-for-evs/" target="_blank">electrek.co — Hyundai/Kia win big with South Korea's new EV support (2026) →</a>
+      </div>
+      <div class="summary">한국 기후에너지환경부 2026 EV 보조금 최종안 — 최대 580만원→680만원 상향. 내연차 폐차·매각 시 추가 100만원 신설. 총 EV 예산 7,150억원→9,360억원 증액. 전기·하이브리드·수소차 취·등록세 면제 유지. 자동차 산업에 15조원+ 저금리 대출/보증. US 관세 대응 + EV 산업 가속 패키지.</div>
+      <div class="highlight-reason">★ 분기 핵심 — 한국 정부 EV 산업 지원 대폭 강화 패키지. 본인 연구 국가 정책 환경 외부 변수.</div>
+      <div class="relevance-note">★4 — ★4 — EMS 다목적 손실의 한국 시장 시나리오 가중치 캘리브레이션 근거. 보조금/세제 직접 입력.</div>
+    </div>
+
+        <div class="item-card cat-market recent highlight" data-item-id="eu-euro-7-nov-2026" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="policy" data-date="2026-05">
+          <div class="meta-row">
+            <span class="cat-tag cat-policy">정책</span>
+            <span class="source-tag policy">Policy</span>
+            
+            <span class="recent-badge">RECENT</span>
+            
+            <span class="relevance-badge">★5/5</span>
+            <span class="date-tag">📅 2026-11-29 시행</span>
+          </div>
+          <div class="title-row">
+            <div class="title">EU Euro 7 — 2026-11-29 신차 시행 확정 (배터리 SoH 의무 + 브레이크 입자 한계)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://eur-lex.europa.eu/EN/legal-content/summary/vehicle-emissions-and-battery-durability-euro-7-technical-requirements-and-certification-rules.html" target="_blank">eur-lex.europa.eu — Euro 7 (Reg. 2024/1257) →</a>
+          </div>
+          <div class="summary">EU Euro 7(Reg. 2024/1257) 2026-11-29 M1/N1 신차 type-approval 단계 시행. EV 배터리 SoH 의무 — 5년/100,000km ≥80%, 8년/160,000km ≥72%. 브레이크 입자 3~7 mg/km 승용 + 타이어 마모 한계 신설. OBD·OBM·anti-tampering·cybersecurity 강화.</div>
+          <div class="highlight-reason">★ 분기 핵심 — EU 규정 단계 시행 확정. EMS 다목적 최적화의 외부 제약(SoH 의무) 직접 강제.</div>
+          <div class="relevance-note">★5 — EMS 손실 함수에 SoH 운용 범위 강제 제약 도입 직접 근거.</div>
+        </div>
+
+        <div class="item-card cat-market recent highlight" data-item-id="iea-global-energy-review-2026-ev" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="report" data-date="2026-05">
+          <div class="meta-row">
+            <span class="cat-tag cat-iea">IEA</span>
+            <span class="source-tag report">Report</span>
+            
+            <span class="recent-badge">RECENT</span>
+            
+            <span class="relevance-badge">★4/5</span>
+            <span class="date-tag">📅 2026-05</span>
+          </div>
+          <div class="title-row">
+            <div class="title">IEA Global Energy Review 2026 — EV 기술 챕터 신규 발간</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.iea.org/reports/global-energy-review-2026/technology-electric-vehicles" target="_blank">iea.org — Global Energy Review 2026: Technology Electric Vehicles →</a>
+          </div>
+          <div class="summary">IEA Global Energy Review 2026의 EV 기술 챕터. 2025년 글로벌 EV 판매 21M(+20% YoY), 신차 4대 중 1대가 EV. 중국 EV 점유율 50% 첫 돌파, 인도 +75%(2.3M), 동남아 2배, 중남미 +70%(350K).</div>
+          <div class="highlight-reason">★ 분기 핵심 — IEA 신 에디션의 EV 전용 챕터. 본인 시뮬레이션 시나리오 외부 reference 갱신 1순위.</div>
+          <div class="relevance-note">★4 — EMS 시뮬레이션 sweep 범위 외부 근거. 지역별 점유율·증가율 시나리오 직접 활용.</div>
+        </div>
+
+        <div class="item-card cat-market recent highlight" data-item-id="nature-tipping-point-ev-2026" data-category="market" data-new="false" data-recent="true" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-05">
+          <div class="meta-row">
+            <span class="cat-tag cat-market">시장</span>
+            <span class="source-tag peer-reviewed">Peer-reviewed</span>
+            
+            <span class="recent-badge">RECENT</span>
+            
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-05</span>
+          </div>
+          <div class="title-row">
+            <div class="title">Nature Communications — EV 양성 티핑포인트 캐스케이드 증거 (Exeter Univ)</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.nature.com/articles/s41467-025-66945-9" target="_blank">nature.com — Cascading positive tipping point towards EVs →</a>
+          </div>
+          <div class="summary">32개국 2016-2023 EV·HEV 판매 데이터 분석. 글로벌 EV 플릿이 약 1.5년마다 2배(중국 1년, EU 1.3년, 미국 1.7년). 가격 평형 시점 — 유럽·중국 2025-2028, 미·캐·한 2026-2030, 그 외 2030-2035.</div>
+          <div class="highlight-reason">★ 분기 핵심 — Top-tier 저널(Nature Comm) 등재 + 다수 매체 동시 보도.</div>
+          <div class="relevance-note">★3 — introduction 시장 동인 외부 근거.</div>
+        </div>
+
+        <div class="item-card cat-market recent" data-item-id="techxplore-tipping-point-2026-05" data-category="market" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-05">
+          <div class="meta-row">
+            <span class="cat-tag cat-market">시장</span>
+            <span class="source-tag press">Press</span>
+            
+            <span class="recent-badge">RECENT</span>
+            
+            <span class="relevance-badge">★2/5</span>
+            <span class="date-tag">📅 2026-05</span>
+          </div>
+          <div class="title-row">
+            <div class="title">TechXplore: 유럽·중국 EV 티핑포인트 도달, 내연 회귀 사실상 불가</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://techxplore.com/news/2026-05-electric-vehicles-europe-china.html" target="_blank">techxplore.com — 'Tipping point' to EVs reached in Europe and China →</a>
+          </div>
+          <div class="summary">Nature Comm 논문의 일반 매체 보도. 유럽·중국 EV 점유율 가속 + 내연차 다양성 감소 + 회복력 약화로 임계점 도달. 미국은 정책 후퇴로 뒤처질 위험.</div>
+          <div class="relevance-note">★2 — Nature Comm 논문 보조 자료.</div>
+        </div>
+
         <div class="item-card cat-market recent" data-item-id="bkl-2026-05-2" data-category="market" data-new="false" data-recent="true" data-highlight="false" data-source-type="local-file" data-date="2026-05-15" data-bkl-file="BKL_2026_5월2차_자동차,모빌리티_정책 및 산업동향.pdf">
           <div class="meta-row">
             <span class="cat-tag cat-bkl">BKL</span>
             <span class="source-tag local-file">Local File</span>
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
+            <span class="relevance-badge">★3/5</span>
             <span class="date-tag">📅 2026-05-15</span>
           </div>
           <div class="title-row">
@@ -1875,7 +2017,8 @@
             <span class="source-tag press">Press</span>
             
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★3/5</span>
+            
+            <span class="relevance-badge">★3/5</span>
             <span class="date-tag">📅 2026-05-12</span>
           </div>
           <div class="title-row">
@@ -1896,7 +2039,7 @@
             <span class="cat-tag cat-eia">EIA</span>
             <span class="source-tag report">Report</span>
             <span class="highlight-badge">HIGHLIGHT</span>
-        <span class="relevance-badge">★3/5</span>
+            <span class="relevance-badge">★3/5</span>
             <span class="date-tag">📅 2026-04-08</span>
           </div>
           <div class="title-row">
@@ -1967,24 +2110,6 @@
           <div class="relevance-note">★3 — 국내 정책·OEM 동향 통합 자료.</div>
         </div>
 
-        <div class="item-card cat-market" data-item-id="pwc-q1-2026-ev-review" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="report" data-date="2026-04">
-          <div class="meta-row">
-            <span class="cat-tag cat-market">시장</span>
-            <span class="source-tag report">Report</span>
-            <span class="relevance-badge">★3/5</span>
-            <span class="date-tag">📅 2026-04</span>
-          </div>
-          <div class="title-row">
-            <div class="title">PwC Strategy& EV Sales Review Q1 2026 — 글로벌 4M대 (YoY -3%), 유럽 +27%</div>
-            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-          </div>
-          <div class="source-link">
-            <a href="https://www.strategyand.pwc.com/de/en/industries/automotive/electric-vehicle-sales-review-q1-2026.html" target="_blank">strategyand.pwc.com — EV Sales Review Q1-2026 →</a>
-          </div>
-          <div class="summary">Q1 글로벌 EV 판매 4.0M대(YoY -3%). 유럽 1.2M(+27%, 3월 단월 50만+), 중국 1.9M(-21%), 북미 0.32M(-27%). BEV 유럽 점유율 19% 사상 최고.</div>
-          <div class="relevance-note">★3 — EMS 적용 차량의 시장 기준선. 지역별 분기 시나리오 셋업에 활용.</div>
-        </div>
-
         <div class="item-card cat-market" data-item-id="bkl-2026-04-2" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="local-file" data-date="2026-04-22" data-bkl-file="BKL_2026_4월2차_자동차,모빌리티_정책 및 산업동향.pdf">
           <div class="meta-row">
             <span class="cat-tag cat-bkl">BKL</span>
@@ -2004,6 +2129,24 @@
           <div class="relevance-note">★3 — 4월 분기 마감 정책 동향. 본문 분석은 다음 회차 자동 분석 시 정밀 인용 가능.</div>
         </div>
 
+        <div class="item-card cat-market" data-item-id="pwc-q1-2026-ev-review" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="report" data-date="2026-04">
+          <div class="meta-row">
+            <span class="cat-tag cat-market">시장</span>
+            <span class="source-tag report">Report</span>
+            <span class="relevance-badge">★3/5</span>
+            <span class="date-tag">📅 2026-04</span>
+          </div>
+          <div class="title-row">
+            <div class="title">PwC Strategy& EV Sales Review Q1 2026 — 글로벌 4M대 (YoY -3%), 유럽 +27%</div>
+            <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+          </div>
+          <div class="source-link">
+            <a href="https://www.strategyand.pwc.com/de/en/industries/automotive/electric-vehicle-sales-review-q1-2026.html" target="_blank">strategyand.pwc.com — EV Sales Review Q1-2026 →</a>
+          </div>
+          <div class="summary">Q1 글로벌 EV 판매 4.0M대(YoY -3%). 유럽 1.2M(+27%, 3월 단월 50만+), 중국 1.9M(-21%), 북미 0.32M(-27%). BEV 유럽 점유율 19% 사상 최고.</div>
+          <div class="relevance-note">★3 — EMS 적용 차량의 시장 기준선. 지역별 분기 시나리오 셋업에 활용.</div>
+        </div>
+
         <div class="item-card cat-market" data-item-id="global-ev-sales-q1-2026" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2026-04-14">
           <div class="meta-row">
             <span class="cat-tag cat-market">시장</span>
@@ -2021,25 +2164,6 @@
           <div class="summary">유럽이 회복 견인, 중국·북미는 정체. 미국 세액공제(2025-09-30) 만료·관세 영향 본격화.</div>
           <div class="relevance-note">★2 — 시장 분기 환경 보조 자료.</div>
         </div>
-
-        <div class="item-card cat-market"
-         data-item-id="counterpoint-global-ev-share-q1-2026" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="report" data-date="2026-Q1">
-      <div class="meta-row">
-        <span class="cat-tag cat-market">시장</span>
-        <span class="source-tag report">Report</span>
-        <span class="relevance-badge">★3/5</span>
-        <span class="date-tag">📅 2026-Q1</span>
-      </div>
-      <div class="title-row">
-        <div class="title">Counterpoint — 글로벌 EV 점유율 분기 트래커 (Q1 2026, BYD 선두 유지)</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://counterpointresearch.com/en/insights/global-electric-vehicle-market-share-quarterly" target="_blank">counterpointresearch.com — Global Electric Vehicle Market Share: Quarterly →</a>
-      </div>
-      <div class="summary">분기별 글로벌 EV(BEV+PHEV) 브랜드 점유율 트래커 — 2025년 BYD가 연간 200만대 이상으로 Tesla를 추월했고 Q1 2026까지 선두 유지. MarkLines 월간 데이터와 교차검증용.</div>
-      <div class="relevance-note">★3 — 브랜드별 분기 점유율 — 시장 시나리오 v5 교차검증 보조 데이터셋.</div>
-    </div>
 
         <div class="item-card cat-market" data-item-id="epa-trends-2025-exec-summary-2026-02" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="report" data-date="2026-02">
           <div class="meta-row">
@@ -2077,6 +2201,25 @@
           <div class="highlight-reason">★ 분기 핵심 — EPA 핵심 연간 리포트. BEV/PHEV 평균 연비 기여 정량화는 EMS 보상 가중치 캘리브레이션 근거.</div>
           <div class="relevance-note">★3 — BEV/PHEV 기여도 정량 자료. EMS 다목적 최적화 가중치 설정 외부 근거.</div>
         </div>
+
+        <div class="item-card cat-market"
+         data-item-id="counterpoint-global-ev-share-q1-2026" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="report" data-date="2026-Q1">
+      <div class="meta-row">
+        <span class="cat-tag cat-market">시장</span>
+        <span class="source-tag report">Report</span>
+        <span class="relevance-badge">★3/5</span>
+        <span class="date-tag">📅 2026-Q1</span>
+      </div>
+      <div class="title-row">
+        <div class="title">Counterpoint — 글로벌 EV 점유율 분기 트래커 (Q1 2026, BYD 선두 유지)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://counterpointresearch.com/en/insights/global-electric-vehicle-market-share-quarterly" target="_blank">counterpointresearch.com — Global Electric Vehicle Market Share: Quarterly →</a>
+      </div>
+      <div class="summary">분기별 글로벌 EV(BEV+PHEV) 브랜드 점유율 트래커 — 2025년 BYD가 연간 200만대 이상으로 Tesla를 추월했고 Q1 2026까지 선두 유지. MarkLines 월간 데이터와 교차검증용.</div>
+      <div class="relevance-note">★3 — 브랜드별 분기 점유율 — 시장 시나리오 v5 교차검증 보조 데이터셋.</div>
+    </div>
 
         <div class="item-card cat-market" data-item-id="epa-tailpipe-revocation-2026-02" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026-02">
           <div class="meta-row">
@@ -2134,10 +2277,11 @@
         </div>
 
         <div class="item-card cat-market"
-         data-item-id="eu-china-bev-price-undertaking-2026-01" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026-01-12">
+         data-item-id="eu-china-bev-price-undertaking-2026-01" data-category="market" data-new="true" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026-01-12">
       <div class="meta-row">
         <span class="cat-tag cat-policy">정책</span>
         <span class="source-tag policy">Policy</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★3/5</span>
         <span class="date-tag">📅 2026-01-12</span>
       </div>
@@ -2228,10 +2372,11 @@
         </div>
 
         <div class="item-card cat-market"
-         data-item-id="korea-ev-battery-regulation-2026" data-category="market" data-new="false" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026">
+         data-item-id="korea-ev-battery-regulation-2026" data-category="market" data-new="true" data-recent="false" data-highlight="false" data-source-type="policy" data-date="2026">
       <div class="meta-row">
         <span class="cat-tag cat-policy">정책</span>
         <span class="source-tag policy">Policy</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★3/5</span>
         <span class="date-tag">📅 2026</span>
       </div>
@@ -2263,6 +2408,10 @@
           <div class="summary">2025-12 EU 집행위 발표. 2030 LCV 감축 40%로 완화, 2035 전체 90% 감축 유지. 2025-2027 CO2 목표 3년 평균 유연화.</div>
           <div class="relevance-note">★2 — 유럽 시장 EMS 캘리브레이션 기준.</div>
         </div>
+
+        <div class="cat-section-empty" style="display:none;">
+          BKL 폴더가 비어 있습니다 (C:\Users\namwook\Documents\Claude\temp\BKL 모빌리티 정책 및 산업동향). 파일 추가 시 다음 회차에 자동 분석.
+        </div>
       </div>
     </div>
 
@@ -2276,12 +2425,33 @@
       <div data-slot="papers-items">
         <div class="section-subhead recent" data-section="papers-recent">⚡ RECENT — 최근 1개월 이내</div>
 
+        <div class="item-card cat-papers recent"
+         data-item-id="energies-19-2487-dp-mpc-dualmotor-phev" data-category="papers" data-new="true" data-recent="true" data-highlight="false" data-source-type="peer-reviewed" data-date="2026-05-21">
+      <div class="meta-row">
+        <span class="cat-tag cat-mpc">MPC</span>
+        <span class="source-tag peer-reviewed">Peer-reviewed</span>
+        <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★5/5</span>
+        <span class="date-tag">📅 2026-05-21</span>
+      </div>
+      <div class="title-row">
+        <div class="title">DP 기반 MPC 에너지관리 — 듀얼모터 PHEV의 실시간성·전역최적성 절충 (Energies)</div>
+        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
+      </div>
+      <div class="source-link">
+        <a href="https://doi.org/10.3390/en19102487" target="_blank">doi.org — Energies 19(10):2487, Dynamic Programming-Based MPC of Energy Management for a Novel PHEV (2026-05-21) →</a>
+      </div>
+      <div class="summary">듀얼모터 PHEV에서 DP로 구한 전역 최적해를 MPC 프레임에 결합해 실시간성과 전역 최적성의 충돌을 완화하는 에너지관리 전략 제안.</div>
+      <div class="relevance-note">★5 — DP+MPC 결합 구조 — 본인 최적제어(MPC 예측구간 설계) 연구의 직접 비교 대상.</div>
+    </div>
+
         <div class="item-card cat-papers recent" data-item-id="mdpi-machines-xev-powertrain-review-2026-05" data-category="papers" data-new="false" data-recent="true" data-highlight="false" data-source-type="peer-reviewed" data-date="2026-05">
           <div class="meta-row">
             <span class="cat-tag cat-review">리뷰</span>
             <span class="source-tag peer-reviewed">Peer-reviewed</span>
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
+            <span class="relevance-badge">★4/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -2300,7 +2470,7 @@
             <span class="cat-tag cat-ems">EMS</span>
             <span class="source-tag peer-reviewed">Peer-reviewed</span>
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★5/5</span>
+            <span class="relevance-badge">★5/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -2320,7 +2490,7 @@
             <span class="cat-tag cat-rl">RL/ML</span>
             <span class="source-tag peer-reviewed">Peer-reviewed</span>
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★4/5</span>
+            <span class="relevance-badge">★4/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -2340,7 +2510,8 @@
             <span class="source-tag peer-reviewed">Peer-reviewed</span>
             
             <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★5/5</span>
+            
+            <span class="relevance-badge">★5/5</span>
             <span class="date-tag">📅 2026-05</span>
           </div>
           <div class="title-row">
@@ -2356,23 +2527,24 @@
         </div>
 
         <div class="item-card cat-papers recent"
-         data-item-id="energies-19-2487-dp-mpc-dualmotor-phev" data-category="papers" data-new="false" data-recent="true" data-highlight="false" data-source-type="peer-reviewed" data-date="2026-05-21">
+         data-item-id="vehicles-8-105-cnn-bilstm-mpc-ems" data-category="papers" data-new="true" data-recent="true" data-highlight="false" data-source-type="peer-reviewed" data-date="2026-05-08">
       <div class="meta-row">
         <span class="cat-tag cat-mpc">MPC</span>
         <span class="source-tag peer-reviewed">Peer-reviewed</span>
         <span class="recent-badge">RECENT</span>
-        <span class="relevance-badge">★5/5</span>
-        <span class="date-tag">📅 2026-05-21</span>
+        <span class="new-badge">NEW</span>
+        <span class="relevance-badge">★4/5</span>
+        <span class="date-tag">📅 2026-05-08</span>
       </div>
       <div class="title-row">
-        <div class="title">DP 기반 MPC 에너지관리 — 듀얼모터 PHEV의 실시간성·전역최적성 절충 (Energies)</div>
+        <div class="title">속도예측 융합 MPC EMS — Stacked-CNN-BiLSTM-Attention (Vehicles)</div>
         <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
       </div>
       <div class="source-link">
-        <a href="https://doi.org/10.3390/en19102487" target="_blank">doi.org — Energies 19(10):2487, Dynamic Programming-Based MPC of Energy Management for a Novel PHEV (2026-05-21) →</a>
+        <a href="https://www.mdpi.com/2624-8921/8/5/105" target="_blank">mdpi.com — Vehicles 8(5):105, MPC Optimization EMS with Fused Temporal Features Speed Prediction (2026-05-08) →</a>
       </div>
-      <div class="summary">듀얼모터 PHEV에서 DP로 구한 전역 최적해를 MPC 프레임에 결합해 실시간성과 전역 최적성의 충돌을 완화하는 에너지관리 전략 제안.</div>
-      <div class="relevance-note">★5 — DP+MPC 결합 구조 — 본인 최적제어(MPC 예측구간 설계) 연구의 직접 비교 대상.</div>
+      <div class="summary">시계열 특징 융합 CNN-BiLSTM-Attention 네트워크로 단기 속도를 예측해 MPC 에너지관리에 결합 — 실주행 불확실성 하 에너지 배분 최적성 개선.</div>
+      <div class="relevance-note">★4 — 학습형 속도예측+MPC — 예측구간 외란 모델링 개선 아이디어로 직접 활용 가능.</div>
     </div>
 
         <div class="section-subhead highlight" data-section="papers-highlight">★ HIGHLIGHT — 분기 핵심</div>
@@ -2382,7 +2554,7 @@
             <span class="cat-tag cat-review">리뷰</span>
             <span class="source-tag peer-reviewed">Peer-reviewed</span>
             <span class="highlight-badge">HIGHLIGHT</span>
-        <span class="relevance-badge">★5/5</span>
+            <span class="relevance-badge">★5/5</span>
             <span class="date-tag">📅 2026-05-03</span>
           </div>
           <div class="title-row">
@@ -2398,11 +2570,12 @@
         </div>
 
         <div class="item-card cat-papers highlight"
-         data-item-id="energies-19-2207-mpc-ev-ems-review" data-category="papers" data-new="false" data-recent="false" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-05-02">
+         data-item-id="energies-19-2207-mpc-ev-ems-review" data-category="papers" data-new="true" data-recent="false" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-05-02">
       <div class="meta-row">
         <span class="cat-tag cat-review">리뷰</span>
         <span class="source-tag peer-reviewed">Peer-reviewed</span>
         <span class="highlight-badge">HIGHLIGHT</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★4/5</span>
         <span class="date-tag">📅 2026-05-02</span>
       </div>
@@ -2423,7 +2596,7 @@
         <span class="cat-tag cat-ems">EMS</span>
         <span class="source-tag peer-reviewed">Peer-reviewed</span>
                         <span class="highlight-badge">HIGHLIGHT</span>
-        <span class="relevance-badge">★5/5</span>
+                        <span class="relevance-badge">★5/5</span>
         <span class="date-tag">📅 2026-04-15</span>
       </div>
       <div class="title-row">
@@ -2439,25 +2612,6 @@
     </div>
 
         <div class="section-subhead" data-section="papers-older">전체 논문·프리프린트</div>
-
-        <div class="item-card cat-papers"
-         data-item-id="vehicles-8-105-cnn-bilstm-mpc-ems" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="peer-reviewed" data-date="2026-05-08">
-      <div class="meta-row">
-        <span class="cat-tag cat-mpc">MPC</span>
-        <span class="source-tag peer-reviewed">Peer-reviewed</span>
-        <span class="relevance-badge">★4/5</span>
-        <span class="date-tag">📅 2026-05-08</span>
-      </div>
-      <div class="title-row">
-        <div class="title">속도예측 융합 MPC EMS — Stacked-CNN-BiLSTM-Attention (Vehicles)</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://www.mdpi.com/2624-8921/8/5/105" target="_blank">mdpi.com — Vehicles 8(5):105, MPC Optimization EMS with Fused Temporal Features Speed Prediction (2026-05-08) →</a>
-      </div>
-      <div class="summary">시계열 특징 융합 CNN-BiLSTM-Attention 네트워크로 단기 속도를 예측해 MPC 에너지관리에 결합 — 실주행 불확실성 하 에너지 배분 최적성 개선.</div>
-      <div class="relevance-note">★4 — 학습형 속도예측+MPC — 예측구간 외란 모델링 개선 아이디어로 직접 활용 가능.</div>
-    </div>
 
         <div class="item-card cat-papers" data-item-id="jes-hess-erev-battery-fuel-2026" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="peer-reviewed" data-date="2026-04">
       <div class="meta-row">
@@ -2666,10 +2820,11 @@
         </div>
 
         <div class="item-card cat-papers"
-         data-item-id="arxiv-2512-14344-data-driven-ev-pwt-model" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="preprint" data-date="2025-12">
+         data-item-id="arxiv-2512-14344-data-driven-ev-pwt-model" data-category="papers" data-new="true" data-recent="false" data-highlight="false" data-source-type="preprint" data-date="2025-12">
       <div class="meta-row">
         <span class="cat-tag cat-papers">모델링</span>
         <span class="source-tag preprint">Preprint</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★3/5</span>
         <span class="date-tag">📅 2025-12</span>
       </div>
@@ -2685,10 +2840,11 @@
     </div>
 
         <div class="item-card cat-papers"
-         data-item-id="arxiv-2508-04874-sequence-aware-sac" data-category="papers" data-new="false" data-recent="false" data-highlight="false" data-source-type="preprint" data-date="2025-08">
+         data-item-id="arxiv-2508-04874-sequence-aware-sac" data-category="papers" data-new="true" data-recent="false" data-highlight="false" data-source-type="preprint" data-date="2025-08">
       <div class="meta-row">
         <span class="cat-tag cat-rl">RL/ML</span>
         <span class="source-tag preprint">Preprint</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★4/5</span>
         <span class="date-tag">📅 2025-08</span>
       </div>
@@ -2878,7 +3034,6 @@
 <section class="archive-section">
   <h2>📚 지난 회차 (최근 6개월)</h2>
   <ul data-slot="archive-list">
-    <li><a href="archive/index_2026-06-08.html">2026-06-08</a></li>
     <li><a href="archive/index_2026-06-04.html">2026-06-04</a></li>
     <li><a href="archive/index_2026-06-02.html">2026-06-02</a></li>
     <li><a href="archive/index_2026-06-01.html">2026-06-01</a></li>
@@ -2890,9 +3045,6 @@
 <section>
   <h2><span class="badge">SOURCES</span>주요 정보 링크 (전체)</h2>
   <ul class="source-list" data-slot="sources">
-    <li><a href="https://carbuzz.com/hyundai-hybrid-lineup-for-2026/" target="_blank">현대차 TMED-II 하이브리드 — P1+P2 듀얼 모터 신구조 — RECENT · NEW</a></li>
-    <li><a href="https://www.cars.com/articles/hyundai-palisade-vs-toyota-grand-highlander-which-hybrid-3-row-suv-gets-the-best-mpg-525661/" target="_blank">2026 Palisade HEV vs Grand Highlander HEV — 실연비 비교 — RECENT · NEW</a></li>
-    <li><a href="https://restofworld.org/2026/iea-global-ev-outlook-us-sales-drop/" target="_blank">IEA Global EV Outlook 2026 — Q1 글로벌 EV 판매 –8% — RECENT · NEW</a></li>
     <li><a href="https://www.carsguide.com.au/car-news/2027-nissan-x-trail-everything-we-know-about-the-new-2026-toyota-rav4-hybrid-and-hyundai" target="_blank">Nissan 차세대 X-Trail — 신형 e-Power 직렬 하이브리드 (정숙성·효율 개선) — RECENT · NEW</a></li>
     <li><a href="https://www.motor1.com/news/797835/new-hyundai-models-2026/" target="_blank">Hyundai — 2026년 신모델 5종 라인업 정리 — NEW</a></li>
     <li><a href="https://www.torquenews.com/3929/honda-announce-new-plan-next-week" target="_blank">Honda 차세대 하이브리드 로드맵 — Mibe CEO 발표 (mid-size 2.0L I4, large V6 dual-motor AWD) — RECENT</a></li>
