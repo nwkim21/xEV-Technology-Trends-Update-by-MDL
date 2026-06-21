@@ -510,7 +510,7 @@
   <h1>xEV 파워트레인 동향 — 통합 보고서</h1>
   <div class="subtitle">①OEM · ②시장·규제 · ③논문 — 매주 월 04:00 자동 갱신</div>
   <div class="meta-bar">
-    <span>최근 업데이트: <strong data-slot="updated-date">2026-06-21</strong></span>
+    <span>최근 업데이트: <strong data-slot="updated-date">2026-06-17</strong></span>
     <span>업데이트 주기: <strong>매주 월 04:00</strong></span>
     <span class="recent-count">RECENT(1개월): <strong data-slot="recent-count">54</strong></span>
     <span class="highlight-count">HIGHLIGHT(분기): <strong data-slot="highlight-count">29</strong></span>
@@ -522,12 +522,12 @@
 <section>
   <h2><span class="badge relevance">RELEVANCE</span>본인 연구 관련성 요약 (이번 회차 핵심)</h2>
   <div class="relevance-card">
-    <strong>이번 회차 핵심 — 직전 회차(6/17) 이후 4일 경과한 주간 점검 회차. 3개 트랙 전수 재검색 결과 차단 리스트(seen_urls) 밖 신규 4건 확보. 가장 임팩트가 큰 항목은 (1) BloombergNEF EVO 2026 신판(6/16 발행, 직전 회차에서 누락) — 2026 글로벌 EV 27% 전망·美 –19%·中 비중 63%, (2) Springer SN Comput. Sci. SAC/PPO/TD3/DDPG/A2C 5종 DRL EMS 정량 비교 동료심사 논문(5/20). EREV OEM 신차 2건(Jeep Grand Wagoneer REEV·현대 2026 Palisade HEV/IONIQ 9)도 추가. BKL 폴더 최신은 6월2차로 이미 분석 완료 — 신규 BKL 없음.</strong>
+    <strong>이번 회차 핵심 — 직전 회차(6/16)에서 1일 경과한 주간 점검 회차. 3개 트랙(OEM·시장·논문) 전수 재검색 결과 seen_urls 차단 리스트에 없는 신규 동향은 발견되지 않음(신규 0건). BKL 폴더 최신 파일은 6월2차(5.30~6.12)로 이미 분석 완료 — 신규 BKL 파일 없음. 기존 RECENT(1개월 이내) 클러스터와 분기 HIGHLIGHT는 그대로 유지·노출.</strong>
     <ul style="margin: 8px 0 0; padding-left: 20px;">
-      <li><strong>논문 — DRL EMS 알고리즘 정량 비교(★5)</strong> — SAC/PPO/TD3/DDPG/A2C를 urban·NEDC·WLTP·aggressive 사이클에서 에너지효율·SoC 규제·수렴속도·제어 평활도로 비교. PPO·SAC 종합 최우수, TD3·DDPG는 평활한 결정론적 제어. 본 연구 EMS 알고리즘 선정 벤치마크에 직접 활용 가능(DOI 10.1007/s42979-026-05029-x).</li>
-      <li><strong>시장 — BNEF EVO 2026 신판(★4)</strong> — IEA GEVO 2026(Q1 –8%)과 교차검증: 글로벌 2300만대(+11%)·美 –19%·노상연료 수요 2029 피크. HEV/EREV 회귀 가정과 정책 시나리오 입력값으로 유효.</li>
-      <li><strong>OEM/하드웨어 — EREV 구동 아키텍처</strong> — Jeep Grand Wagoneer REEV(92kWh+3.6L V6 발전기, 500마일+)는 발전기 운전점·직병렬 전환 제어 벤치마크. 현대 2026 Palisade HEV/IONIQ 9은 TMED-II·3열 전동화 사례.</li>
-      <li><strong>RECENT 유지 — 규제</strong> — 中 EREV 레인지익스텐더 규정 강화(연 100만대 돌파)·국토부 회생제동 제동등 의무화('26.9.1)가 회생제동/원페달 EMS 캘리브레이션 제약으로 계속 유효.</li>
+      <li><strong>신규 항목 없음</strong> — 6/16 회차 이후 1일 경과로 OEM 신차·하드웨어, 시장·규제, 동료심사 논문·프리프린트 모두 차단 리스트 밖 신규 미발생. 핵심 연간 리포트(IEA GEVO 2026, EPA, EIA AEO)도 새 에디션 없음.</li>
+      <li><strong>RECENT 유지 — 규제</strong> — 中 EREV 레인지익스텐더 규정 강화(연 100만대 돌파, 2026-06)·국토부 회생제동 제동등 의무화('26.9.1)가 회생제동/원페달 EMS 캘리브레이션 제약으로 계속 유효.</li>
+      <li><strong>RECENT 유지 — 하드웨어</strong> — ZF eRE/eRE+ 인텔리전트 클러치 레인지익스텐더, Horse Powertrain BEV 플랫폼용 하이브리드 유닛 → EREV plant model·발전기 운전점 제어 벤치마크로 추적 지속.</li>
+      <li><strong>RECENT 유지 — 논문</strong> — 5월 MPC-EMS 클러스터(DP+MPC 듀얼모터 PHEV·LSTM-MPC 속도예측 DDQN·TD3/SAC/PPO 비교 리뷰) 인용군 유지. 신규 프리프린트 부재로 기존 항목 심화 권장.</li>
     </ul>
   </div>
 </section>
@@ -535,10 +535,10 @@
 <section>
   <h2><span class="badge action">ACTION</span>후속 액션 제안 (우선순위)</h2>
   <ol class="action-list">
-    <li><strong>DRL EMS 알고리즘 비교 논문 정독(신규 ★5)</strong> — Sahbani(2026) SAC/PPO/TD3/DDPG/A2C 비교를 본 연구 환경(엔진 운전점·SoC 제약)에 매핑하고, 5월 MPC-EMS 클러스터(DP+MPC 듀얼모터 PHEV·LSTM-MPC 속도예측 DDQN)와 함께 알고리즘 선정 근거로 정리.</li>
-    <li><strong>BNEF EVO 2026 ↔ IEA GEVO 2026 교차검증</strong> — 두 리포트의 2026 글로벌 전망(BNEF +11%/27% vs IEA ~30%)·美 하향(–19%)·中 둔화를 HEV/EREV 회귀 시나리오 입력값으로 반영.</li>
-    <li><strong>EREV plant model 벤치마크 확장</strong> — Jeep Grand Wagoneer REEV(92kWh+V6 발전기)·Ram 1500 REV(690마일급)·ZF eRE+·현대 EREV 구성을 비교해 발전기 운전점/직병렬 전환 전략 정리.</li>
+    <li><strong>5월 MPC-EMS 논문 클러스터 심화</strong> — 신규 항목이 없는 이번 회차는 기존 핵심 논문(DP+MPC 듀얼모터 PHEV·LSTM-MPC 속도예측 DDQN·TD3/SAC/PPO 비교) 재정독 및 인용군 정리에 활용.</li>
     <li><strong>회생제동 제동등 규정 영향 정리</strong> — 1.3㎨ 감속 제동등 점등 의무('26.9.1)가 회생제동 토크 프로파일/원페달 EMS 캘리브레이션에 주는 제약을 국내 양산 시나리오에 문서화.</li>
+    <li><strong>EREV plant model 벤치마크</strong> — ZF eRE+ 인텔리전트 클러치·Buick Electra L7(252kW+40.2kWh)·현대 EREV 구성을 비교해 발전기 운전점 전략 정리(기존 RECENT 항목 활용).</li>
+    <li><strong>시장 시나리오 모니터링</strong> — IEA GEVO 2026(Q1 글로벌 –8%)·中 EREV 100만대 돌파를 HEV/EREV 회귀 가정에 유지, 다음 회차 신규 시그널 대기.</li>
     <li><strong>BKL 차기 파일 대기</strong> — 6월2차까지 분석 완료. 7월1차 발행 시 차기 회차 자동 분석.</li>
   </ol>
 </section>
@@ -546,31 +546,7 @@
 <section>
   <h2><span class="badge new">NEW</span>이번 회차 신규 동향</h2>
   <div data-slot="new-items">
-    <p style="margin:0 0 12px; color:#475569; font-size:13px;">이번 회차(2026-06-21) 차단 리스트(seen_urls·seen_bkl_files) 밖 신규 <strong>4건</strong> (OEM 2 · 시장 1 · 논문 1). 신규 BKL 파일 0건. 각 항목의 정식 카드는 아래 카테고리별 상세(③ 논문 등)에서 📌 저장·필터와 함께 확인할 수 있습니다.</p>
-    <div style="border-left:4px solid #1e3a8a; background:#f8fafc; padding:10px 14px; margin:8px 0; border-radius:4px;">
-      <div style="font-size:12px; color:#64748b;">③ 논문 · peer-reviewed · ★5/5 · 📅 2026-05-20 · HIGHLIGHT</div>
-      <div style="font-weight:700; margin:3px 0;">DRL EMS 알고리즘 5종 정량 비교 — SAC·PPO·TD3·DDPG·A2C (urban/NEDC/WLTP/aggressive)</div>
-      <a href="https://link.springer.com/article/10.1007/s42979-026-05029-x" target="_blank" style="font-size:13px;">link.springer.com — Comparative Analysis of DRL Algorithms for EMS in BEVs (SN Comput. Sci. 2026, DOI:10.1007/s42979-026-05029-x) →</a>
-      <div style="font-size:13px; color:#334155; margin-top:4px;">PPO·SAC가 에너지효율·SoC 규제 종합 최우수, TD3·DDPG는 평활한 결정론적 제어, A2C는 빠르나 수렴·분산 열위. 본 연구 EMS 알고리즘 선정 벤치마크로 직접 활용.</div>
-    </div>
-    <div style="border-left:4px solid #1e3a8a; background:#f8fafc; padding:10px 14px; margin:8px 0; border-radius:4px;">
-      <div style="font-size:12px; color:#64748b;">② 시장·규제 · report · ★4/5 · 📅 2026-06-16 · RECENT · HIGHLIGHT</div>
-      <div style="font-weight:700; margin:3px 0;">BloombergNEF Electric Vehicle Outlook 2026 — 글로벌 EV 2300만대(+11%)·美 –19%·中 비중 63%</div>
-      <a href="https://about.bnef.com/insights/clean-transport/bloombergnefs-electric-vehicle-outlook-2026-global-ev-sales-set-for-another-record-breaking-year-but-growth-in-some-major-markets-slows/" target="_blank" style="font-size:13px;">about.bnef.com — BNEF EVO 2026 Press Release →</a>
-      <div style="font-size:13px; color:#334155; margin-top:4px;">2026 신차 27%가 전기차 전망(5년 전 9%), 2035년 승용 52% 전동화. 美 연방 지원 철회로 단기·장기 전망 2년 연속 하향. 노상연료 수요 2029 피크. IEA GEVO 2026과 교차검증용.</div>
-    </div>
-    <div style="border-left:4px solid #b45309; background:#fffbeb; padding:10px 14px; margin:8px 0; border-radius:4px;">
-      <div style="font-size:12px; color:#92400e;">① OEM · press · ★4/5 · 📅 2026-06 · RECENT</div>
-      <div style="font-weight:700; margin:3px 0;">Jeep Grand Wagoneer REEV / Ram 1500 REV — V6 발전기형 EREV 양산 임박</div>
-      <a href="https://cars.usnews.com/cars-trucks/advice/jeep-grand-wagoneer-extended-range-ev-coming-in-2026" target="_blank" style="font-size:13px;">cars.usnews.com — Jeep Grand Wagoneer Extended-Range EV Coming in 2026 →</a>
-      <div style="font-size:13px; color:#334155; margin-top:4px;">92kWh 배터리 + 3.6L Pentastar V6 → 130kW 발전기, 총 항속 500마일+. Ram 1500 REV는 647hp·690마일급(’26 하반기 생산). 발전기 운전점·직병렬 전환 제어 벤치마크.</div>
-    </div>
-    <div style="border-left:4px solid #b45309; background:#fffbeb; padding:10px 14px; margin:8px 0; border-radius:4px;">
-      <div style="font-size:12px; color:#92400e;">① OEM · oem · ★3/5 · 📅 2026-06 · RECENT</div>
-      <div style="font-weight:700; margin:3px 0;">현대차 2026 Palisade HEV · IONIQ 9 — 3열 전동화 라인업 확대</div>
-      <a href="https://www.hyundainews.com/releases/4513" target="_blank" style="font-size:13px;">hyundainews.com — Hyundai 2026 Model Year Changes →</a>
-      <div style="font-size:13px; color:#334155; margin-top:4px;">2026 Palisade는 신규 하이브리드 파워트레인·XRT PRO 트림 추가, IONIQ 9는 브랜드 첫 3열 EV. TMED-II 하이브리드 구조 양산 사례로 추적.</div>
-    </div>
+    <div class="empty-state">이번 회차(2026-06-17)에는 차단 리스트(seen_urls·seen_bkl_files) 밖의 신규 항목이 없습니다. 직전 회차(2026-06-16) 이후 1일 경과 — OEM·시장·논문 3개 트랙 전수 재검색 및 핵심 연간 리포트 새 에디션 확인 결과 신규 0건, 신규 BKL 파일 0건. 아래 카테고리별 상세에서 기존 RECENT·HIGHLIGHT 항목을 계속 확인할 수 있습니다.</div>
   </div>
 </section>
 
@@ -604,48 +580,6 @@
       </h3>
       <div data-slot="oem-items">
         <div class="section-subhead recent" data-section="oem-recent">⚡ RECENT — 최근 1개월 이내</div>
-
-        <div class="item-card cat-oem recent"
-         data-item-id="jeep-grand-wagoneer-reev-2026-06" data-category="oem" data-new="true" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-06">
-      <div class="meta-row">
-        <span class="cat-tag cat-hardware">Hardware</span>
-        <span class="source-tag press">Press</span>
-        <span class="recent-badge">RECENT</span>
-        <span class="new-badge">NEW</span>
-        <span class="relevance-badge">★4/5</span>
-        <span class="date-tag">📅 2026-06</span>
-      </div>
-      <div class="title-row">
-        <div class="title">Jeep Grand Wagoneer REEV / Ram 1500 REV — V6 발전기형 EREV 양산 임박</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://cars.usnews.com/cars-trucks/advice/jeep-grand-wagoneer-extended-range-ev-coming-in-2026" target="_blank">cars.usnews.com — Jeep Grand Wagoneer Extended-Range EV Coming in 2026 →</a>
-      </div>
-      <div class="summary">Grand Wagoneer REEV는 92kWh 배터리 + 자연흡기 3.6L Pentastar V6가 130kW 발전기를 구동해 총 항속 500마일+. 자매 Ram 1500 REV는 듀얼 모터 647hp·전기 145마일+발전기로 690마일급(2026 하반기 생산, 2027 MY). 발전기 운전점·직병렬 전환 EMS 벤치마크로 적합.</div>
-      <div class="relevance-note">★4 — 대형 SUV/픽업 EREV의 발전기 제어·운전점 최적화 사례로 본 연구 plant model에 직접 대응.</div>
-    </div>
-
-        <div class="item-card cat-oem recent"
-         data-item-id="hyundai-2026-palisade-hev-ioniq9-2026-06" data-category="oem" data-new="true" data-recent="true" data-highlight="false" data-source-type="oem" data-date="2026-06">
-      <div class="meta-row">
-        <span class="cat-tag cat-oem">OEM</span>
-        <span class="source-tag oem">OEM</span>
-        <span class="recent-badge">RECENT</span>
-        <span class="new-badge">NEW</span>
-        <span class="relevance-badge">★3/5</span>
-        <span class="date-tag">📅 2026-06</span>
-      </div>
-      <div class="title-row">
-        <div class="title">현대차 2026 Palisade HEV · IONIQ 9 — 3열 전동화 라인업 확대</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://www.hyundainews.com/releases/4513" target="_blank">hyundainews.com — Hyundai Announces 2026 Model Year Changes →</a>
-      </div>
-      <div class="summary">2026 Palisade는 신규 하이브리드 파워트레인과 XRT PRO 트림을 추가, IONIQ 9은 현대 첫 3열 EV로 양산. TMED-II 기반 하이브리드 구조와 대형 3열 패키지의 전동화 사례로 추적 가치.</div>
-      <div class="relevance-note">★3 — 양산 HEV 파워트레인 구성 레퍼런스. 제어 알고리즘 직접 공개는 없으나 하드웨어 트렌드 추적용.</div>
-    </div>
 
         <div class="item-card cat-oem recent"
          data-item-id="zf-ere-plus-range-extender-2026-06" data-category="oem" data-new="false" data-recent="true" data-highlight="false" data-source-type="press" data-date="2026-06">
@@ -1192,10 +1126,11 @@
         <div class="section-subhead" data-section="oem-older">전체 OEM 동향</div>
 
         <div class="item-card cat-oem"
-         data-item-id="buick-electra-l7-erev-truedragon" data-category="oem" data-new="false" data-recent="false" data-highlight="false" data-source-type="press" data-date="2025-08">
+         data-item-id="buick-electra-l7-erev-truedragon" data-category="oem" data-new="true" data-recent="false" data-highlight="false" data-source-type="press" data-date="2025-08">
       <div class="meta-row">
         <span class="cat-tag cat-oem">신차</span>
         <span class="source-tag press">Press</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★3/5</span>
         <span class="date-tag">📅 2025-08</span>
       </div>
@@ -1485,34 +1420,13 @@
       <div data-slot="market-items">
         <div class="section-subhead recent" data-section="market-recent">⚡ RECENT — 최근 1개월 이내</div>
 
-        <div class="item-card cat-market recent highlight"
-         data-item-id="bnef-evo-2026" data-category="market" data-new="true" data-recent="true" data-highlight="true" data-source-type="report" data-date="2026-06-16">
-      <div class="meta-row">
-        <span class="cat-tag cat-market">시장</span>
-        <span class="source-tag report">Report</span>
-        <span class="recent-badge">RECENT</span>
-        <span class="new-badge">NEW</span>
-        <span class="relevance-badge">★4/5</span>
-        <span class="date-tag">📅 2026-06-16</span>
-      </div>
-      <div class="title-row">
-        <div class="title">BloombergNEF Electric Vehicle Outlook 2026 — 글로벌 EV 2300만대(+11%), 美 –19%</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://about.bnef.com/insights/clean-transport/bloombergnefs-electric-vehicle-outlook-2026-global-ev-sales-set-for-another-record-breaking-year-but-growth-in-some-major-markets-slows/" target="_blank">about.bnef.com — BloombergNEF's Electric Vehicle Outlook 2026 (Press Release) →</a>
-      </div>
-      <div class="summary">BNEF 연례 EVO 신판(6/16): 2026 신차의 27%가 전기차 전망(5년 전 9%), 2035년 승용 52% 전동화. 中이 2025년 글로벌 EV 판매의 63% 차지, 美는 연방 지원 철회로 올해 –19%. 단기·장기 전망 2년 연속 하향, 노상연료 수요 2029 피크 전망.</div>
-      <div class="highlight-reason">★ 분기 핵심 — IEA GEVO 2026과 함께 시장 시나리오 입력값을 교차검증하는 양대 연간 리포트.</div>
-      <div class="relevance-note">★4 — HEV/EREV 회귀 가정과 지역별 정책 둔화(美·中)를 정량 시나리오로 반영 가능.</div>
-    </div>
-
         <div class="item-card cat-market recent"
-         data-item-id="bkl-2026-6wol2cha" data-category="market" data-new="false" data-recent="true" data-highlight="false" data-source-type="local-file" data-date="2026-06-15" data-bkl-file="BKL_2026_6월2차_자동차,모빌리티_정책 및 산업동향.pdf">
+         data-item-id="bkl-2026-6wol2cha" data-category="market" data-new="true" data-recent="true" data-highlight="false" data-source-type="local-file" data-date="2026-06-15" data-bkl-file="BKL_2026_6월2차_자동차,모빌리티_정책 및 산업동향.pdf">
       <div class="meta-row">
         <span class="cat-tag cat-bkl">BKL</span>
         <span class="source-tag local-file">Local-file</span>
         <span class="recent-badge">RECENT</span>
+        <span class="new-badge">NEW</span>
         <span class="relevance-badge">★3/5</span>
         <span class="date-tag">📅 2026-06-15</span>
       </div>
@@ -2480,28 +2394,6 @@
 
         <div class="section-subhead highlight" data-section="papers-highlight">★ HIGHLIGHT — 분기 핵심</div>
 
-        <div class="item-card cat-papers highlight"
-         data-item-id="sahbani-drl-ems-comparison-2026-05" data-category="papers" data-new="true" data-recent="false" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-05-20">
-      <div class="meta-row">
-        <span class="cat-tag cat-rlml">RL/ML</span>
-        <span class="source-tag peer-reviewed">Peer-reviewed</span>
-        <span class="highlight-badge">HIGHLIGHT</span>
-        <span class="new-badge">NEW</span>
-        <span class="relevance-badge">★5/5</span>
-        <span class="date-tag">📅 2026-05-20</span>
-      </div>
-      <div class="title-row">
-        <div class="title">DRL EMS 알고리즘 5종 정량 비교 — SAC·PPO·TD3·DDPG·A2C (urban/NEDC/WLTP/aggressive)</div>
-        <button class="pin-btn" data-action="pin" title="주요 항목으로 저장">📌</button>
-      </div>
-      <div class="source-link">
-        <a href="https://link.springer.com/article/10.1007/s42979-026-05029-x" target="_blank">link.springer.com — Comparative Analysis of Deep Reinforcement Learning Algorithms for Energy Management in BEVs (SN Comput. Sci. 7:439, DOI 10.1007/s42979-026-05029-x) →</a>
-      </div>
-      <div class="summary">상세 파워트레인·리튬이온 배터리 모델을 포함한 커스텀 환경에서 SAC·PPO·TD3·DDPG·A2C를 도심·NEDC·WLTP·공격적 주행 사이클로 학습·평가. 에너지효율·SoC 규제·수렴속도·제어 평활도 기준 PPO·SAC 종합 최우수, TD3·DDPG는 평활한 결정론적 제어로 중간 이득, A2C는 빠르나 수렴 느리고 분산 큼.</div>
-      <div class="highlight-reason">★ 분기 핵심 — 5종 DRL 에이전트를 동일 환경·동일 지표로 직접 비교한 드문 동료심사 연구.</div>
-      <div class="relevance-note">★5 — 본 연구 EMS 알고리즘 선정·튜닝 시 알고리즘별 trade-off(평활도 vs 효율 vs 수렴) 근거로 직접 활용.</div>
-    </div>
-
         <div class="item-card cat-papers highlight" data-item-id="energies-drl-ems-review-2216-2026-05" data-category="papers" data-new="false" data-recent="false" data-highlight="true" data-source-type="peer-reviewed" data-date="2026-05-03">
           <div class="meta-row">
             <span class="cat-tag cat-review">리뷰</span>
@@ -3003,7 +2895,6 @@
 <section class="archive-section">
   <h2>📚 지난 회차 (최근 6개월)</h2>
   <ul data-slot="archive-list">
-    <li><a href="archive/index_2026-06-17.html">2026-06-17</a></li>
     <li><a href="archive/index_2026-06-16.html">2026-06-16</a></li>
     <li><a href="archive/index_2026-06-14.html">2026-06-14</a></li>
     <li><a href="archive/index_2026-06-11.html">2026-06-11</a></li>
@@ -3019,11 +2910,7 @@
 <section>
   <h2><span class="badge">SOURCES</span>주요 정보 링크 (전체)</h2>
   <ul class="source-list" data-slot="sources">
-    <li><a href="https://link.springer.com/article/10.1007/s42979-026-05029-x" target="_blank">SN Comput. Sci. (2026) — DRL EMS 알고리즘 5종 비교 SAC/PPO/TD3/DDPG/A2C (DOI 10.1007/s42979-026-05029-x) — 논문 · HIGHLIGHT · NEW</a></li>
-    <li><a href="https://about.bnef.com/insights/clean-transport/bloombergnefs-electric-vehicle-outlook-2026-global-ev-sales-set-for-another-record-breaking-year-but-growth-in-some-major-markets-slows/" target="_blank">BloombergNEF EVO 2026 — 글로벌 EV 2300만대(+11%)·美 –19%·中 63% — 시장 · RECENT · HIGHLIGHT · NEW</a></li>
-    <li><a href="https://cars.usnews.com/cars-trucks/advice/jeep-grand-wagoneer-extended-range-ev-coming-in-2026" target="_blank">Jeep Grand Wagoneer REEV / Ram 1500 REV — V6 발전기형 EREV (92kWh, 500마일+) — OEM · RECENT · NEW</a></li>
-    <li><a href="https://www.hyundainews.com/releases/4513" target="_blank">현대차 2026 Palisade HEV · IONIQ 9 — 3열 전동화 라인업 (2026 MY) — OEM · RECENT · NEW</a></li>
-    <li><a href="file:///C:/Users/namwook/Documents/Claude/temp/BKL%20%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5/BKL_2026_6%EC%9B%942%EC%B0%A8_%EC%9E%90%EB%8F%99%EC%B0%A8%2C%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0_%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5.pdf" target="_blank">BKL 모빌리티 6월2차 (5.30~6.12) — 회생제동 제동등 의무화 외 (로컬 PC) — RECENT</a></li>
+    <li><a href="file:///C:/Users/namwook/Documents/Claude/temp/BKL%20%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0%20%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5/BKL_2026_6%EC%9B%942%EC%B0%A8_%EC%9E%90%EB%8F%99%EC%B0%A8%2C%EB%AA%A8%EB%B9%8C%EB%A6%AC%ED%8B%B0_%EC%A0%95%EC%B1%85%20%EB%B0%8F%20%EC%82%B0%EC%97%85%EB%8F%99%ED%96%A5.pdf" target="_blank">BKL 모빌리티 6월2차 (5.30~6.12) — 회생제동 제동등 의무화 외 (로컬 PC) — RECENT · NEW</a></li>
     <li><a href="https://gmauthority.com/blog/2025/08/2026-buick-electra-l7-sedan-debuts-new-erev-powertrain/" target="_blank">Buick Electra L7 EREV — SAIC-GM 'True Dragon' (252kW + 40.2kWh) — NEW</a></li>
     <li><a href="https://www.electronicdesign.com/markets/automotive/article/55289800/electronic-design-erevs-burning-gasoline-efficiently-in-an-ev" target="_blank">ZF 전기 레인지익스텐더 eRE / eRE+ — 발전기·2차 구동 겸용 — RECENT</a></li>
     <li><a href="https://autotechinsight.spglobal.com/news/5285081/south-korea-plans-to-boost-ev-subsidies-and-support-auto-industry-amid-us-tariffs" target="_blank">한국 2026 EV 보조금 약 20% 확대 — 美 관세 대응 — RECENT · NEW</a></li>
