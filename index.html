@@ -100,6 +100,21 @@
     background: var(--surface-alt); border-left: 2px solid var(--accent);
     padding: 12px 16px; border-radius: 0 4px 4px 0; font-size: 14px;
   }
+
+  /* ============ Summary / New — concise bullet lists ============ */
+  .summary-list, .new-list { list-style: none; margin: 0; padding: 0; font-size: 14px; }
+  .summary-list li { display: flex; gap: 10px; padding: 6px 0; border-bottom: 1px dashed var(--divider); line-height: 1.55; }
+  .summary-list li:last-child { border-bottom: none; }
+  .summary-list .k { flex: 0 0 64px; font-weight: 700; color: var(--accent); }
+  .summary-meta { margin: 8px 0 0; font-size: 12px; color: var(--text-muted); }
+  .new-group { margin: 0 0 12px; }
+  .new-group:last-child { margin-bottom: 0; }
+  .new-group-title { font-size: 13px; font-weight: 700; margin: 0 0 4px; color: var(--text); }
+  .new-list li { padding: 4px 0 4px 14px; position: relative; line-height: 1.55; }
+  .new-list li::before { content: "–"; position: absolute; left: 0; color: var(--text-muted); }
+  .new-list .stars { font-weight: 700; color: var(--tier-new); margin-right: 4px; }
+  .new-list .point { color: var(--text-muted); }
+  .new-list a { font-size: 12px; white-space: nowrap; }
   .action-list { padding-left: 22px; margin: 0; }
   .action-list li { margin-bottom: 8px; }
 
@@ -519,17 +534,39 @@
 </div>
 </header>
 <section>
-<h2><span class="badge relevance">RELEVANCE</span>본인 연구 관련성 요약 (이번 회차 핵심)</h2>
-<div class="relevance-card"><strong>이번 회차 핵심 — 직전 회차(2026-10-18) 이후 점검. 신규 8건(OEM 3 · 시장 3 · 논문 2), 신규 BKL 파일 0건(Drive 폴더 최신본까지 분석 완료).</strong> (1) 규제 — 유럽의회 주요 정파가 2035년 승용차 CO₂ 감축 목표를 100%에서 87.5%로 낮추는 타협안에 합의해, 2035년 이후에도 HEV·PHEV 신차 등록의 길이 열릴 전망이다(위원회·본회의·이사회 표결 남음). 하이브리드 파워트레인의 유럽 내 수명이 10년 이상 연장될 수 있다는 점에서 이번 분기 최대 규제 이슈다(HIGHLIGHT). (2) 시장 — ACEA 1~9월 EU 등록에서 HEV가 36.3%로 최대 파워트레인 지위를 굳혔고 BEV(22.7%)가 휘발유(21.2%)를 추월, PHEV는 10.1%였다. 중국은 10월 NEV 소매가 약 107만 대(-16.5%)로 위축되지만 침투율은 66.9%로 고착되는 양상이다. (3) OEM — 토요타 차세대 코롤라가 하이브리드·BEV를 함께 수용하는 '멀티패스웨이' 플랫폼의 첫 차량이 되고 신형 1.5L 하이브리드로 효율 10~20% 개선을 노린다. GM도 미국 하이브리드 도입을 공식화했고 기아는 셀토스 하이브리드에 첫 e-AWD를 적용했다. (4) 논문 — 전기버스 배터리의 DQN 충전·회생 디레이팅과 LSTM 디지털 트윈, NMPC를 계층 결합한 연구(Smart Cities 10월)와 HEV EMS 배치 관점 서베이가 추가됐다. IEA World Energy Outlook 2026은 11/18 발간 예정으로 아직 공개 전이다. RECENT 컷오프 2026-09-24 · HIGHLIGHT 컷오프 2026-07-24 · 90일 보존 컷오프 2026-07-26 적용.
-<ul style="margin: 8px 0 0; padding-left: 20px;"><li><strong>정책 — EU 의회 2035 CO₂ 87.5% 타협안 (신규 ★5, HIGHLIGHT)</strong> — 2035년 이후 HEV/PHEV 존속 가능성.</li><li><strong>시장 — EU 1~9월 HEV 36.3%·BEV 22.7%·PHEV 10.1% (신규 ★4)</strong> — 유럽 HEV 1위 지속.</li><li><strong>OEM — 토요타 차세대 코롤라, 멀티패스웨이 플랫폼·신형 1.5L HEV (신규 ★4)</strong> — 엔진 동작점 재최적화 벤치마크.</li><li><strong>논문 — 전기버스 DQN+LSTM 디지털 트윈+NMPC (신규 ★3)</strong> — 학습형 열·노화 제약 처리 방법론.</li></ul></div>
+<h2><span class="badge relevance">SUMMARY</span>회차 핵심 요약</h2>
+<div class="relevance-card" data-slot="summary"><ul class="summary-list">
+<li><span class="k">총괄</span><span>신규 <strong>8건</strong> (OEM 3 · 시장 3 · 논문 2) · BKL 신규 0건 · 90일 초과 정리 0건</span></li>
+<li><span class="k">규제</span><span><strong>EU 2035 CO₂ 목표 100%→87.5%</strong> 타협안 → 2035년 이후 HEV·PHEV 존속 여지 (위원회·본회의·이사회 표결 남음)</span></li>
+<li><span class="k">시장</span><span>EU 1~9월 <strong>HEV 36.3% 1위</strong> · BEV 22.7% · PHEV 10.1% / 중국 10월 NEV 107만 대(-16.5%), 침투율 66.9%</span></li>
+<li><span class="k">OEM</span><span>토요타 차세대 코롤라 <strong>멀티패스웨이·신형 1.5L HEV</strong>(효율 +10~20%) / GM 미국 HEV 도입 / 기아 셀토스 HEV 첫 e-AWD</span></li>
+<li><span class="k">논문</span><span>전기버스 <strong>DQN+LSTM 디지털 트윈+NMPC</strong> 계층 결합 / HEV EMS 배치 관점 서베이</span></li>
+<li><span class="k">예정</span><span>IEA World Energy Outlook 2026 — 11/18 발간 예정</span></li>
+</ul>
+<p class="summary-meta">컷오프 — RECENT 2026-09-24 · HIGHLIGHT 2026-07-24 · 90일 보존 2026-07-26</p></div>
+</section>
+<section>
+<h2><span class="badge new">NEW</span>이번 회차 신규 동향</h2>
+<div data-slot="new-items">
+<div class="new-group"><div class="new-group-title">① OEM 동향 (3)</div><ul class="new-list">
+<li><span class="stars">★4</span><strong>토요타 차세대 코롤라 — 멀티패스웨이 플랫폼</strong> <span class="point">— 신형 1.5L HEV 효율 +10~20%, 2028 중국 생산</span> <a href="https://electrek.co/2026/10/19/toyotas-best-selling-corolla-going-electric" target="_blank">electrek.co →</a></li>
+<li><span class="stars">★3</span><strong>기아 셀토스 하이브리드 — 첫 e-AWD</strong> <span class="point">— 후륜 e-모터, 전·후 축 토크 분배</span> <a href="https://www.hyundaimotorgroup.com/en/news/the-all-new-kia-seltos-hybrid-makes-its-european-premiere-at-2026-paris-motor-show" target="_blank">hyundaimotorgroup.com →</a></li>
+<li><span class="stars">★3</span><strong>GM 미국 하이브리드 도입 공식화</strong> <span class="point">— EV 둔화 대응, 차종·형식 미공개</span> <a href="https://qz.com/gm-hybrid-vehicles-us-lineup-ev-sales-100526" target="_blank">qz.com →</a></li>
+</ul></div>
+<div class="new-group"><div class="new-group-title">② 시장 및 규제 동향 (3)</div><ul class="new-list">
+<li><span class="stars">★5 · HIGHLIGHT</span><strong>EU 2035 CO₂ 87.5% 타협안</strong> <span class="point">— 2035년 이후 HEV·PHEV 등록 여지, 표결 남음</span> <a href="https://www.electrive.com/2026/10/20/eu-parliament-mulls-watered-down-co%E2%82%82-reductions-for-cars-in-auto-package-debate/" target="_blank">electrive.com →</a></li>
+<li><span class="stars">★4</span><strong>ACEA EU 1~9월 등록</strong> <span class="point">— HEV 36.3% 1위 · BEV 22.7% · PHEV 10.1%</span> <a href="https://www.acea.auto/pc-registrations/new-car-registrations-5-7-in-september-2026-year-to-date-battery-electric-22-7-market-share/" target="_blank">acea.auto →</a></li>
+<li><span class="stars">★3</span><strong>CPCA 10월 중국 NEV 전망</strong> <span class="point">— 107만 대(-16.5%), 침투율 66.9%</span> <a href="https://cnevpost.com/2026/10/23/cpca-forecasts-weak-china-nev-retail-oct-2026/" target="_blank">cnevpost.com →</a></li>
+</ul></div>
+<div class="new-group"><div class="new-group-title">③ 논문 동향 (2)</div><ul class="new-list">
+<li><span class="stars">★3</span><strong>전기버스 DQN+LSTM 디지털 트윈+NMPC</strong> <span class="point">— 충전·회생 디레이팅, 열·노화 제약 (Smart Cities)</span> <a href="https://doi.org/10.3390/smartcities9110180" target="_blank">doi.org →</a></li>
+<li><span class="stars">★3</span><strong>HEV EMS 서베이</strong> <span class="point">— 오프라인/온라인 배치 분류, PIML·MARL 전망 (Discover Sustainability)</span> <a href="https://doi.org/10.1007/s43621-026-03469-2" target="_blank">doi.org →</a></li>
+</ul></div>
+</div>
 </section>
 <section>
 <h2><span class="badge action">ACTION</span>후속 액션 제안 (우선순위)</h2>
 <ol class="action-list"><li><strong>EU 2035 규제 시나리오 업데이트 (★5)</strong> — 87.5% 감축안이 확정될 경우 2035년 이후 허용되는 HEV/PHEV 비중을 추정하고, WLTP 기준 PHEV 유틸리티 팩터·CO₂ 가중 목적함수를 시나리오(100%/90%/87.5%)별로 정리. 11월 환경위·12월 본회의 결과를 추적.</li><li><strong>유럽 HEV 점유율 데이터 연구 근거화 (★4)</strong> — ACEA 1~9월 수치(HEV 36.3%, PHEV 10.1%)를 원자료로 확보해 과제 제안서·논문 서론의 시장 근거로 갱신.</li><li><strong>소배기량 신엔진 하이브리드 EMS 민감도 (★4)</strong> — 토요타 신형 1.5L·혼다 2.0L 고효율 영역 확대 사례를 참고해, BSFC 맵 고효율 영역 확장 시 최적 동작선·SOC 운용이 어떻게 바뀌는지 본인 모델로 민감도 분석.</li><li><strong>e-AWD 협조 EMS 문제 정의 (★3)</strong> — 기아 셀토스·혼다 Honda Hybrid의 e-AWD 도입 추세에 맞춰 전·후 축 토크 분배를 포함한 에너지·구동력 통합 최적제어 정식화 검토.</li><li><strong>연간 리포트 발간 모니터링 (★3)</strong> — IEA WEO 2026(11/18 발간 예정)·BP Energy Outlook 2026 신규 에디션 여부를 다음 회차에 재확인.</li></ol>
-</section>
-<section>
-<h2><span class="badge new">NEW</span>이번 회차 신규 동향</h2>
-<div data-slot="new-items"><p style="margin:0 0 12px; color:#475569; font-size:13px;">이번 회차(2026-10-24) 차단 리스트(seen_urls·seen_bkl_files) 밖 신규 <strong>8건</strong> (OEM 3 · 시장 3 · 논문 2). <strong>신규 BKL 파일 0건</strong> — Drive 폴더에 아직 분석하지 않은 신규 PDF가 없습니다. IEA World Energy Outlook 2026은 11/18 발간 예정, BP Energy Outlook 2026 신규 에디션은 아직 확인되지 않았습니다. 수집 90일 초과 항목 <strong>0건</strong>을 정리했습니다.</p><div style="border-left:4px solid #6b5b95; background:#f4f2f8; padding:10px 14px; margin:8px 0; border-radius:4px; font-size:13px; color:#334155;"><strong>신규 하이라이트</strong> — ① 정책: EU 의회 2035 CO₂ 87.5% 타협안(★5, HIGHLIGHT) · ② 시장: EU 1~9월 HEV 36.3%·PHEV 10.1%(★4) · ③ OEM: 토요타 차세대 코롤라 멀티패스웨이·신형 1.5L HEV(★4) · ④ 시장: CPCA 10월 중국 NEV 107만 대 전망(★3) · ⑤ OEM: GM 미국 하이브리드 도입 공식화(★3) · ⑥ OEM: 기아 셀토스 하이브리드 e-AWD(★3) · ⑦ 논문: 전기버스 DQN+LSTM 디지털 트윈(★3) · ⑧ 논문: HEV EMS 서베이(★3)</div></div>
 </section>
 <section>
 <h2><span class="badge">DETAILS</span>카테고리별 상세 (필터 가능)</h2>
